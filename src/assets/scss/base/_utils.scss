@@ -1,5 +1,17 @@
+@use '../abstracts/mixins' as m;
+
 .container {
   width: 85%;
   max-width: 1320px;
   margin-inline: auto;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@include m.mq(md) {
+  .block-md {
+    display: block !important;
+  }
 }
