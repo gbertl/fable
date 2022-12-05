@@ -5,17 +5,17 @@ const Header = () => {
   return (
     <div className="header">
       <div className="container header__container">
-        <a href="#" className="header__logo">
+        <a href="#" className="header__logo hidden block-md">
           <img src={logo} alt="" />
         </a>
         <ul className="header__nav">
           <li>
             <a href="#">Collections</a>
           </li>
-          <li>
+          <li className="hidden block-md">
             <a href="#">Customizer</a>
           </li>
-          <li>
+          <li className="hidden block-md">
             <a href="#">Sale</a>
           </li>
         </ul>
