@@ -11,28 +11,45 @@ import hero6 from '../assets/images/hero-6.png';
 import hero7 from '../assets/images/hero-7.png';
 import hero8 from '../assets/images/hero-8.png';
 import hero9 from '../assets/images/hero-9.png';
+import HeroPopover from './HeroPopover';
+import { useState } from 'react';
 
 const HeroSlide = () => {
   const isDesktop = useMediaQuery({ query: '(min-width: 992px)' });
   const isTablet = useMediaQuery({ query: '(min-width: 768px)' });
   const isMobile = useMediaQuery({ query: '(min-width: 576px)' });
 
+  const [isHovered, setIsHovered] = useState(false);
+  const [hoveredIdx, setHoveredIdx] = useState(0);
+
   return (
-    <Swiper
-      className="hero__images"
-      slidesPerView={isDesktop ? 9 : isTablet ? 6 : isMobile ? 3 : 2}
-      spaceBetween={3}
-      loop={true}
-      centeredSlides={true}
-    >
-      {[hero1, hero2, hero3, hero4, hero5, hero6, hero7, hero8, hero9].map(
-        (heroImg) => (
-          <SwiperSlide>
-            <img src={heroImg} alt="" />
-          </SwiperSlide>
-        )
-      )}
-    </Swiper>
+    <>
+      <Swiper
+        className="hero__images"
+        slidesPerView={isDesktop ? 9 : isTablet ? 6 : isMobile ? 3 : 2}
+        spaceBetween={3}
+        maxBackfaceHiddenSlides={0}
+      >
+        {[hero1, hero2, hero3, hero4, hero5, hero6, hero7, hero8, hero9].map(
+          (heroImg, idx) => (
+            <SwiperSlide
+              key={idx}
+              onMouseEnter={() => {
+                setIsHovered(true);
+                setHoveredIdx(idx);
+              }}
+              onMouseLeave={() => {
+                setIsHovered(false);
+                setHoveredIdx(0);
+              }}
+            >
+              <img src={heroImg} alt="" />
+              {isHovered && hoveredIdx === idx && <HeroPopover />}
+            </SwiperSlide>
+          )
+        )}
+      </Swiper>
+    </>
   );
 };
 

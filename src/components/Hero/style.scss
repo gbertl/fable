@@ -1,4 +1,6 @@
 .hero {
+  position: relative;
+
   &__container {
     text-align: center;
     margin-bottom: 67px;
@@ -12,7 +14,73 @@
   &__images > .swiper-wrapper {
     align-items: flex-end;
   }
+
   p {
     color: var(--gray);
+  }
+
+  &__popover {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 30%;
+    left: 100%;
+    width: max-content;
+    z-index: 9999;
+    background-color: #fff;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translate(-100%, -50%);
+      width: 0;
+      height: 0;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-right: 12px solid var(--gray-2);
+    }
+  }
+
+  &__popover-title {
+    color: var(--dark);
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+  &__popover-img {
+    background: var(--gray-2);
+    padding: 30px;
+
+    img {
+      width: 98px;
+    }
+  }
+
+  &__popover-body {
+    padding: 0 22px;
+  }
+
+  &__popover-desc {
+    font-size: 12px;
+    color: var(--gray);
+    margin-bottom: 24px;
+  }
+
+  &__popover-subdesc {
+    display: flex;
+    font-size: 14px;
+    gap: 14px;
+    color: var(--dark);
+    margin-bottom: 32px;
+  }
+
+  &__popover-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--dark);
   }
 }
