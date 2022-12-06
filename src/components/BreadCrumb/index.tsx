@@ -1,8 +1,12 @@
 import './style.scss';
 
-const BreadCrumb = () => {
+interface Props {
+  className: string;
+}
+
+const BreadCrumb = ({ className }: Props) => {
   return (
-    <ul className="breadcrumb">
+    <ul className={`breadcrumb ${className}`}>
       <li>
         <a href="#">Fable of Colors</a>
       </li>
