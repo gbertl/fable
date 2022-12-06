@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logo from '../../assets/icons/logo.svg';
 import './style.scss';
 
@@ -5,9 +6,9 @@ const Header = () => {
   return (
     <div className="header">
       <div className="container header__container">
-        <a href="#" className="header__logo hidden block-md">
+        <Link to="/" className="header__logo hidden block-md">
           <img src={logo} alt="" />
-        </a>
+        </Link>
         <ul className="header__nav">
           <li>
             <a href="#">Collections</a>
