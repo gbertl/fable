@@ -1,0 +1,52 @@
+.product {
+  &__breadcrumb {
+    margin-bottom: 12px;
+  }
+
+  &__card {
+    display: grid;
+    grid-template-columns: 650px 1fr;
+  }
+
+  &__card-img {
+    background: var(--gray-2);
+  }
+
+  &__card-body {
+    padding: 0 32px;
+  }
+
+  &__card-title {
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  &__card-subtitle {
+    margin-bottom: 32px;
+    font-size: 28px;
+  }
+
+  &__card-colors {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  &__card-color {
+    width: 40px;
+    height: 40px;
+  }
+
+  &__card-sizes {
+    display: flex;
+    gap: 32px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 32px;
+  }
+
+  &__card-size {
+    padding: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
