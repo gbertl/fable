@@ -1,19 +1,25 @@
 import { Link } from 'react-router-dom';
-import productShort5 from '../assets/images/product-short-5.png';
+import { products } from '../data';
 
-const HeroPopover = () => {
+interface Props {
+  productId: number;
+}
+
+const HeroPopover = ({ productId }: Props) => {
+  const product = products.find((p) => p.id === productId);
+
   return (
     <div className="hero__popover">
       <div className="hero__popover-img">
-        <img src={productShort5} alt="" />
+        <img src={product?.image} alt="" />
       </div>
 
       <div className="hero__popover-body">
-        <h1 className="hero__popover-title">Shorts CLR</h1>
+        <h1 className="hero__popover-title">{product?.name}</h1>
         <ul className="hero__popover-desc">
           <li>
             Collection:{' '}
-            <span className="font-bold uppercase">Fable of colors</span>
+            <span className="font-bold uppercase">{product?.collection}</span>
           </li>
           <li>
             Article: <span className="font-bold">H0146027</span>
@@ -21,17 +27,18 @@ const HeroPopover = () => {
         </ul>
         <ul className="hero__popover-subdesc">
           <li>
-            Size: <span className="font-bold">S</span>
+            Size: <span className="font-bold uppercase">{product?.size}</span>
           </li>
           <li>
-            Color: <span className="font-bold">Black</span>
+            Color:{' '}
+            <span className="font-bold capitalize">{product?.color}</span>
           </li>
         </ul>
         <div className="hero__popover-footer">
           <span>
-            Price: <span className="font-bold">$9</span>
+            Price: <span className="font-bold">{product?.price}</span>
           </span>
-          <Link to="/products/5" className="font-bold">
+          <Link to={`/products/${product?.id}`} className="font-bold">
             Show more
           </Link>
         </div>
