@@ -19,3 +19,23 @@
 .font-bold {
   font-weight: 500;
 }
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.btn {
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  padding: 12px 65px;
+  font-size: 20px;
+
+  &-primary {
+    --btn-bg: var(--dark);
+    --btn-color: #fff;
+
+    &:hover {
+      --btn-bg: rgba(60, 55, 55, 0.8);
+    }
+  }
+}
