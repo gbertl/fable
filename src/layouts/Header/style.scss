@@ -3,6 +3,9 @@
 .header {
   text-transform: uppercase;
   color: var(--dark);
+  margin-bottom: 94px;
+  font-size: 14px;
+  font-weight: 500;
 
   &__container {
     display: flex;

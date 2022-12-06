@@ -1,0 +1,18 @@
+.hero {
+  &__container {
+    text-align: center;
+    margin-bottom: 67px;
+  }
+
+  &__logo {
+    width: 321px;
+    margin-bottom: 32px;
+  }
+
+  &__images > .swiper-wrapper {
+    align-items: flex-end;
+  }
+  p {
+    color: var(--gray);
+  }
+}
