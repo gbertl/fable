@@ -1,3 +1,4 @@
+import { HashLink } from 'react-router-hash-link';
 import './style.scss';
 
 interface Props {
@@ -14,11 +15,20 @@ const BreadCrumb = ({
   return (
     <ul className={`breadcrumb ${className}`}>
       <li>
-        <a href="#">{productCollection}</a>
+        <HashLink
+          to={`/#${productCollection
+            ?.toLowerCase()
+            .split(' ')
+            .join('-')}-section`}
+        >
+          {productCollection}
+        </HashLink>
       </li>
       <li>&#8212;</li>
       <li>
-        <a href="#">{productCategory}</a>
+        <HashLink to={`/#${productCategory?.toLowerCase()}-section`}>
+          {productCategory}
+        </HashLink>
       </li>
     </ul>
   );
