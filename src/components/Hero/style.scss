@@ -44,7 +44,6 @@
   }
 
   &__popover-title {
-    color: var(--dark);
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 10px;
@@ -73,7 +72,6 @@
     display: flex;
     font-size: 14px;
     gap: 14px;
-    color: var(--dark);
     margin-bottom: 32px;
   }
 
@@ -81,6 +79,5 @@
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    color: var(--dark);
   }
 }
