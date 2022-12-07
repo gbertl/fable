@@ -1,15 +1,29 @@
+@use '../../assets/scss/abstracts/mixins' as m;
+
 .hero {
   position: relative;
-  margin-top: 94px;
+  margin-top: 103px;
+
+  @include m.mq(md) {
+    margin-top: 94px;
+  }
 
   &__container {
     text-align: center;
-    margin-bottom: 67px;
+    margin-bottom: 44px;
+
+    @include m.mq(md) {
+      margin-bottom: 67px;
+    }
   }
 
   &__logo {
     width: 321px;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
+
+    @include m.mq(md) {
+      margin-bottom: 32px;
+    }
   }
 
   &__images > .swiper-wrapper {
