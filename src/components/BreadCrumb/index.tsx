@@ -1,35 +1,36 @@
+import React from 'react';
 import { HashLink } from 'react-router-hash-link';
 import './style.scss';
 
-interface Props {
-  className: string;
-  productCollection?: string;
-  productCategory?: string;
+interface Link {
+  title: string;
+  url?: string;
 }
 
-const BreadCrumb = ({
-  className,
-  productCollection,
-  productCategory,
-}: Props) => {
+interface Props {
+  className?: string;
+  links: Link[];
+}
+
+const BreadCrumb = ({ className, links }: Props) => {
   return (
-    <ul className={`breadcrumb ${className}`}>
-      <li>
-        <HashLink
-          to={`/#${productCollection
-            ?.toLowerCase()
-            .split(' ')
-            .join('-')}-section`}
-        >
-          {productCollection}
-        </HashLink>
-      </li>
-      <li>&#8212;</li>
-      <li>
-        <HashLink to={`/#${productCategory?.toLowerCase()}-section`}>
-          {productCategory}
-        </HashLink>
-      </li>
+    <ul className={`breadcrumb ${className ? className : ''}`}>
+      {links.map((l, idx) => (
+        <React.Fragment key={idx}>
+          <li>
+            <HashLink
+              to={
+                l.url
+                  ? l.url
+                  : `/#${l.title?.toLowerCase().split(' ').join('-')}-section`
+              }
+            >
+              {l.title}
+            </HashLink>
+          </li>
+          {idx < links.length - 1 && <li>&#8212;</li>}
+        </React.Fragment>
+      ))}
     </ul>
   );
 };
