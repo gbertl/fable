@@ -94,7 +94,7 @@ const ProductCard = ({ product }: Props) => {
         </button>
 
         <Link
-          to="/"
+          to="/checkout"
           className="btn btn-success product__card-btn hidden"
           ref={goToCartRef}
         >
