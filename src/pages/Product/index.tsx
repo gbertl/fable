@@ -9,13 +9,14 @@ const Product = () => {
   const { id } = useParams();
   const product = products.find((p) => p.id === parseInt(id || ''));
 
+  if (!product) return null;
+
   return (
     <div className="product">
       <div className="container">
         <BreadCrumb
           className="product__breadcrumb"
-          productCollection={product?.collection}
-          productCategory={product?.category}
+          links={[{ title: product.collection }, { title: product.category }]}
         />
 
         {product && <ProductCard product={product} />}
