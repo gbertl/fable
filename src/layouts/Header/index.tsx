@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/icons/logo.svg';
+import { useAppSelector } from '../../hooks';
+import { selectItems } from '../../store/slices/cart';
 import './style.scss';
 
 const Header = () => {
+  const cartItems = useAppSelector(selectItems);
+
   return (
     <div className="header">
       <div className="container header__container">
@@ -22,7 +26,7 @@ const Header = () => {
         </ul>
         <ul className="header__right">
           <li>
-            <a href="#">Items</a>
+            <a href="#">Items ({cartItems.length})</a>
           </li>
           <li>
             <a href="#">Profile</a>

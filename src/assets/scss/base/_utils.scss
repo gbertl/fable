@@ -42,8 +42,18 @@
     --btn-bg: var(--dark);
     --btn-color: #fff;
 
+    &:disabled,
     &:hover {
       --btn-bg: rgba(60, 55, 55, 0.8);
+    }
+  }
+
+  &-success {
+    --btn-bg: var(--green);
+    --btn-color: #fff;
+
+    &:hover {
+      opacity: 0.8;
     }
   }
 }

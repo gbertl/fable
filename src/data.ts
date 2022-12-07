@@ -13,6 +13,7 @@ import productHero8 from './assets/images/product-hero8.png';
 import product9 from './assets/images/product9.png';
 import product10 from './assets/images/product10.png';
 import product11 from './assets/images/product11.png';
+import { Sizes } from './typings.d';
 
 export const products = [
   {
@@ -21,7 +22,7 @@ export const products = [
     name: 'Jacket CLR Black',
     collection: 'Fable of Colors',
     category: 'Jacket',
-    size: 'l',
+    size: Sizes.L,
     color: 'black',
     price: 'P710',
   },
@@ -32,7 +33,7 @@ export const products = [
     name: 'Jacket CLR Blue',
     collection: 'Fable of Colors',
     category: 'Jacket',
-    size: 'l',
+    size: Sizes.L,
     color: 'blue',
     price: 'P710',
   },
@@ -42,7 +43,7 @@ export const products = [
     name: 'Jacket CLR Ruby',
     collection: 'Fable of Colors',
     category: 'Jacket',
-    size: 'l',
+    size: Sizes.L,
     color: 'ruby',
     price: 'P800',
   },
@@ -53,7 +54,7 @@ export const products = [
     name: 'Jacket CLR White',
     collection: 'Fable of Colors',
     category: 'Jacket',
-    size: 'l',
+    size: Sizes.L,
     color: 'white',
     price: 'P800',
   },
@@ -63,7 +64,7 @@ export const products = [
     name: 'Jacket CLR Green',
     collection: 'Fable of Colors',
     category: 'Jacket',
-    size: 's',
+    size: Sizes.S,
     color: 'green',
     price: 'P929',
   },
@@ -74,7 +75,7 @@ export const products = [
     name: 'Jacket CLR Orange',
     collection: 'Fable of Colors',
     category: 'Jacket',
-    size: 'l',
+    size: Sizes.L,
     color: 'orange',
     price: 'P820',
   },
@@ -84,7 +85,7 @@ export const products = [
     name: 'Shorts CLR Blue',
     collection: 'Fable of Colors',
     category: 'Shorts',
-    size: 'l',
+    size: Sizes.L,
     color: 'blue',
     price: 'P820',
   },
@@ -95,7 +96,7 @@ export const products = [
     name: 'Shorts CLR Black',
     collection: 'Fable of Colors',
     category: 'Shorts',
-    size: 'l',
+    size: Sizes.L,
     color: 'black',
     price: 'P820',
   },
@@ -105,7 +106,7 @@ export const products = [
     name: 'Shorts CLR White',
     collection: 'Fable of Colors',
     category: 'Shorts',
-    size: 'l',
+    size: Sizes.L,
     color: 'white',
     price: 'P820',
   },
@@ -115,7 +116,7 @@ export const products = [
     name: 'Shorts CLR Orange',
     collection: 'Fable of Colors',
     category: 'Shorts',
-    size: 'l',
+    size: Sizes.L,
     color: 'orange',
     price: 'P820',
   },
@@ -125,8 +126,21 @@ export const products = [
     name: 'Shorts CLR Ruby',
     collection: 'Fable of Colors',
     category: 'Shorts',
-    size: 'l',
+    size: Sizes.XL,
     color: 'ruby',
     price: 'P820',
   },
 ];
+
+export const colors = [
+  { id: 1, hex: '#F4E1CC' },
+  { id: 2, hex: '#262626' },
+  { id: 3, hex: '#9FAED9' },
+  { id: 4, hex: '#56AA91' },
+  { id: 5, hex: '#707070' },
+  { id: 6, hex: '#743821' },
+  { id: 7, hex: '#C89607' },
+  { id: 8, hex: '#214133' },
+];
+
+export const sizes = [Sizes.XS, Sizes.S, Sizes.M, Sizes.L, Sizes.XL];

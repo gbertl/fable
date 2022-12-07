@@ -84,7 +84,17 @@
     }
   }
 
+  &__card-radio {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+    &:hover,
+    &--active {
+      border-color: rgba(60, 55, 55, 0.8);
+    }
+  }
+
   &__card-color {
+    display: block;
     width: 22px;
     height: 22px;
 
@@ -112,7 +122,6 @@
 
   &__card-size {
     padding: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   &__card-btn {
