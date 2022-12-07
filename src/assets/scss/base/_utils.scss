@@ -6,6 +6,10 @@
   margin-inline: auto;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .hidden {
   display: none !important;
 }
@@ -33,6 +37,7 @@
 }
 
 .btn {
+  display: inline-block;
   background: var(--btn-bg);
   color: var(--btn-color);
   padding: 12px 65px;
@@ -55,5 +60,76 @@
     &:hover {
       opacity: 0.8;
     }
+  }
+
+  &-outline {
+    border: 1px solid var(--dark);
+
+    &:hover {
+      --btn-bg: var(--dark);
+      --btn-color: #fff;
+    }
+  }
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-1\/2 {
+  width: 50% !important;
+}
+
+.form {
+  &__label {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  &__input {
+    border: 1px solid var(--dark);
+    padding: 12px 16px;
+    font-size: 20px;
+
+    &::placeholder {
+      color: var(--dark);
+      opacity: 0.2;
+    }
+  }
+
+  &__textarea {
+    height: 100px;
+  }
+
+  &__checkbox &__label {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__checkbox &__label > &__checkbox-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--dark);
+    position: relative;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      background: var(--dark);
+    }
+  }
+
+  &__checkbox-input:checked ~ &__label > &__checkbox-icon::before {
+    display: block;
   }
 }

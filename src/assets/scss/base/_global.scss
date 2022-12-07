@@ -51,3 +51,19 @@ h1 {
 h5 {
   font-size: 18px;
 }
+
+label {
+  display: block;
+}
+
+input,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background: none;
+}
+
+textarea {
+  resize: vertical;
+}
