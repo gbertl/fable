@@ -26,7 +26,7 @@ const Header = () => {
         </ul>
         <ul className="header__right">
           <li>
-            <a href="#">Items ({cartItems.length})</a>
+            <Link to="/checkout">Items ({cartItems.length})</Link>
           </li>
           <li>
             <a href="#">Profile</a>
