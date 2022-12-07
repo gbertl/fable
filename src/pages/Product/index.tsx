@@ -35,6 +35,8 @@ const Product = () => {
           <div className="product__card-body">
             <h1 className="product__card-title">{product?.name}</h1>
             <h2 className="product__card-subtitle">{product?.price}</h2>
+
+            <h3 className="hidden-md product__card-section-heading">Color</h3>
             <ul className="product__card-colors">
               {colors.map((color, idx) => (
                 <li
@@ -50,6 +52,7 @@ const Product = () => {
               ))}
             </ul>
 
+            <h3 className="hidden-md product__card-section-heading">Size</h3>
             <ul className="product__card-sizes">
               {sizes.map((size) => (
                 <li key={size} className="product__card-size">
@@ -58,7 +61,9 @@ const Product = () => {
               ))}
             </ul>
 
-            <button className="btn btn-primary">Add to cart</button>
+            <button className="btn btn-primary product__card-btn">
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
