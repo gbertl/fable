@@ -28,8 +28,10 @@
     }
   }
 
-  &__form-pickup-wrapper {
-    margin-right: 20px;
+  &__form-delivery-btns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 
   &__form-delivery-input:checked ~ &__form-delivery-btn {

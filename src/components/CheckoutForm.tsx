@@ -59,40 +59,42 @@ const CheckoutForm = () => {
             Delivery method
           </label>
 
-          <div className="inline-block checkout__form-pickup-wrapper">
-            <input
-              type="radio"
-              name="delivery-method"
-              id="pickup"
-              className="hidden checkout__form-delivery-input"
-              onChange={handleDeliveryMethod}
-              value={DeliveryMethods.PickUp}
-              checked={data.deliveryMethod === DeliveryMethods.PickUp}
-            />
-            <label
-              htmlFor="pickup"
-              className="btn btn-outline checkout__form-delivery-btn"
-            >
-              In-store pick up
-            </label>
-          </div>
+          <div className="checkout__form-delivery-btns">
+            <div className="inline-block">
+              <input
+                type="radio"
+                name="delivery-method"
+                id="pickup"
+                className="hidden checkout__form-delivery-input"
+                onChange={handleDeliveryMethod}
+                value={DeliveryMethods.PickUp}
+                checked={data.deliveryMethod === DeliveryMethods.PickUp}
+              />
+              <label
+                htmlFor="pickup"
+                className="btn btn-outline w-full checkout__form-delivery-btn"
+              >
+                In-store pick up
+              </label>
+            </div>
 
-          <div className="inline-block">
-            <input
-              type="radio"
-              name="delivery-method"
-              id="to-door"
-              className="hidden checkout__form-delivery-input"
-              onChange={handleDeliveryMethod}
-              value={DeliveryMethods.ToDoor}
-              checked={data.deliveryMethod === DeliveryMethods.ToDoor}
-            />
-            <label
-              htmlFor="to-door"
-              className="btn btn-outline checkout__form-delivery-btn"
-            >
-              To the door
-            </label>
+            <div className="inline-block">
+              <input
+                type="radio"
+                name="delivery-method"
+                id="to-door"
+                className="hidden checkout__form-delivery-input"
+                onChange={handleDeliveryMethod}
+                value={DeliveryMethods.ToDoor}
+                checked={data.deliveryMethod === DeliveryMethods.ToDoor}
+              />
+              <label
+                htmlFor="to-door"
+                className="btn btn-outline w-full checkout__form-delivery-btn"
+              >
+                To the door
+              </label>
+            </div>
           </div>
         </div>
 
