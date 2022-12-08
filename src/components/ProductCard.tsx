@@ -108,7 +108,7 @@ const ProductCard = ({ product }: Props) => {
       <img src={product?.image} alt="" className="product__card-img" />
       <div className="product__card-body">
         <h1 className="product__card-title">{product?.name}</h1>
-        <h2 className="product__card-subtitle">{product?.price}</h2>
+        <h2 className="product__card-subtitle">₱{product?.price}</h2>
 
         <h3 className="hidden-md product__card-section-heading">Color</h3>
         <ul className="product__card-colors">

@@ -15,7 +15,7 @@ export interface Product {
   category: string;
   size: Sizes;
   color: string;
-  price: string;
+  price: number;
 }
 
 export interface Item {

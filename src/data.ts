@@ -24,7 +24,7 @@ export const products = [
     category: 'Jacket',
     size: Sizes.L,
     color: 'black',
-    price: 'P710',
+    price: 710,
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ export const products = [
     category: 'Jacket',
     size: Sizes.L,
     color: 'blue',
-    price: 'P710',
+    price: 710,
   },
   {
     id: 3,
@@ -45,7 +45,7 @@ export const products = [
     category: 'Jacket',
     size: Sizes.L,
     color: 'ruby',
-    price: 'P800',
+    price: 800,
   },
   {
     id: 4,
@@ -56,7 +56,7 @@ export const products = [
     category: 'Jacket',
     size: Sizes.L,
     color: 'white',
-    price: 'P800',
+    price: 800,
   },
   {
     id: 5,
@@ -66,7 +66,7 @@ export const products = [
     category: 'Jacket',
     size: Sizes.S,
     color: 'green',
-    price: 'P929',
+    price: 929,
   },
   {
     id: 6,
@@ -77,7 +77,7 @@ export const products = [
     category: 'Jacket',
     size: Sizes.L,
     color: 'orange',
-    price: 'P820',
+    price: 820,
   },
   {
     id: 7,
@@ -87,7 +87,7 @@ export const products = [
     category: 'Shorts',
     size: Sizes.L,
     color: 'blue',
-    price: 'P820',
+    price: 820,
   },
   {
     id: 8,
@@ -98,7 +98,7 @@ export const products = [
     category: 'Shorts',
     size: Sizes.L,
     color: 'black',
-    price: 'P820',
+    price: 820,
   },
   {
     id: 9,
@@ -108,7 +108,7 @@ export const products = [
     category: 'Shorts',
     size: Sizes.L,
     color: 'white',
-    price: 'P820',
+    price: 820,
   },
   {
     id: 10,
@@ -118,7 +118,7 @@ export const products = [
     category: 'Shorts',
     size: Sizes.L,
     color: 'orange',
-    price: 'P820',
+    price: 820,
   },
   {
     id: 11,
@@ -128,7 +128,7 @@ export const products = [
     category: 'Shorts',
     size: Sizes.XL,
     color: 'ruby',
-    price: 'P820',
+    price: 820,
   },
 ];
 

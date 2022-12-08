@@ -36,7 +36,7 @@ const HeroPopover = ({ productId }: Props) => {
         </ul>
         <div className="hero__popover-footer">
           <span>
-            Price: <span className="font-bold">{product?.price}</span>
+            Price: <span className="font-bold">₱{product?.price}</span>
           </span>
           <Link to={`/products/${product?.id}`} className="font-bold">
             Show more

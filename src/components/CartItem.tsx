@@ -82,7 +82,10 @@ const CartItem = ({ item }: Props) => {
         </ul>
 
         <p className="cart__item-footer">
-          Price: <span className="font-bold">{product.price}</span>
+          Price:{' '}
+          <span className="font-bold">
+            ₱{product.price * (item?.quantity || 0)}
+          </span>
         </p>
       </div>
     </div>
