@@ -63,6 +63,16 @@
     }
   }
 
+  &-light {
+    --btn-bg: #fff;
+    --btn-color: var(--dark);
+
+    &:hover {
+      --btn-bg: var(--dark);
+      --btn-color: #fff;
+    }
+  }
+
   &-outline {
     border: 1px solid var(--dark);
 
