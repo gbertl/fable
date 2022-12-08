@@ -33,7 +33,10 @@ const HeroPopover = ({ productId }: Props) => {
             Color:{' '}
             <div
               className="hero__popover-color-box"
-              style={{ background: product?.color }}
+              style={{
+                background: product?.color,
+                border: '1px solid var(--dark)',
+              }}
             ></div>
           </li>
         </ul>
