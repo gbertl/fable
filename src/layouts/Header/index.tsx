@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import logo from '../../assets/icons/logo.svg';
 import { useAppSelector } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
@@ -15,7 +16,7 @@ const Header = () => {
         </Link>
         <ul className="header__nav">
           <li>
-            <a href="#">Collections</a>
+            <HashLink to="/#fable-of-colors-section">Collections</HashLink>
           </li>
           <li className="hidden block-md">
             <a href="#">Customizer</a>
