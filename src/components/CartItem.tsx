@@ -87,12 +87,23 @@ const CartItem = ({ item }: Props) => {
           </li>
         </ul>
 
-        <p className="cart__item-footer">
-          Price:{' '}
-          <span className="font-bold">
-            ₱{product.price * (item?.quantity || 0)}
-          </span>
-        </p>
+        <div className="cart__item-footer">
+          <div>
+            Price:{' '}
+            <span className="font-bold">
+              ₱{product.price * (item?.quantity || 0)}
+            </span>
+          </div>
+
+          <button
+            className="cart__item-delete"
+            onClick={() =>
+              dispatch(replaceItems(cartItems.filter((ci) => ci !== item)))
+            }
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );

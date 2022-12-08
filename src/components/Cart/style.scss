@@ -58,6 +58,9 @@
   }
 
   &__item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 14px;
   }
 
@@ -71,5 +74,13 @@
     display: inline-block;
     width: 20px;
     height: 20px;
+  }
+
+  &__item-delete {
+    color: var(--gray);
+
+    &:hover {
+      color: var(--dark);
+    }
   }
 }
