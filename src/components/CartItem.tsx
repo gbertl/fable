@@ -1,4 +1,6 @@
 import { colors, products } from '../data';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { replaceItems, selectItems } from '../store/slices/cart';
 import { Item } from '../typings';
 
 interface Props {
@@ -8,8 +10,36 @@ interface Props {
 const CartItem = ({ item }: Props) => {
   const product = products.find((p) => p.id === item.productId);
   const color = colors.find((c) => c.id === item.colorId);
+  const cartItems = useAppSelector(selectItems);
+  const dispatch = useAppDispatch();
 
   if (!product) return null;
+
+  const handleChangeQuantity = ({ isIncrease }: { isIncrease: boolean }) => {
+    const updatedCartItems = cartItems.map((ci) => {
+      if (
+        ci.productId === item.productId &&
+        ci.colorId === item.colorId &&
+        ci.size === item.size
+      ) {
+        if (isIncrease) {
+          return {
+            ...ci,
+            quantity: (ci?.quantity || 0) + 1,
+          };
+        } else {
+          return {
+            ...ci,
+            quantity: (ci?.quantity || 0) - 1,
+          };
+        }
+      } else {
+        return ci;
+      }
+    });
+
+    dispatch(replaceItems(updatedCartItems));
+  };
 
   return (
     <div className="cart__item">
@@ -35,9 +65,18 @@ const CartItem = ({ item }: Props) => {
           <li>
             Quantity:
             <div className="cart__item-quantity">
-              <button>-</button>
-              <span>1</span>
-              <button>+</button>
+              <button
+                onClick={() => handleChangeQuantity({ isIncrease: false })}
+              >
+                -
+              </button>
+
+              <span>{item.quantity}</span>
+              <button
+                onClick={() => handleChangeQuantity({ isIncrease: true })}
+              >
+                +
+              </button>
             </div>
           </li>
         </ul>

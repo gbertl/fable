@@ -16,7 +16,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     replaceItems: (state, action: PayloadAction<Item[]>) => {
-      state.items = action.payload;
+      state.items = action.payload.filter((i) => i.quantity !== 0);
     },
   },
 });
