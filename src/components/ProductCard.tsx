@@ -1,29 +1,106 @@
-import { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Item, Product, Sizes } from '../typings.d';
 import { sizes, colors } from '../data';
-import { addToCart } from '../store/slices/cart';
-import { useAppDispatch } from '../hooks';
+import { replaceItems, selectItems } from '../store/slices/cart';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { Link } from 'react-router-dom';
+import { findCartItem } from '../utils';
 
 interface Props {
   product: Product;
 }
 
 const ProductCard = ({ product }: Props) => {
-  const [data, setData] = useState<Item>({
-    productId: product.id,
-  });
+  const [data, setData] = useState<Item>({ productId: product.id });
+
+  const cartItems = useAppSelector(selectItems);
 
   const dispatch = useAppDispatch();
 
-  const addToCartRef = useRef<HTMLButtonElement>(null);
-  const goToCartRef = useRef<HTMLAnchorElement>(null);
+  const handleAddToCart = () => {
+    const item = {
+      ...data,
+      quantity: (data.quantity || 0) + 1,
+    };
 
-  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
-    dispatch(addToCart(data));
-    goToCartRef.current?.classList.remove('hidden');
-    addToCartRef.current?.classList.add('hidden');
+    dispatch(replaceItems([...cartItems, item]));
+
+    setData(item);
+  };
+
+  const handleUpdateQuantity = ({ isIncrease }: { isIncrease: boolean }) => {
+    const items = cartItems.map((cartItem) => {
+      if (
+        cartItem.productId === data.productId &&
+        cartItem.colorId === data.colorId &&
+        cartItem.size === data.size
+      ) {
+        const quantity = isIncrease
+          ? (cartItem.quantity || 0) + 1
+          : (cartItem.quantity || 0) - 1;
+
+        setData((prevData) => ({ ...prevData, quantity }));
+
+        return {
+          ...cartItem,
+          quantity,
+        };
+      } else {
+        return cartItem;
+      }
+    });
+
+    dispatch(replaceItems(items));
+  };
+
+  const handleChangeColor = (colorId: number) =>
+    setData((prevData) => {
+      const existingItem = findCartItem(cartItems, { ...prevData, colorId });
+
+      if (existingItem) {
+        return existingItem;
+      } else {
+        return {
+          ...prevData,
+          colorId,
+          quantity: 0,
+        };
+      }
+    });
+
+  const handleChangeSize = (size: Sizes) => {
+    setData((prevData) => {
+      const existingItem = findCartItem(cartItems, { ...prevData, size });
+
+      if (existingItem) {
+        return existingItem;
+      } else {
+        return { ...prevData, size, quantity: 0 };
+      }
+    });
+  };
+
+  const handleKeyupQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const item = {
+      ...data,
+      quantity: parseInt(e.target.value),
+    };
+
+    const updatedCartItems = cartItems.map((ci) => {
+      if (
+        ci.productId === data.productId &&
+        ci.colorId === data.colorId &&
+        ci.size === data.size
+      ) {
+        return item;
+      } else {
+        return ci;
+      }
+    });
+
+    dispatch(replaceItems(updatedCartItems));
+    setData(item);
   };
 
   return (
@@ -42,12 +119,7 @@ const ProductCard = ({ product }: Props) => {
                 name="item-color"
                 id={`item-color-${color.id}`}
                 value={color.id}
-                onChange={() =>
-                  setData((prevData) => ({
-                    ...prevData,
-                    colorId: color.id,
-                  }))
-                }
+                onChange={() => handleChangeColor(color.id)}
                 className="hidden"
               />
               <label
@@ -60,7 +132,6 @@ const ProductCard = ({ product }: Props) => {
             </li>
           ))}
         </ul>
-
         <h3 className="hidden-md product__card-section-heading">Size</h3>
         <ul className="product__card-sizes">
           {sizes.map((size) => (
@@ -69,7 +140,7 @@ const ProductCard = ({ product }: Props) => {
                 type="radio"
                 name="item-size"
                 id={`item-size-${size}`}
-                onChange={() => setData((prevData) => ({ ...prevData, size }))}
+                onChange={() => handleChangeSize(size)}
                 className="hidden"
               />
               <label
@@ -84,22 +155,48 @@ const ProductCard = ({ product }: Props) => {
           ))}
         </ul>
 
-        <button
-          className="btn btn-primary product__card-btn"
-          onClick={handleAddToCart}
-          disabled={data.colorId && data.size ? false : true}
-          ref={addToCartRef}
-        >
-          Add to cart
-        </button>
+        {data.quantity ? (
+          <>
+            {/* Quantity */}
+            <div className="product__card-quantity">
+              <h3 className="product__card-section-heading">Quantity:</h3>
+              <div className="product__card-quantity-ctrl">
+                <button
+                  className="product__card-quantity-btn"
+                  onClick={() => handleUpdateQuantity({ isIncrease: false })}
+                >
+                  -
+                </button>
 
-        <Link
-          to="/checkout"
-          className="btn btn-success product__card-btn hidden"
-          ref={goToCartRef}
-        >
-          Go to cart
-        </Link>
+                <input
+                  type="number"
+                  value={data.quantity}
+                  onChange={handleKeyupQuantity}
+                  className="product__card-quantity-input"
+                />
+
+                <button
+                  className="product__card-quantity-btn"
+                  onClick={() => handleUpdateQuantity({ isIncrease: true })}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <Link to="/checkout" className="btn btn-success product__card-btn">
+              Go to cart
+            </Link>
+          </>
+        ) : (
+          <button
+            className="btn btn-primary product__card-btn"
+            onClick={handleAddToCart}
+            disabled={data.colorId && data.size ? false : true}
+          >
+            Add to cart
+          </button>
+        )}
       </div>
     </div>
   );

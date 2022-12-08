@@ -1,10 +1,11 @@
 import BreadCrumb from '../../components/BreadCrumb';
+import Cart from '../../components/Cart';
 import CheckoutForm from '../../components/CheckoutForm';
 import './style.scss';
 
 const Checkout = () => {
   return (
-    <div className="checkout">
+    <section className="checkout">
       <div className="container">
         <BreadCrumb
           links={[
@@ -15,9 +16,10 @@ const Checkout = () => {
 
         <div className="checkout__grid">
           <CheckoutForm />
+          <Cart />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

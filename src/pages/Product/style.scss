@@ -68,6 +68,11 @@
     font-weight: 400;
     margin-bottom: 18px;
     text-align: center;
+
+    @include m.mq(md) {
+      font-size: 20px;
+      margin-bottom: 0;
+    }
   }
 
   &__card-colors {
@@ -126,9 +131,40 @@
 
   &__card-btn {
     width: 100%;
+    text-align: center;
 
     @include m.mq(md) {
       width: auto;
     }
+  }
+
+  &__card-quantity {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    @include m.mq(md) {
+      flex-direction: row;
+    }
+  }
+
+  &__card-quantity-ctrl {
+    display: flex;
+    gap: 12px;
+
+    @include m.mq(md) {
+      margin-left: 20px;
+    }
+  }
+
+  &__card-quantity-btn {
+    padding: 12px;
+  }
+
+  &__card-quantity-input {
+    width: 36px;
+    outline: none;
+    text-align: center;
   }
 }
