@@ -22,7 +22,7 @@ const Products = () => {
                 </Link>
                 <div className="products__card-body">
                   <h5 className="products__card-title">{p.name}</h5>
-                  <span className="products__card-price">{p.price}</span>
+                  <span className="products__card-price">₱{p.price}</span>
                 </div>
               </div>
             ))}
@@ -40,7 +40,7 @@ const Products = () => {
                 </Link>
                 <div className="products__card-body">
                   <h5 className="products__card-title">{p.name}</h5>
-                  <span className="products__card-price">{p.price}</span>
+                  <span className="products__card-price">₱{p.price}</span>
                 </div>
               </div>
             ))}

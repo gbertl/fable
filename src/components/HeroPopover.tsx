@@ -29,9 +29,12 @@ const HeroPopover = ({ productId }: Props) => {
           <li>
             Size: <span className="font-bold uppercase">{product?.size}</span>
           </li>
-          <li>
+          <li className="hero__popover-color">
             Color:{' '}
-            <span className="font-bold capitalize">{product?.color}</span>
+            <div
+              className="hero__popover-color-box"
+              style={{ background: product?.color }}
+            ></div>
           </li>
         </ul>
         <div className="hero__popover-footer">

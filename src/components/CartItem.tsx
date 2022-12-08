@@ -59,8 +59,14 @@ const CartItem = ({ item }: Props) => {
           <li>
             Size: <span className="uppercase font-bold">{item.size}</span>
           </li>
-          <li>
-            Color: <span className="font-bold">{color?.hex}</span>
+          <li className="cart__item-color">
+            Color:{' '}
+            <div
+              className="cart__item-color-box"
+              style={{
+                background: color?.hex,
+              }}
+            ></div>
           </li>
           <li>
             Quantity:

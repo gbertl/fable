@@ -96,4 +96,15 @@
     justify-content: space-between;
     font-size: 14px;
   }
+
+  &__popover-color {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  &__popover-color-box {
+    width: 18px;
+    height: 18px;
+  }
 }
