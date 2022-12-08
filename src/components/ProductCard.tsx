@@ -84,7 +84,7 @@ const ProductCard = ({ product }: Props) => {
   const handleKeyupQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
     const item = {
       ...data,
-      quantity: parseInt(e.target.value),
+      quantity: parseInt(e.target.value) || 0,
     };
 
     const updatedCartItems = cartItems.map((ci) => {
