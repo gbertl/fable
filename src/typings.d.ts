@@ -19,7 +19,8 @@ export interface Product {
 }
 
 export interface Item {
-  productId: number;
+  productId?: number;
   colorId?: number;
   size?: Sizes;
+  quantity?: number;
 }
