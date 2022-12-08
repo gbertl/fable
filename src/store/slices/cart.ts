@@ -15,13 +15,13 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<Item>) => {
-      state.items.push(action.payload);
+    replaceItems: (state, action: PayloadAction<Item[]>) => {
+      state.items = action.payload;
     },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { replaceItems } = cartSlice.actions;
 
 export const selectItems = (state: RootState) => state.cart.items;
 
