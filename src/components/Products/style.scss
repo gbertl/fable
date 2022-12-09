@@ -20,13 +20,29 @@
     }
   }
 
-  &__category-heading {
+  &__cards-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__subheading {
     font-size: 14px;
     color: var(--dark);
     margin: 20px 0;
 
     @include m.mq(md) {
       font-size: 24px;
+    }
+  }
+
+  &__sort {
+    margin-left: 8px;
+    text-transform: capitalize;
+    color: var(--gray);
+    outline: none;
+
+    @include m.mq(md) {
+      margin-left: 16px;
     }
   }
 

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 
 import BreadCrumb from '../../components/BreadCrumb';
 import './style.scss';
-import { products } from '../../data';
+import { categories, products } from '../../data';
 import ProductCard from '../../components/ProductCard';
 
 const Product = () => {
@@ -16,7 +16,13 @@ const Product = () => {
       <div className="container">
         <BreadCrumb
           className="product__breadcrumb"
-          links={[{ title: product.collection }, { title: product.category }]}
+          links={[
+            { title: product.collection },
+            {
+              title:
+                categories.find((c) => c.id === product.categoryId)?.name || '',
+            },
+          ]}
         />
 
         {product && <ProductCard product={product} />}

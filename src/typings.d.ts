@@ -6,13 +6,18 @@ export enum Sizes {
   XL = 'xl',
 }
 
+export interface Category {
+  id: number;
+  name: string;
+}
+
 export interface Product {
   id: number;
   heroImage?: string;
   image: string;
   name: string;
   collection: string;
-  category: string;
+  categoryId: number;
   size: Sizes;
   color: string;
   price: number;

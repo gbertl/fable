@@ -6,6 +6,10 @@
   margin-inline: auto;
 }
 
+.flex {
+  display: flex;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -22,6 +26,10 @@
   .hidden-md {
     display: none !important;
   }
+}
+
+.items-center {
+  align-items: center;
 }
 
 .font-bold {

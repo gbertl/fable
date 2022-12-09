@@ -4,6 +4,7 @@
   &__breadcrumb {
     margin-top: 12px;
     margin-bottom: 20px;
+    text-transform: capitalize;
 
     @include m.mq(md) {
       margin-bottom: 12px;
