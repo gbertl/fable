@@ -163,3 +163,8 @@
     display: block;
   }
 }
+
+.hide-scrollbar {
+  overflow-y: hidden;
+  padding-right: 15px;
+}

@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import logo from '../../assets/icons/logo.svg';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
+import { showSideCart } from '../../store/slices/ui';
 import './style.scss';
 
 const Header = () => {
   const cartItems = useAppSelector(selectItems);
+  const dispatch = useAppDispatch();
 
   return (
     <div className="header">
@@ -27,7 +29,9 @@ const Header = () => {
         </ul>
         <ul className="header__right">
           <li>
-            <Link to="/checkout">Items ({cartItems.length})</Link>
+            <button onClick={() => dispatch(showSideCart())}>
+              Items ({cartItems.length})
+            </button>
           </li>
           <li>
             <a href="#">Profile</a>

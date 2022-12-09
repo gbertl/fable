@@ -6,6 +6,7 @@ import { replaceItems, selectItems } from '../../store/slices/cart';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Link } from 'react-router-dom';
 import { findCartItem } from '../../utils';
+import { showSideCart } from '../../store/slices/ui';
 
 interface Props {
   product: Product;
@@ -184,9 +185,12 @@ const ProductCard = ({ product }: Props) => {
               </div>
             </div>
 
-            <Link to="/checkout" className="btn btn-success product__card-btn">
+            <button
+              className="btn btn-success product__card-btn"
+              onClick={() => dispatch(showSideCart())}
+            >
               Go to cart
-            </Link>
+            </button>
           </>
         ) : (
           <button

@@ -2,7 +2,6 @@ import { useAppSelector } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import './style.scss';
 import CartItem from './CartItem';
-import CartSummary from './CartSummary';
 
 interface Props {
   className?: string;
@@ -19,7 +18,6 @@ const Cart = ({ className, style }: Props) => {
           <CartItem item={item} />
         ))}
       </div>
-      <CartSummary />
     </div>
   );
 };

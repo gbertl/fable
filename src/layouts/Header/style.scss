@@ -24,4 +24,9 @@
     display: flex;
     gap: 36px;
   }
+
+  button {
+    font-weight: inherit;
+    text-transform: inherit;
+  }
 }

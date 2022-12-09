@@ -73,4 +73,30 @@
     --btn-bg: var(--dark);
     --btn-color: #fff;
   }
+
+  // Summary
+  &__summary {
+    width: 65%;
+    margin-top: 60px;
+    margin-left: auto;
+  }
+
+  &__summary-details {
+    margin-bottom: 24px;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+  }
+
+  &__summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
 }

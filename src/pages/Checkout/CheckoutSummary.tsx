@@ -2,14 +2,14 @@ import { useAppSelector } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import { getCartTotal } from '../../utils';
 
-const CartSummary = () => {
+const CheckoutSummary = () => {
   const cartItems = useAppSelector(selectItems);
 
   const total = getCartTotal(cartItems);
 
   return (
-    <div className="cart__summary">
-      <ul className="cart__summary-details">
+    <div className="checkout__summary">
+      <ul className="checkout__summary-details">
         <li>
           Summary: <span>₱{total}</span>
         </li>
@@ -21,7 +21,7 @@ const CartSummary = () => {
         </li>
       </ul>
 
-      <p className="cart__summary-total">
+      <p className="checkout__summary-total">
         Total: <span>₱{total}</span>
       </p>
 
@@ -37,4 +37,4 @@ const CartSummary = () => {
   );
 };
 
-export default CartSummary;
+export default CheckoutSummary;
