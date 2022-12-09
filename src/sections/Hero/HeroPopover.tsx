@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { products } from '../data';
+import { products } from '../../data';
 
 interface Props {
   productId: number;

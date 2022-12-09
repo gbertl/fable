@@ -1,7 +1,7 @@
-import { colors, products } from '../data';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { replaceItems, selectItems } from '../store/slices/cart';
-import { Item } from '../typings';
+import { colors, products } from '../../data';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { replaceItems, selectItems } from '../../store/slices/cart';
+import { Item } from '../../typings';
 
 interface Props {
   item: Item;

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import BreadCrumb from '../../components/BreadCrumb';
 import './style.scss';
 import { categories, products } from '../../data';
-import ProductCard from '../../components/ProductCard';
+import ProductCard from './ProductCard';
 
 const Product = () => {
   const { id } = useParams();

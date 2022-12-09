@@ -3,14 +3,11 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     margin-top: 42px;
+    gap: 70px;
   }
 
   .form__input {
     width: 100%;
-  }
-
-  &__form {
-    padding-right: 20px;
   }
 
   &__form-title {

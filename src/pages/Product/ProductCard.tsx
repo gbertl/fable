@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-import { Item, Product, Sizes } from '../typings.d';
-import { sizes, colors } from '../data';
-import { replaceItems, selectItems } from '../store/slices/cart';
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { Item, Product, Sizes } from '../../typings';
+import { sizes, colors } from '../../data';
+import { replaceItems, selectItems } from '../../store/slices/cart';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Link } from 'react-router-dom';
-import { findCartItem } from '../utils';
+import { findCartItem } from '../../utils';
 
 interface Props {
   product: Product;

@@ -4,12 +4,12 @@ import { useMediaQuery } from 'react-responsive';
 
 import HeroPopover from './HeroPopover';
 import { useState } from 'react';
-import { products } from '../data';
-import productHeroA from '../assets/images/product-hero-a.png';
-import productHeroB from '../assets/images/product-hero-b.png';
-import productHeroC from '../assets/images/product-hero-c.png';
-import productHeroD from '../assets/images/product-hero-d.png';
-import productHeroE from '../assets/images/product-hero-e.png';
+import { products } from '../../data';
+import productHeroA from '../../assets/images/product-hero-a.png';
+import productHeroB from '../../assets/images/product-hero-b.png';
+import productHeroC from '../../assets/images/product-hero-c.png';
+import productHeroD from '../../assets/images/product-hero-d.png';
+import productHeroE from '../../assets/images/product-hero-e.png';
 
 const heroProducts = [
   products.find((p) => p.id == 2),
@@ -34,7 +34,7 @@ const HeroSlide = () => {
   return (
     <>
       <Swiper
-        className="hero__images"
+        className="hero__slider"
         slidesPerView={isDesktop ? 9 : isTablet ? 6 : isMobile ? 3 : 2}
         spaceBetween={3}
         maxBackfaceHiddenSlides={0}

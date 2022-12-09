@@ -1,6 +1,6 @@
 import BreadCrumb from '../../components/BreadCrumb';
 import Cart from '../../components/Cart';
-import CheckoutForm from '../../components/CheckoutForm';
+import CheckoutForm from './CheckoutForm';
 import './style.scss';
 
 const Checkout = () => {

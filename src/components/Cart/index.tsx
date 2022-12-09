@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import './style.scss';
-import CartItem from '../CartItem';
+import CartItem from './CartItem';
 
 const Cart = () => {
   const cartItems = useAppSelector(selectItems);

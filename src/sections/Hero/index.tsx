@@ -1,6 +1,6 @@
 import logo from '../../assets/icons/logo.svg';
 import './style.scss';
-import HeroSlide from '../HeroSlide';
+import HeroSlider from './HeroSlider';
 
 const Hero = () => {
   return (
@@ -12,7 +12,7 @@ const Hero = () => {
           concepts
         </p>
       </div>
-      <HeroSlide />
+      <HeroSlider />
     </section>
   );
 };
