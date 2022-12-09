@@ -67,6 +67,7 @@
     border-color: #fff !important;
     margin-bottom: 16px;
     width: 100%;
+    color: #fff;
 
     @include m.mq(md) {
       margin-bottom: 0;

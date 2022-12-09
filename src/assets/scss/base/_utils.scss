@@ -75,9 +75,13 @@
     --btn-bg: #fff;
     --btn-color: var(--dark);
 
+    border: 1px solid transparent;
+
     &:hover {
       --btn-bg: var(--dark);
       --btn-color: #fff;
+
+      border-color: #fff;
     }
   }
 
