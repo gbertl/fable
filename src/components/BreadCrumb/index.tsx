@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import './style.scss';
 
 interface Link {
   title: string;
-  url?: string;
+  url: string;
 }
 
 interface Props {
@@ -18,15 +19,11 @@ const BreadCrumb = ({ className, links }: Props) => {
       {links.map((l, idx) => (
         <React.Fragment key={idx}>
           <li>
-            <HashLink
-              to={
-                l.url
-                  ? l.url
-                  : `/#${l.title?.toLowerCase().split(' ').join('-')}-section`
-              }
-            >
-              {l.title}
-            </HashLink>
+            {l.url.includes('#') ? (
+              <HashLink to={l.url}>{l.title}</HashLink>
+            ) : (
+              <Link to={l.url}>{l.title}</Link>
+            )}
           </li>
           {idx < links.length - 1 && <li>&#8212;</li>}
         </React.Fragment>
