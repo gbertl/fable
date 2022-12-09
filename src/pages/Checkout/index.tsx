@@ -9,7 +9,7 @@ const Checkout = () => {
       <div className="container">
         <BreadCrumb
           links={[
-            { title: 'Shopping Bag', url: '#' },
+            { title: 'Collections', url: '/#fable-of-colors-section' },
             { title: 'Order', url: '#' },
           ]}
         />
