@@ -44,7 +44,7 @@
     text-align: center;
 
     @include m.mq(md) {
-      font-size: 28px;
+      font-size: var(--h1-font-size);
       text-transform: uppercase;
       text-align-last: left;
       color: var(--dark);
@@ -59,7 +59,7 @@
 
     @include m.mq(md) {
       margin-bottom: 32px;
-      font-size: 28px;
+      font-size: var(--h1-font-size);
       text-align-last: left;
     }
   }
