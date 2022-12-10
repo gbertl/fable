@@ -4,24 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import HeroPopover from './HeroPopover';
 import { useState } from 'react';
-import { products } from '../../data';
-import productHeroA from '../../assets/images/product-hero-a.png';
-import productHeroB from '../../assets/images/product-hero-b.png';
-import productHeroC from '../../assets/images/product-hero-c.png';
-import productHeroD from '../../assets/images/product-hero-d.png';
-import productHeroE from '../../assets/images/product-hero-e.png';
-
-const heroProducts = [
-  products.find((p) => p.id == 2),
-  { id: null, heroImage: productHeroA },
-  products.find((p) => p.id == 6),
-  { id: null, heroImage: productHeroB },
-  products.find((p) => p.id == 8),
-  products.find((p) => p.id == 4),
-  { id: null, heroImage: productHeroC },
-  { id: null, heroImage: productHeroD },
-  { id: null, heroImage: productHeroE },
-];
+import { heroProducts } from '../../data';
 
 const HeroSlider = () => {
   const isDesktop = useMediaQuery({ query: '(min-width: 992px)' });

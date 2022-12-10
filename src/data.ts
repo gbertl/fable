@@ -14,6 +14,11 @@ import product9 from './assets/images/product9.png';
 import product10 from './assets/images/product10.png';
 import product11 from './assets/images/product11.png';
 import { Sizes } from './typings.d';
+import productHeroA from './assets/images/product-hero-a.png';
+import productHeroB from './assets/images/product-hero-b.png';
+import productHeroC from './assets/images/product-hero-c.png';
+import productHeroD from './assets/images/product-hero-d.png';
+import productHeroE from './assets/images/product-hero-e.png';
 
 export const categories = [
   {
@@ -152,3 +157,15 @@ export const colors = [
 ];
 
 export const sizes = [Sizes.XS, Sizes.S, Sizes.M, Sizes.L, Sizes.XL];
+
+export const heroProducts = [
+  products.find((p) => p.id == 2),
+  { id: null, heroImage: productHeroA },
+  products.find((p) => p.id == 6),
+  { id: null, heroImage: productHeroB },
+  products.find((p) => p.id == 8),
+  products.find((p) => p.id == 4),
+  { id: null, heroImage: productHeroC },
+  { id: null, heroImage: productHeroD },
+  { id: null, heroImage: productHeroE },
+];
