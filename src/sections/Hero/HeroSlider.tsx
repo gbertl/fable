@@ -23,7 +23,7 @@ const heroProducts = [
   { id: null, heroImage: productHeroE },
 ];
 
-const HeroSlide = () => {
+const HeroSlider = () => {
   const isDesktop = useMediaQuery({ query: '(min-width: 992px)' });
   const isTablet = useMediaQuery({ query: '(min-width: 768px)' });
   const isMobile = useMediaQuery({ query: '(min-width: 576px)' });
@@ -66,4 +66,4 @@ const HeroSlide = () => {
   );
 };
 
-export default HeroSlide;
+export default HeroSlider;
