@@ -31,6 +31,10 @@
     gap: 20px;
   }
 
+  &__form-delivery-btn {
+    padding: 12px 0 !important;
+  }
+
   &__form-delivery-input:checked ~ &__form-delivery-btn {
     --btn-bg: var(--dark);
     --btn-color: #fff;
