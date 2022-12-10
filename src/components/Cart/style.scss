@@ -24,7 +24,7 @@
   }
 
   &__item-desc {
-    font-size: 12px;
+    font-size: var(--font-size-xs);
     color: var(--gray);
 
     li:not(:last-child) {
@@ -35,7 +35,7 @@
   &__item-subdesc {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
     width: 100%;
   }
 
@@ -61,7 +61,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
   }
 
   &__item-color {

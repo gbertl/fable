@@ -79,14 +79,14 @@
   }
 
   &__popover-desc {
-    font-size: 12px;
+    font-size: var(--font-size-xs);
     color: var(--gray);
     margin-bottom: 24px;
   }
 
   &__popover-subdesc {
     display: flex;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
     gap: 14px;
     margin-bottom: 32px;
   }
@@ -94,7 +94,7 @@
   &__popover-footer {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
   }
 
   &__popover-color {

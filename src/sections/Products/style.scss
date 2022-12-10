@@ -26,12 +26,12 @@
   }
 
   &__subheading {
-    font-size: 14px;
+    font-size: var(--font-size-sm);
     color: var(--dark);
     margin: 20px 0;
 
     @include m.mq(md) {
-      font-size: 24px;
+      font-size: var(--font-size-lg);
     }
   }
 
@@ -72,16 +72,16 @@
     color: var(--gray);
 
     @include m.mq(md) {
-      font-size: 18px;
+      font-size: var(--font-size-md);
     }
   }
 
   &__card-price {
-    font-size: 14px;
+    font-size: var(--font-size-sm);
     font-weight: 500;
 
     @include m.mq(md) {
-      font-size: 24px;
+      font-size: var(--font-size-lg);
     }
   }
 }
