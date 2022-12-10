@@ -58,7 +58,7 @@
 
     &:disabled,
     &:hover {
-      --btn-bg: rgba(60, 55, 55, 0.8);
+      --btn-bg: var(--gray);
     }
   }
 
