@@ -92,10 +92,15 @@
 
   &__card-radio {
     border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 
     &:hover,
     &--active {
       border-color: var(--gray);
+    }
+
+    &--active {
+      cursor: auto;
     }
   }
 
