@@ -51,6 +51,11 @@
   padding: 12px 65px;
   font-size: 20px;
   text-align: center;
+  cursor: pointer;
+
+  &[disabled] {
+    cursor: auto;
+  }
 
   &-primary {
     --btn-bg: var(--dark);
