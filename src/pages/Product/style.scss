@@ -54,7 +54,7 @@
 
   &__card-subtitle {
     margin-bottom: 12px;
-    font-size: 16px;
+    font-size: var(--font-size-base);
     text-align: center;
 
     @include m.mq(md) {
@@ -65,7 +65,7 @@
   }
 
   &__card-section-heading {
-    font-size: 16px;
+    font-size: var(--font-size-base);
     font-weight: 400;
     margin-bottom: 18px;
     text-align: center;
