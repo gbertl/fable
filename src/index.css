@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .hide-scrollbar {
+    overflow-y: hidden;
+    padding-right: 15px;
+  }
+}
