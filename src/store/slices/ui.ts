@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../index';
 
 interface UiState {
-  isSideCartActive: boolean;
+  isSideCartOpen: boolean;
 }
 
 const initialState: UiState = {
-  isSideCartActive: false,
+  isSideCartOpen: false,
 };
 
 export const uiSlice = createSlice({
@@ -14,17 +14,17 @@ export const uiSlice = createSlice({
   initialState,
   reducers: {
     showSideCart: (state) => {
-      state.isSideCartActive = true;
+      state.isSideCartOpen = true;
     },
     hideSideCart: (state) => {
-      state.isSideCartActive = false;
+      state.isSideCartOpen = false;
     },
   },
 });
 
 export const { showSideCart, hideSideCart } = uiSlice.actions;
 
-export const selectIsSideCartActive = (state: RootState) =>
-  state.ui.isSideCartActive;
+export const selectIsSideCartOpen = (state: RootState) =>
+  state.ui.isSideCartOpen;
 
 export default uiSlice.reducer;
