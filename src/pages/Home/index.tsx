@@ -1,5 +1,4 @@
-import Hero from '../../sections/Hero';
-import Products from '../../sections/Products';
+import { Hero, Products } from '../../sections';
 
 const Home = () => {
   return (
