@@ -1,8 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './layouts/Layout';
-import Checkout from './pages/Checkout';
-import Home from './pages/Home';
-import Product from './pages/Product';
+import { Checkout, Home, Product } from './pages';
 
 const router = createBrowserRouter([
   {
