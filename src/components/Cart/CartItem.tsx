@@ -42,27 +42,27 @@ const CartItem = ({ item }: Props) => {
   };
 
   return (
-    <div className="cart__item">
-      <img src={product.image} className="cart__item-img" />
+    <div className="grid gap-5 grid-cols-[1fr_65%]">
+      <img src={product.image} className="h-[203px] object-cover bg-gray2" />
 
-      <div className="cart__item-body">
+      <div className="flex flex-col justify-between">
         <div>
-          <h1 className="cart__item-title">{product.name}</h1>
+          <h1 className="text-base font-normal mb-2">{product.name}</h1>
 
-          <ul className="cart__item-desc">
-            <li>Collection: {product.collection}</li>
+          <ul className="text-xs text-gray">
+            <li className="mb-2">Collection: {product.collection}</li>
             <li>Article: H0146027</li>
           </ul>
         </div>
 
-        <ul className="cart__item-subdesc">
+        <ul className="flex justify-between text-sm w-full">
           <li>
             Size: <span className="uppercase font-medium">{item.size}</span>
           </li>
-          <li className="cart__item-color">
+          <li className="flex items-center gap-3">
             Color:{' '}
             <div
-              className="cart__item-color-box"
+              className="inline-block w-5 h-5"
               style={{
                 background: color?.hex,
               }}
@@ -70,16 +70,19 @@ const CartItem = ({ item }: Props) => {
           </li>
           <li>
             Quantity:
-            <div className="cart__item-quantity">
+            <div className="inline-flex items-center leading-none gap-1 ml-3">
               <button
                 onClick={() => handleChangeQuantity({ isIncrease: false })}
+                className="px-2"
               >
                 -
               </button>
 
               <span>{item.quantity}</span>
+
               <button
                 onClick={() => handleChangeQuantity({ isIncrease: true })}
+                className="px-2"
               >
                 +
               </button>
@@ -87,7 +90,7 @@ const CartItem = ({ item }: Props) => {
           </li>
         </ul>
 
-        <div className="cart__item-footer">
+        <div className="flex justify-between items-center text-sm">
           <div>
             Price:{' '}
             <span className="font-medium">
@@ -96,7 +99,7 @@ const CartItem = ({ item }: Props) => {
           </div>
 
           <button
-            className="cart__item-delete"
+            className="text-gray hover:text-dark"
             onClick={() =>
               dispatch(replaceItems(cartItems.filter((ci) => ci !== item)))
             }

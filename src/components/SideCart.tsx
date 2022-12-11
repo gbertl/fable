@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 import { BsCartX } from 'react-icons/bs';
 import { HashLink } from 'react-router-hash-link';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectItems } from '../../store/slices/cart';
-import { hideSideCart } from '../../store/slices/ui';
-import { getCartTotal } from '../../utils';
-import { Cart } from '../';
-import './style.scss';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { selectItems } from '../store/slices/cart';
+import { hideSideCart } from '../store/slices/ui';
+import { getCartTotal } from '../utils';
+import { Cart } from '.';
 
 const SideCart = () => {
   const cartItems = useAppSelector(selectItems);
@@ -27,32 +26,35 @@ const SideCart = () => {
   const length = cartItems.length;
 
   return (
-    <div className="sidecart" onClick={handleClickOutside}>
-      <div className="sidecart__body">
-        <div className="sidecart__header">
+    <div
+      className="fixed top-0 left-0 w-full h-screen z-[9999] bg-black bg-opacity-50"
+      onClick={handleClickOutside}
+    >
+      <div className="w-max h-full bg-white p-5 flex flex-col ml-auto sidecart__body">
+        <div className="flex gap-4 items-center mb-8">
           <button
-            className="sidecart__close"
+            className="flex items-center"
             onClick={() => dispatch(hideSideCart())}
           >
             <MdChevronLeft />
           </button>
-          <h5 className="sidecart__heading">
+          <h5 className="text-gray">
             Your Cart ({length} item{length > 1 ? 's' : ''})
           </h5>
         </div>
 
         {length ? (
           <>
-            <Cart className="sidecart__cart" />
+            <Cart className="overflow-auto mb-5" />
 
-            <div className="sidecart__footer">
-              <p className="sidecart__footer-total">
+            <div className="mt-auto">
+              <p className="flex justify-between text-xl font-medium mb-3">
                 Total: <span>₱{total}</span>
               </p>
 
               <Link
                 to="/checkout"
-                className="btn btn-primary sidecart__checkout-btn"
+                className="btn btn-primary w-full"
                 onClick={() => dispatch(hideSideCart())}
               >
                 Proceed to checkout
@@ -60,10 +62,10 @@ const SideCart = () => {
             </div>
           </>
         ) : (
-          <div className="sidecart__alert">
-            <BsCartX className="sidecart__alert-icon" />
-            <h5 className="sidecart__alert-title">Your cart is empty</h5>
-            <p className="sidecart__alert-text">
+          <div className="w-[280px] text-center">
+            <BsCartX className="text-8xl mb-5 relative left-1/2 -translate-x-1/2" />
+            <h5 className="text-2xl mb-2">Your cart is empty</h5>
+            <p className="text-sm mb-8">
               You have no items in your shopping cart. Let's go buy something!
             </p>
             <HashLink

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-import './style.scss';
 
 interface Link {
   title: string;
@@ -13,16 +12,16 @@ interface Props {
   links: Link[];
 }
 
-const BreadCrumb = ({ className, links }: Props) => {
+const BreadCrumb = ({ className = '', links }: Props) => {
   return (
-    <ul className={`breadcrumb ${className ? className : ''}`}>
-      {links.map((l, idx) => (
+    <ul className={`flex gap-4 text-xs font-medium ${className}`}>
+      {links.map((link, idx) => (
         <React.Fragment key={idx}>
           <li>
-            {l.url.includes('#') ? (
-              <HashLink to={l.url}>{l.title}</HashLink>
+            {link.url.includes('#') ? (
+              <HashLink to={link.url}>{link.title}</HashLink>
             ) : (
-              <Link to={l.url}>{l.title}</Link>
+              <Link to={link.url}>{link.title}</Link>
             )}
           </li>
           {idx < links.length - 1 && <li>&#8212;</li>}

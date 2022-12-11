@@ -1,6 +1,5 @@
 import { useAppSelector } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
-import './style.scss';
 import CartItem from './CartItem';
 
 interface Props {
@@ -12,8 +11,8 @@ const Cart = ({ className, style }: Props) => {
   const cartItems = useAppSelector(selectItems);
 
   return (
-    <div className={`cart ${className ? className : ''}`} style={style}>
-      <div className="cart__items">
+    <div className={`${className ? className : ''}`} style={style}>
+      <div className="flex flex-col gap-5">
         {cartItems.map((item) => (
           <CartItem item={item} />
         ))}
