@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-import BreadCrumb from '../../components/BreadCrumb';
+import { BreadCrumb } from '../../components';
 import './style.scss';
 import { categories, products } from '../../data';
 import ProductCard from './ProductCard';

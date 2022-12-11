@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Outlet, ScrollRestoration } from 'react-router-dom';
-import SideCart from '../components/SideCart';
+import { SideCart } from '../components';
 import { useAppSelector } from '../hooks';
 import { selectIsSideCartActive } from '../store/slices/ui';
 import Footer from './Footer';

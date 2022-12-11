@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import { hideSideCart } from '../../store/slices/ui';
 import { getCartTotal } from '../../utils';
-import Cart from '../Cart';
+import { Cart } from '../';
 import './style.scss';
 
 const SideCart = () => {

@@ -1,5 +1,4 @@
-import BreadCrumb from '../../components/BreadCrumb';
-import Cart from '../../components/Cart';
+import { BreadCrumb, Cart } from '../../components';
 import { useAppSelector } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import CheckoutForm from './CheckoutForm';
