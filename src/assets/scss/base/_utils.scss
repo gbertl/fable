@@ -6,44 +6,6 @@
   margin-inline: auto;
 }
 
-.flex {
-  display: flex;
-}
-
-.inline-block {
-  display: inline-block;
-}
-
-.hidden {
-  display: none !important;
-}
-
-@include m.mq(md) {
-  .block-md {
-    display: block !important;
-  }
-
-  .hidden-md {
-    display: none !important;
-  }
-}
-
-.items-center {
-  align-items: center;
-}
-
-.font-bold {
-  font-weight: 500;
-}
-
-.uppercase {
-  text-transform: uppercase;
-}
-
-.capitalize {
-  text-transform: capitalize;
-}
-
 .btn {
   display: inline-block;
   background: var(--btn-bg);
@@ -98,14 +60,6 @@
       --btn-color: #fff;
     }
   }
-}
-
-.w-full {
-  width: 100%;
-}
-
-.w-1\/2 {
-  width: 50% !important;
 }
 
 // Form

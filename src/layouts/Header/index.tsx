@@ -13,17 +13,17 @@ const Header = () => {
   return (
     <div className="header">
       <div className="container header__container">
-        <Link to="/" className="header__logo hidden block-md">
+        <Link to="/" className="header__logo hidden md:block">
           <img src={logo} alt="" />
         </Link>
         <ul className="header__nav">
           <li>
             <HashLink to="/#fable-of-colors-section">Collections</HashLink>
           </li>
-          <li className="hidden block-md">
+          <li className="hidden md:block">
             <a href="#">Customizer</a>
           </li>
-          <li className="hidden block-md">
+          <li className="hidden md:block">
             <a href="#">Sale</a>
           </li>
         </ul>

@@ -111,7 +111,7 @@ const ProductCard = ({ product }: Props) => {
         <h1 className="product__card-title">{product?.name}</h1>
         <h2 className="product__card-subtitle">₱{product?.price}</h2>
 
-        <h3 className="hidden-md product__card-section-heading">Color</h3>
+        <h3 className="md:hidden product__card-section-heading">Color</h3>
         <ul className="product__card-colors">
           {colors.map((color) => (
             <li key={color.id}>
@@ -133,7 +133,7 @@ const ProductCard = ({ product }: Props) => {
             </li>
           ))}
         </ul>
-        <h3 className="hidden-md product__card-section-heading">Size</h3>
+        <h3 className="md:hidden product__card-section-heading">Size</h3>
         <ul className="product__card-sizes">
           {sizes.map((size) => (
             <li key={size}>

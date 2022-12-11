@@ -57,7 +57,7 @@ const CartItem = ({ item }: Props) => {
 
         <ul className="cart__item-subdesc">
           <li>
-            Size: <span className="uppercase font-bold">{item.size}</span>
+            Size: <span className="uppercase font-medium">{item.size}</span>
           </li>
           <li className="cart__item-color">
             Color:{' '}
@@ -90,7 +90,7 @@ const CartItem = ({ item }: Props) => {
         <div className="cart__item-footer">
           <div>
             Price:{' '}
-            <span className="font-bold">
+            <span className="font-medium">
               ₱{product.price * (item?.quantity || 0)}
             </span>
           </div>

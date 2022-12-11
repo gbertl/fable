@@ -19,15 +19,15 @@ const HeroPopover = ({ productId }: Props) => {
         <ul className="hero__popover-desc">
           <li>
             Collection:{' '}
-            <span className="font-bold uppercase">{product?.collection}</span>
+            <span className="font-medium uppercase">{product?.collection}</span>
           </li>
           <li>
-            Article: <span className="font-bold">H0146027</span>
+            Article: <span className="font-medium">H0146027</span>
           </li>
         </ul>
         <ul className="hero__popover-subdesc">
           <li>
-            Size: <span className="font-bold uppercase">{product?.size}</span>
+            Size: <span className="font-medium uppercase">{product?.size}</span>
           </li>
           <li className="hero__popover-color">
             Color:{' '}
@@ -42,9 +42,9 @@ const HeroPopover = ({ productId }: Props) => {
         </ul>
         <div className="hero__popover-footer">
           <span>
-            Price: <span className="font-bold">₱{product?.price}</span>
+            Price: <span className="font-medium">₱{product?.price}</span>
           </span>
-          <Link to={`/products/${product?.id}`} className="font-bold">
+          <Link to={`/products/${product?.id}`} className="font-medium">
             Show more
           </Link>
         </div>
