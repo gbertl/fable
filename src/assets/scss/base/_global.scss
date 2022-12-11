@@ -13,28 +13,6 @@ body {
   color: var(--dark);
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-ul {
-  list-style: none;
-}
-
-img {
-  max-width: 100%;
-  display: inline-block;
-}
-
-button {
-  background: none;
-  border: none;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: pointer;
-}
-
 h1,
 h2,
 h3,
@@ -54,15 +32,6 @@ h5 {
 
 label {
   display: block;
-}
-
-input,
-textarea,
-select {
-  font-family: inherit;
-  font-size: inherit;
-  border: none;
-  background: none;
 }
 
 textarea {
