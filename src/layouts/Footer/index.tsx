@@ -1,9 +1,10 @@
+import { Container } from '../../components';
 import './style.scss';
 
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="container footer__container">
+      <Container className="footer__container">
         {/* Categories */}
         <div className="footer__categories">
           <ul>
@@ -50,7 +51,7 @@ const Footer = () => {
           />
           <button className="btn btn-light">Subscribe</button>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 };

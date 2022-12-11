@@ -1,11 +1,5 @@
 @use '../abstracts/mixins' as m;
 
-.container {
-  width: 85%;
-  max-width: 1320px;
-  margin-inline: auto;
-}
-
 .btn {
   display: inline-block;
   background: var(--btn-bg);

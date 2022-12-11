@@ -2,6 +2,7 @@ import './style.scss';
 import { categories, products } from '../../data';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
+import { Container } from '../../components';
 
 enum SortBy {
   Price = 'price',
@@ -25,7 +26,7 @@ const Products = () => {
 
   return (
     <section className="products">
-      <div className="container">
+      <Container>
         <h1 className="products__heading" id="fable-of-colors-section">
           Fable of Colors
         </h1>
@@ -72,7 +73,7 @@ const Products = () => {
             </div>
           </React.Fragment>
         ))}
-      </div>
+      </Container>
     </section>
   );
 };

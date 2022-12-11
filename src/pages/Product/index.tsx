@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-import { BreadCrumb } from '../../components';
+import { BreadCrumb, Container } from '../../components';
 import './style.scss';
 import { categories, products } from '../../data';
 import ProductCard from './ProductCard';
@@ -17,7 +17,7 @@ const Product = () => {
 
   return (
     <div className="product">
-      <div className="container">
+      <Container>
         <BreadCrumb
           className="product__breadcrumb"
           links={[
@@ -33,7 +33,7 @@ const Product = () => {
         />
 
         {product && <ProductCard product={product} />}
-      </div>
+      </Container>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import logo from '../../assets/icons/logo.svg';
+import { Container } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import { showSideCart } from '../../store/slices/ui';
@@ -12,7 +13,7 @@ const Header = () => {
 
   return (
     <div className="header">
-      <div className="container header__container">
+      <Container className="header__container">
         <Link to="/" className="header__logo hidden md:block">
           <img src={logo} alt="" />
         </Link>
@@ -37,7 +38,7 @@ const Header = () => {
             <a href="#">Profile</a>
           </li>
         </ul>
-      </div>
+      </Container>
     </div>
   );
 };

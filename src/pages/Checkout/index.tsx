@@ -1,4 +1,4 @@
-import { BreadCrumb, Cart } from '../../components';
+import { BreadCrumb, Cart, Container } from '../../components';
 import { useAppSelector } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import CheckoutForm from './CheckoutForm';
@@ -10,7 +10,7 @@ const Checkout = () => {
 
   return (
     <section className="checkout">
-      <div className="container">
+      <Container>
         <BreadCrumb
           links={[
             { title: 'Collections', url: '/#fable-of-colors-section' },
@@ -28,7 +28,7 @@ const Checkout = () => {
             </div>
           ) : null}
         </div>
-      </div>
+      </Container>
     </section>
   );
 };
