@@ -9,7 +9,7 @@ const Checkout = () => {
   const cartItems = useAppSelector(selectItems);
 
   return (
-    <section className="checkout">
+    <section>
       <Container>
         <BreadCrumb
           links={[
@@ -18,7 +18,7 @@ const Checkout = () => {
           ]}
         />
 
-        <div className="checkout__grid">
+        <div className="grid grid-cols-2 mt-11 gap-16">
           <CheckoutForm />
 
           {cartItems.length ? (

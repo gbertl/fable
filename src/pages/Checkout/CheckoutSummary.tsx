@@ -8,20 +8,20 @@ const CheckoutSummary = () => {
   const total = getCartTotal(cartItems);
 
   return (
-    <div className="checkout__summary">
-      <ul className="checkout__summary-details">
-        <li>
+    <div className="w-[65%] mt-16 ml-auto">
+      <ul className="mb-6">
+        <li className="flex justify-between text-xs mb-2">
           Summary: <span>₱{total}</span>
         </li>
-        <li>
+        <li className="flex justify-between text-xs mb-2">
           Delivery: <span>₱0</span>
         </li>
-        <li>
+        <li className="flex justify-between text-xs mb-2">
           Promocode: <span>₱0</span>
         </li>
       </ul>
 
-      <p className="checkout__summary-total">
+      <p className="flex justify-between text-xl font-medium mb-3">
         Total: <span>₱{total}</span>
       </p>
 

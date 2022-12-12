@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 
 import { BreadCrumb, Container } from '../../components';
-import './style.scss';
 import { categories, products } from '../../data';
 import ProductCard from './ProductCard';
 import { stringToHash } from '../../utils';
@@ -16,10 +15,10 @@ const Product = () => {
     categories.find((c) => c.id === product.categoryId)?.name || '';
 
   return (
-    <div className="product">
+    <section>
       <Container>
         <BreadCrumb
-          className="product__breadcrumb"
+          className="mt-3 mb-5 md:mb-3 capitalize"
           links={[
             {
               title: product.collection,
@@ -34,7 +33,7 @@ const Product = () => {
 
         {product && <ProductCard product={product} />}
       </Container>
-    </div>
+    </section>
   );
 };
 

@@ -39,10 +39,10 @@ const CheckoutForm = () => {
   };
 
   return (
-    <form className="checkout__form">
-      <div className="checkout__form-group">
+    <form>
+      <div className="mb-14">
         {/* City */}
-        <div>
+        <div className="mb-9">
           <label htmlFor="" className="form__label">
             City
           </label>
@@ -54,12 +54,12 @@ const CheckoutForm = () => {
         </div>
 
         {/* Delivery method */}
-        <div>
+        <div className="mb-9">
           <label htmlFor="" className="form__label">
             Delivery method
           </label>
 
-          <div className="checkout__form-delivery-btns">
+          <div className="grid grid-cols-2 gap-5">
             <div className="inline-block">
               <input
                 type="radio"
@@ -72,7 +72,7 @@ const CheckoutForm = () => {
               />
               <label
                 htmlFor="pickup"
-                className="btn btn-outline w-full checkout__form-delivery-btn"
+                className="btn btn-outline w-full checkout__form-delivery-btn py-3"
               >
                 In-store pick up
               </label>
@@ -90,7 +90,7 @@ const CheckoutForm = () => {
               />
               <label
                 htmlFor="to-door"
-                className="btn btn-outline w-full checkout__form-delivery-btn"
+                className="btn btn-outline w-full checkout__form-delivery-btn py-3"
               >
                 To the door
               </label>
@@ -103,15 +103,19 @@ const CheckoutForm = () => {
           <label htmlFor="" className="form__label">
             Address
           </label>
-          <input type="text" placeholder="Address" className="form__input" />
+          <input
+            type="text"
+            placeholder="Address"
+            className="form__input w-full"
+          />
         </div>
       </div>
 
       {/* Point */}
-      <div className="checkout__form-group">
-        <h5 className="checkout__form-title">Point</h5>
+      <div className="mb-14">
+        <h5 className="text-xl mb-5">Point</h5>
 
-        <label htmlFor="" className="form__label">
+        <label htmlFor="" className="form__label text-base font-normal">
           Enter your loyalty card
         </label>
         <input
@@ -122,48 +126,48 @@ const CheckoutForm = () => {
       </div>
 
       {/* Recipient's details */}
-      <div className="checkout__form-group">
-        <h5 className="checkout__form-title">Recipient's details</h5>
+      <div className="mb-14">
+        <h5 className="text-xl mb-5">Recipient's details</h5>
 
-        <div>
-          <label htmlFor="" className="form__label">
+        <div className="mb-5">
+          <label htmlFor="" className="form__label text-base font-normal mb-2">
             Name and surname
           </label>
           <input
             type="text"
             placeholder="Enter name and surname"
-            className="form__input"
+            className="form__input w-full"
           />
         </div>
 
-        <div>
-          <label htmlFor="" className="form__label">
+        <div className="mb-5">
+          <label htmlFor="" className="form__label text-base font-normal mb-2">
             Phone
           </label>
           <input
             type="phone"
             placeholder="Enter phone number"
-            className="form__input"
+            className="form__input w-full"
           />
         </div>
 
         <div>
-          <label htmlFor="" className="form__label">
+          <label htmlFor="" className="form__label text-base font-normal mb-2">
             Email
           </label>
           <input
             type="email"
             placeholder="Enter emails"
-            className="form__input"
+            className="form__input w-full"
           />
         </div>
       </div>
 
       {/* Payment method */}
-      <div className="checkout__form-group">
-        <h5 className="checkout__form-title">Payment method</h5>
+      <div className="mb-14">
+        <h5 className="text-xl mb-5">Payment method</h5>
 
-        <div className="checkout__form-payment-card">
+        <div className="mb-5">
           <input
             type="radio"
             name="payment-method"
@@ -201,19 +205,19 @@ const CheckoutForm = () => {
       </div>
 
       {/* Order comment */}
-      <div className="checkout__form-group">
+      <div className="mb-14">
         <label htmlFor="" className="form__label">
           Order Comment
         </label>
         <textarea
           name=""
           id=""
-          className="form__input form__textarea"
+          className="form__input form__textarea w-full"
         ></textarea>
       </div>
 
       {/* Terms */}
-      <div className="checkout__form-agree form__checkbox">
+      <div className="mb-8 form__checkbox">
         <input
           type="checkbox"
           name="terms"
@@ -223,7 +227,10 @@ const CheckoutForm = () => {
             setData((prevData) => ({ ...prevData, agree: e.target.checked }));
           }}
         />
-        <label htmlFor="terms" className="form__label">
+        <label
+          htmlFor="terms"
+          className="form__label mb-0 text-base font-normal select-none"
+        >
           <span className="form__checkbox-icon"></span>I agree to the terms of
           the offer and the loyalty policy
         </label>

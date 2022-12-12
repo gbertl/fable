@@ -105,14 +105,24 @@ const ProductCard = ({ product }: Props) => {
   };
 
   return (
-    <div className="product__card">
-      <img src={product?.image} alt="" className="product__card-img" />
-      <div className="product__card-body">
-        <h1 className="product__card-title">{product?.name}</h1>
-        <h2 className="product__card-subtitle">₱{product?.price}</h2>
+    <div className="flex flex-col md:flex-row">
+      <img
+        src={product?.image}
+        alt=""
+        className="bg-gray2 w-[650px] mb-3 md:mb-0 self-start"
+      />
+      <div className="md:px-8">
+        <h1 className="text-sm md:text-3xl mb-1 md:mb-2 text-gray md:text-dark text-center md:text-left md:uppercase">
+          {product?.name}
+        </h1>
+        <h2 className="mb-3 md:mb-8 text-base md:text-3xl text-center md:text-left">
+          ₱{product?.price}
+        </h2>
 
-        <h3 className="md:hidden product__card-section-heading">Color</h3>
-        <ul className="product__card-colors">
+        <h3 className="md:hidden text-base md:text-xl font-normal mb-5 md:mb-0 text-center">
+          Color
+        </h3>
+        <ul className="flex justify-center md:justify-start gap-5 md:gap-8 flex-wrap mb-5 md:mb-8">
           {colors.map((color) => (
             <li key={color.id}>
               <input
@@ -125,16 +135,18 @@ const ProductCard = ({ product }: Props) => {
               />
               <label
                 htmlFor={`item-color-${color.id}`}
-                className={`product__card-color product__card-radio ${
-                  data.colorId === color.id ? 'product__card-radio--active' : ''
+                className={`block w-5 h-5 md:w-10 md:h-10 border border-black hover:border-gray border-opacity-10 cursor-pointer ${
+                  data.colorId === color.id ? 'border-gray cursor-auto' : ''
                 }`}
                 style={{ background: color.hex }}
               ></label>
             </li>
           ))}
         </ul>
-        <h3 className="md:hidden product__card-section-heading">Size</h3>
-        <ul className="product__card-sizes">
+        <h3 className="md:hidden text-base md:text-xl font-normal mb-5 md:mb-0 text-center">
+          Size
+        </h3>
+        <ul className="flex justify-center md:justify-start flex-wrap gap-5 md:gap-8 uppercase leading-none mb-5 md:mb-8">
           {sizes.map((size) => (
             <li key={size}>
               <input
@@ -146,8 +158,8 @@ const ProductCard = ({ product }: Props) => {
               />
               <label
                 htmlFor={`item-size-${size}`}
-                className={`product__card-size product__card-radio ${
-                  data.size === size ? 'product__card-radio--active' : ''
+                className={`p-3 border border-black hover:border-gray border-opacity-10 cursor-pointer ${
+                  data.size === size ? 'border-gray cursor-auto' : ''
                 }`}
               >
                 {size}
@@ -159,11 +171,13 @@ const ProductCard = ({ product }: Props) => {
         {data.quantity ? (
           <>
             {/* Quantity */}
-            <div className="product__card-quantity">
-              <h3 className="product__card-section-heading">Quantity:</h3>
-              <div className="product__card-quantity-ctrl">
+            <div className="flex items-center flex-col md:flex-row mb-5">
+              <h3 className="text-base md:text-xl font-normal mb-5 md:mb-0 text-center">
+                Quantity <span className="hidden md:inline">:</span>
+              </h3>
+              <div className="flex gap-3 ml-5">
                 <button
-                  className="product__card-quantity-btn"
+                  className="p-3"
                   onClick={() => handleUpdateQuantity({ isIncrease: false })}
                 >
                   -
@@ -173,11 +187,11 @@ const ProductCard = ({ product }: Props) => {
                   type="number"
                   value={data.quantity}
                   onChange={handleKeyupQuantity}
-                  className="product__card-quantity-input"
+                  className="w-9 outline-none text-center"
                 />
 
                 <button
-                  className="product__card-quantity-btn"
+                  className="p-3"
                   onClick={() => handleUpdateQuantity({ isIncrease: true })}
                 >
                   +
@@ -186,7 +200,7 @@ const ProductCard = ({ product }: Props) => {
             </div>
 
             <button
-              className="btn btn-success product__card-btn"
+              className="btn btn-success w-full md:w-auto text-center"
               onClick={() => dispatch(showSideCart())}
             >
               Go to cart
@@ -194,7 +208,7 @@ const ProductCard = ({ product }: Props) => {
           </>
         ) : (
           <button
-            className="btn btn-primary product__card-btn"
+            className="btn btn-primary w-full md:w-auto text-center"
             onClick={handleAddToCart}
             disabled={data.colorId && data.size ? false : true}
           >
