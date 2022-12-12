@@ -22,6 +22,26 @@
 }
 
 @layer components {
+  .btn {
+    @apply inline-block py-3 px-16 text-xl text-center;
+  }
+
+  .btn-primary {
+    @apply bg-dark hover:bg-gray text-white;
+  }
+
+  .btn-success {
+    @apply bg-green hover:opacity-80 text-white;
+  }
+
+  .btn-light {
+    @apply bg-white hover:bg-dark text-dark hover:text-white border border-transparent hover:border-white;
+  }
+
+  .btn-outline {
+    @apply border border-dark hover:bg-dark hover:text-white;
+  }
+
   .form-group {
     @apply flex gap-4;
   }

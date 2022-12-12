@@ -19,39 +19,33 @@ const Button = <C extends React.ElementType = 'button'>({
 }: Props<C>) => {
   const Component = as || 'button';
 
-  let buttonCls = 'inline-block py-3 px-16 text-xl text-center';
-  let variantCls = '';
+  switch (variant) {
+    case 'primary':
+      className += ' btn-primary';
+      break;
+    case 'success':
+      className += ' btn-success';
+      break;
+    case 'light':
+      className += ' btn-light';
+      break;
+    case 'outline':
+      className += ' btn-outline';
+      break;
+  }
 
   if (disabled) {
-    variantCls = 'cursor-auto';
+    className += ' cursor-auto';
 
     switch (variant) {
       case 'primary':
-        variantCls += ' bg-gray text-white';
-        break;
-    }
-  } else {
-    switch (variant) {
-      case 'primary':
-        variantCls = 'bg-dark hover:bg-gray text-white';
-        break;
-      case 'success':
-        variantCls = 'bg-green hover:opacity-80 text-white';
-        break;
-      case 'light':
-        variantCls =
-          'bg-white hover:bg-dark text-dark hover:text-white border border-transparent hover:border-white';
-        break;
-      case 'outline':
-        variantCls = 'border border-dark hover:bg-dark hover:text-white';
+        className += ' bg-gray text-white';
         break;
     }
   }
 
-  buttonCls += ` ${variantCls} ${className}`;
-
   return (
-    <Component className={buttonCls} disabled={disabled} {...props}>
+    <Component className={`btn ${className}`} disabled={disabled} {...props}>
       {children}
     </Component>
   );
