@@ -1,110 +1,11 @@
 @use '../../assets/scss/abstracts/mixins' as m;
 
 .hero {
-  position: relative;
-  margin-top: 103px;
-
-  @include m.mq(md) {
-    margin-top: 94px;
-  }
-
-  &__container {
-    text-align: center;
-    margin-bottom: 44px;
-
-    @include m.mq(md) {
-      margin-bottom: 67px;
-    }
-  }
-
-  &__logo {
-    width: 321px;
-    margin-bottom: 28px;
-
-    @include m.mq(md) {
-      margin-bottom: 32px;
-    }
-  }
-
   &__slider > .swiper-wrapper {
     align-items: flex-end;
   }
 
-  p {
-    color: var(--gray);
-  }
-
   &__popover {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 30%;
-    left: 100%;
-    width: max-content;
-    z-index: 9999;
-    background-color: #fff;
     filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.3));
-
-    &::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translate(-100%, -50%);
-      width: 0;
-      height: 0;
-      border-top: 12px solid transparent;
-      border-bottom: 12px solid transparent;
-      border-right: 12px solid var(--gray-2);
-    }
-  }
-
-  &__popover-title {
-    font-size: 16px;
-    font-weight: 400;
-    margin-bottom: 10px;
-  }
-
-  &__popover-img {
-    background: var(--gray-2);
-    padding: 28px 39px;
-
-    img {
-      width: 150px;
-    }
-  }
-
-  &__popover-body {
-    padding: 0 22px;
-  }
-
-  &__popover-desc {
-    font-size: var(--font-size-xs);
-    color: var(--gray);
-    margin-bottom: 24px;
-  }
-
-  &__popover-subdesc {
-    display: flex;
-    font-size: var(--font-size-sm);
-    gap: 14px;
-    margin-bottom: 32px;
-  }
-
-  &__popover-footer {
-    display: flex;
-    justify-content: space-between;
-    font-size: var(--font-size-sm);
-  }
-
-  &__popover-color {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-  }
-
-  &__popover-color-box {
-    width: 18px;
-    height: 18px;
   }
 }
