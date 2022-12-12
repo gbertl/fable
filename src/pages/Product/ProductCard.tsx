@@ -4,9 +4,9 @@ import { Item, Product, Sizes } from '../../typings';
 import { sizes, colors } from '../../data';
 import { replaceItems, selectItems } from '../../store/slices/cart';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { Link } from 'react-router-dom';
 import { findCartItem } from '../../utils';
 import { showSideCart } from '../../store/slices/ui';
+import { Button } from '../../components';
 
 interface Props {
   product: Product;
@@ -199,21 +199,22 @@ const ProductCard = ({ product }: Props) => {
               </div>
             </div>
 
-            <button
-              className="btn btn-success w-full md:w-auto text-center"
+            <Button
+              variant="success"
+              className="w-full md:w-auto"
               onClick={() => dispatch(showSideCart())}
             >
               Go to cart
-            </button>
+            </Button>
           </>
         ) : (
-          <button
-            className="btn btn-primary w-full md:w-auto text-center"
+          <Button
+            className="w-full md:w-auto"
             onClick={handleAddToCart}
             disabled={data.colorId && data.size ? false : true}
           >
             Add to cart
-          </button>
+          </Button>
         )}
       </div>
     </div>

@@ -9,6 +9,7 @@ import { selectItems } from '../store/slices/cart';
 import { hideSideCart } from '../store/slices/ui';
 import { getCartTotal } from '../utils';
 import { Cart } from '.';
+import Button from './Button';
 
 const SideCart = () => {
   const cartItems = useAppSelector(selectItems);
@@ -52,13 +53,14 @@ const SideCart = () => {
                 Total: <span>₱{total}</span>
               </p>
 
-              <Link
+              <Button
+                as={Link}
                 to="/checkout"
-                className="btn btn-primary w-full"
+                className="w-full"
                 onClick={() => dispatch(hideSideCart())}
               >
                 Proceed to checkout
-              </Link>
+              </Button>
             </div>
           </>
         ) : (
@@ -68,13 +70,13 @@ const SideCart = () => {
             <p className="text-sm mb-8">
               You have no items in your shopping cart. Let's go buy something!
             </p>
-            <HashLink
+            <Button
+              as={HashLink}
               to="/#fable-of-colors-section"
-              className="btn btn-primary"
               onClick={() => dispatch(hideSideCart())}
             >
               Shop Now
-            </HashLink>
+            </Button>
           </div>
         )}
       </div>

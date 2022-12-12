@@ -1,4 +1,4 @@
-import { Container } from '../components';
+import { Container, Button } from '../components';
 
 const linkGroup1 = ['Brand', 'Campaign', 'Clothing Care'];
 const linkGroup2 = ['Guarantee', 'Store', 'Delivery & Returns'];
@@ -35,7 +35,9 @@ const Footer = () => {
             placeholder="Enter your email"
             className="form__input border-white mb-4 md:mb-0 md:mr-4 w-full md:w-auto text-white"
           />
-          <button className="btn btn-light w-full md:w-auto">Subscribe</button>
+          <Button variant="light" className="w-full md:w-auto">
+            Subscribe
+          </Button>
         </div>
       </Container>
     </footer>

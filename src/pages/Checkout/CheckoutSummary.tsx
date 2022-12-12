@@ -1,3 +1,4 @@
+import { Button } from '../../components';
 import { useAppSelector } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import { getCartTotal } from '../../utils';
@@ -31,7 +32,7 @@ const CheckoutSummary = () => {
           placeholder="Enter promocode"
           className="form__input"
         />
-        <button className="btn btn-primary">Apply</button>
+        <Button>Apply</Button>
       </div>
     </div>
   );

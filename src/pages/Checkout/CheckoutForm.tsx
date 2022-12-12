@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from '../../components';
 
 enum DeliveryMethods {
   PickUp = 'pick-up',
@@ -70,12 +71,14 @@ const CheckoutForm = () => {
                 value={DeliveryMethods.PickUp}
                 checked={data.deliveryMethod === DeliveryMethods.PickUp}
               />
-              <label
+              <Button
+                as="label"
+                variant="outline"
                 htmlFor="pickup"
-                className="btn btn-outline w-full checkout__form-delivery-btn py-3"
+                className="w-full checkout__form-delivery-btn py-3"
               >
                 In-store pick up
-              </label>
+              </Button>
             </div>
 
             <div className="inline-block">
@@ -88,12 +91,13 @@ const CheckoutForm = () => {
                 value={DeliveryMethods.ToDoor}
                 checked={data.deliveryMethod === DeliveryMethods.ToDoor}
               />
-              <label
+              <Button
+                as="label"
                 htmlFor="to-door"
-                className="btn btn-outline w-full checkout__form-delivery-btn py-3"
+                className="w-full checkout__form-delivery-btn py-3"
               >
                 To the door
-              </label>
+              </Button>
             </div>
           </div>
         </div>
@@ -177,12 +181,14 @@ const CheckoutForm = () => {
             onChange={handlePaymentMethod}
             checked={data.paymentMethod === PaymentMethods.Card}
           />
-          <label
+          <Button
+            as="label"
+            variant="outline"
             htmlFor="card"
-            className="btn btn-outline w-full checkout__form-payment-btn"
+            className="w-full checkout__form-payment-btn"
           >
             Payment card
-          </label>
+          </Button>
         </div>
 
         <div>
@@ -195,12 +201,14 @@ const CheckoutForm = () => {
             onChange={handlePaymentMethod}
             checked={data.paymentMethod === PaymentMethods.Cod}
           />
-          <label
+          <Button
+            as="label"
+            variant="outline"
             htmlFor="cod"
-            className="btn btn-outline w-full checkout__form-payment-btn"
+            className="w-full checkout__form-payment-btn"
           >
             Cash on delivery
-          </label>
+          </Button>
         </div>
       </div>
 
@@ -236,9 +244,9 @@ const CheckoutForm = () => {
         </label>
       </div>
 
-      <button className="btn btn-primary w-full" disabled={!data.agree}>
+      <Button className="w-full" disabled={!data.agree}>
         Place an order
-      </button>
+      </Button>
     </form>
   );
 };
