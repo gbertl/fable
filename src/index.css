@@ -23,7 +23,7 @@
 
 @layer components {
   .btn {
-    @apply inline-block py-3 px-16 text-xl text-center;
+    @apply inline-block py-3 px-16 text-xl text-center cursor-pointer;
   }
 
   .btn-primary {

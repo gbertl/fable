@@ -3,7 +3,6 @@ import { useAppSelector } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import CheckoutForm from './CheckoutForm';
 import CheckoutSummary from './CheckoutSummary';
-import './style.scss';
 
 const Checkout = () => {
   const cartItems = useAppSelector(selectItems);

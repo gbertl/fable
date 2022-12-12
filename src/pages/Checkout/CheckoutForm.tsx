@@ -11,6 +11,28 @@ enum PaymentMethods {
   Cod = 'cod',
 }
 
+const paymentMethods = [
+  {
+    method: PaymentMethods.Card,
+    title: 'Payment Card',
+  },
+  {
+    method: PaymentMethods.Cod,
+    title: 'Cash on delivery',
+  },
+];
+
+const deliveryMethods = [
+  {
+    method: DeliveryMethods.PickUp,
+    title: 'In-store pick up',
+  },
+  {
+    method: DeliveryMethods.ToDoor,
+    title: 'To the door',
+  },
+];
+
 interface Data {
   deliveryMethod: DeliveryMethods;
   paymentMethod: PaymentMethods;
@@ -53,44 +75,32 @@ const CheckoutForm = () => {
           <Label>Delivery method</Label>
 
           <div className="grid grid-cols-2 gap-5">
-            <div className="inline-block">
-              <input
-                type="radio"
-                name="delivery-method"
-                id="pickup"
-                className="hidden checkout__form-delivery-input"
-                onChange={handleDeliveryMethod}
-                value={DeliveryMethods.PickUp}
-                checked={data.deliveryMethod === DeliveryMethods.PickUp}
-              />
-              <Button
-                as="label"
-                variant="outline"
-                htmlFor="pickup"
-                className="w-full checkout__form-delivery-btn py-3"
-              >
-                In-store pick up
-              </Button>
-            </div>
-
-            <div className="inline-block">
-              <input
-                type="radio"
-                name="delivery-method"
-                id="to-door"
-                className="hidden checkout__form-delivery-input"
-                onChange={handleDeliveryMethod}
-                value={DeliveryMethods.ToDoor}
-                checked={data.deliveryMethod === DeliveryMethods.ToDoor}
-              />
-              <Button
-                as="label"
-                htmlFor="to-door"
-                className="w-full checkout__form-delivery-btn py-3"
-              >
-                To the door
-              </Button>
-            </div>
+            {deliveryMethods.map((deliveryMethod) => {
+              return (
+                <div>
+                  <input
+                    type="radio"
+                    name="delivery-method"
+                    className="hidden"
+                    id={deliveryMethod.method}
+                    value={deliveryMethod.method}
+                    onChange={handleDeliveryMethod}
+                  />
+                  <Button
+                    as="label"
+                    variant="outline"
+                    htmlFor={deliveryMethod.method}
+                    className={`w-full lg:px-0 ${
+                      data.deliveryMethod === deliveryMethod.method
+                        ? 'bg-dark text-white cursor-auto'
+                        : ''
+                    }`}
+                  >
+                    {deliveryMethod.title}
+                  </Button>
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -133,45 +143,32 @@ const CheckoutForm = () => {
       <div className="mb-14">
         <h5 className="text-xl mb-5">Payment method</h5>
 
-        <div className="mb-5">
-          <input
-            type="radio"
-            name="payment-method"
-            className="hidden checkout__form-payment-input"
-            id="card"
-            value={PaymentMethods.Card}
-            onChange={handlePaymentMethod}
-            checked={data.paymentMethod === PaymentMethods.Card}
-          />
-          <Button
-            as="label"
-            variant="outline"
-            htmlFor="card"
-            className="w-full checkout__form-payment-btn"
-          >
-            Payment card
-          </Button>
-        </div>
-
-        <div>
-          <input
-            type="radio"
-            name="payment-method"
-            className="hidden checkout__form-payment-input"
-            id="cod"
-            value={PaymentMethods.Cod}
-            onChange={handlePaymentMethod}
-            checked={data.paymentMethod === PaymentMethods.Cod}
-          />
-          <Button
-            as="label"
-            variant="outline"
-            htmlFor="cod"
-            className="w-full checkout__form-payment-btn"
-          >
-            Cash on delivery
-          </Button>
-        </div>
+        {paymentMethods.map((paymentMethod, idx) => {
+          return (
+            <>
+              <input
+                type="radio"
+                name="payment-method"
+                className="hidden"
+                id={paymentMethod.method}
+                value={paymentMethod.method}
+                onChange={handlePaymentMethod}
+              />
+              <Button
+                as="label"
+                variant="outline"
+                htmlFor={paymentMethod.method}
+                className={`w-full ${
+                  data.paymentMethod === paymentMethod.method
+                    ? 'bg-dark text-white cursor-auto'
+                    : ''
+                } ${idx !== 0 ? 'mt-5' : ''}`}
+              >
+                {paymentMethod.title}
+              </Button>
+            </>
+          );
+        })}
       </div>
 
       {/* Order comment */}
