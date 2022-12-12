@@ -158,7 +158,7 @@ const ProductCard = ({ product }: Props) => {
               />
               <label
                 htmlFor={`item-size-${size}`}
-                className={`p-3 border border-black hover:border-gray border-opacity-10 cursor-pointer ${
+                className={`block p-3 border border-black hover:border-gray border-opacity-10 cursor-pointer md:text-2xl ${
                   data.size === size ? 'border-gray cursor-auto' : ''
                 }`}
               >
@@ -175,7 +175,7 @@ const ProductCard = ({ product }: Props) => {
               <h3 className="text-base md:text-xl font-normal mb-5 md:mb-0 text-center">
                 Quantity <span className="hidden md:inline">:</span>
               </h3>
-              <div className="flex gap-3 ml-5">
+              <div className="flex gap-3 ml-5 md:text-xl">
                 <button
                   className="p-3"
                   onClick={() => handleUpdateQuantity({ isIncrease: false })}

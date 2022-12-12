@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply text-dark font-sans;
+  }
+
   h1,
   h2,
   h3,
@@ -18,6 +22,17 @@
 
   h5 {
     font-size: var(--font-size-md);
+  }
+
+  /* disable buttons in input type number */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
   }
 }
 
@@ -47,7 +62,7 @@
   }
 
   .form-label {
-    @apply text-xl font-medium mb-5;
+    @apply block text-xl font-medium mb-5;
   }
 
   .form-input {
@@ -55,7 +70,7 @@
   }
 
   .form-textarea {
-    @apply h-28;
+    @apply h-28 resize-y;
   }
 
   .form-checkbox-label {

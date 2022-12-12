@@ -1,5 +1,5 @@
 import logo from '../../assets/icons/logo.svg';
-import './style.scss';
+import './style.css';
 import HeroSlider from './HeroSlider';
 import { Container } from '../../components';
 
@@ -12,7 +12,7 @@ const Hero = () => {
           alt=""
           className="w-80 mb-7 md:mb-8 relative left-1/2 -translate-x-1/2"
         />
-        <p className="text-gray">
+        <p className="text-gray md:text-2xl">
           A clothing brand that doesn't limit itself to the framework of any
           concepts
         </p>

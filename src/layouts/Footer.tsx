@@ -33,7 +33,7 @@ const Footer = () => {
           <Input
             type="text"
             placeholder="Enter your email"
-            className="border-white mb-4 md:mb-0 md:mr-4 w-full md:w-auto text-white"
+            className="border-white mb-4 md:mb-0 md:mr-4 w-full md:w-auto text-white bg-transparent"
           />
           <Button variant="light" className="w-full md:w-auto">
             Subscribe

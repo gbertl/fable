@@ -34,12 +34,12 @@ const SideCart = () => {
       <div className="w-max h-full bg-white p-5 flex flex-col ml-auto sidecart__body">
         <div className="flex gap-4 items-center mb-8">
           <button
-            className="flex items-center"
+            className="flex items-center text-2xl"
             onClick={() => dispatch(hideSideCart())}
           >
             <MdChevronLeft />
           </button>
-          <h5 className="text-gray">
+          <h5 className="text-gray text-lg">
             Your Cart ({length} item{length > 1 ? 's' : ''})
           </h5>
         </div>
