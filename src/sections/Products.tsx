@@ -63,7 +63,7 @@ const Products = () => {
               {productsData
                 .filter((p) => p.categoryId === c.id)
                 .map((p) => (
-                  <div key={p.id} className="products__card">
+                  <div key={p.id}>
                     <Link to={`/products/${p.id}`}>
                       <img src={p.image} alt="" className="bg-gray2 mb-3" />
                     </Link>
