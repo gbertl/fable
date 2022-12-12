@@ -1,4 +1,4 @@
-import { Button } from '../../components';
+import { Button, Input } from '../../components';
 import { useAppSelector } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import { getCartTotal } from '../../utils';
@@ -26,12 +26,8 @@ const CheckoutSummary = () => {
         Total: <span>₱{total}</span>
       </p>
 
-      <div className="form__group">
-        <input
-          type="text"
-          placeholder="Enter promocode"
-          className="form__input"
-        />
+      <div className="form-group">
+        <Input type="text" placeholder="Enter promocode" />
         <Button>Apply</Button>
       </div>
     </div>

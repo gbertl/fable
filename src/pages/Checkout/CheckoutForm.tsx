@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from '../../components';
+import { Button, Checkbox, Input, Label } from '../../components';
 
 enum DeliveryMethods {
   PickUp = 'pick-up',
@@ -44,21 +44,13 @@ const CheckoutForm = () => {
       <div className="mb-14">
         {/* City */}
         <div className="mb-9">
-          <label htmlFor="" className="form__label">
-            City
-          </label>
-          <input
-            type="text"
-            placeholder="Enter city"
-            className="form__input w-1/2"
-          />
+          <Label>City</Label>
+          <Input type="text" placeholder="Enter city" className="w-1/2" />
         </div>
 
         {/* Delivery method */}
         <div className="mb-9">
-          <label htmlFor="" className="form__label">
-            Delivery method
-          </label>
+          <Label>Delivery method</Label>
 
           <div className="grid grid-cols-2 gap-5">
             <div className="inline-block">
@@ -104,14 +96,8 @@ const CheckoutForm = () => {
 
         {/* Address */}
         <div>
-          <label htmlFor="" className="form__label">
-            Address
-          </label>
-          <input
-            type="text"
-            placeholder="Address"
-            className="form__input w-full"
-          />
+          <Label>Address</Label>
+          <Input type="text" placeholder="Address" />
         </div>
       </div>
 
@@ -119,14 +105,8 @@ const CheckoutForm = () => {
       <div className="mb-14">
         <h5 className="text-xl mb-5">Point</h5>
 
-        <label htmlFor="" className="form__label text-base font-normal">
-          Enter your loyalty card
-        </label>
-        <input
-          type="text"
-          placeholder="Enter loyalty card"
-          className="form__input w-1/2"
-        />
+        <Label className="text-base font-normal">Enter your loyalty card</Label>
+        <Input type="text" placeholder="Enter loyalty card" className="w-1/2" />
       </div>
 
       {/* Recipient's details */}
@@ -134,36 +114,18 @@ const CheckoutForm = () => {
         <h5 className="text-xl mb-5">Recipient's details</h5>
 
         <div className="mb-5">
-          <label htmlFor="" className="form__label text-base font-normal mb-2">
-            Name and surname
-          </label>
-          <input
-            type="text"
-            placeholder="Enter name and surname"
-            className="form__input w-full"
-          />
+          <Label className="text-base font-normal mb-2">Name and surname</Label>
+          <Input type="text" placeholder="Enter name and surname" />
         </div>
 
         <div className="mb-5">
-          <label htmlFor="" className="form__label text-base font-normal mb-2">
-            Phone
-          </label>
-          <input
-            type="phone"
-            placeholder="Enter phone number"
-            className="form__input w-full"
-          />
+          <Label className="text-base font-normal mb-2">Phone</Label>
+          <Input type="phone" placeholder="Enter phone number" />
         </div>
 
         <div>
-          <label htmlFor="" className="form__label text-base font-normal mb-2">
-            Email
-          </label>
-          <input
-            type="email"
-            placeholder="Enter emails"
-            className="form__input w-full"
-          />
+          <Label className="text-base font-normal mb-2">Email</Label>
+          <Input type="email" placeholder="Enter emails" />
         </div>
       </div>
 
@@ -214,34 +176,21 @@ const CheckoutForm = () => {
 
       {/* Order comment */}
       <div className="mb-14">
-        <label htmlFor="" className="form__label">
-          Order Comment
-        </label>
-        <textarea
-          name=""
-          id=""
-          className="form__input form__textarea w-full"
-        ></textarea>
+        <Label>Order Comment</Label>
+        <Input as="textarea" />
       </div>
 
       {/* Terms */}
-      <div className="mb-8 form__checkbox">
-        <input
-          type="checkbox"
+      <div className="mb-8">
+        <Checkbox
+          label="I agree to the terms of the offer and the loyalty policy"
+          className="mb-0 text-base font-normal select-none"
           name="terms"
-          id="terms"
-          className="hidden form__checkbox-input"
+          controlId="terms"
           onChange={(e) => {
             setData((prevData) => ({ ...prevData, agree: e.target.checked }));
           }}
         />
-        <label
-          htmlFor="terms"
-          className="form__label mb-0 text-base font-normal select-none"
-        >
-          <span className="form__checkbox-icon"></span>I agree to the terms of
-          the offer and the loyalty policy
-        </label>
       </div>
 
       <Button className="w-full" disabled={!data.agree}>

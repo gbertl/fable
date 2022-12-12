@@ -1,4 +1,4 @@
-import { Container, Button } from '../components';
+import { Container, Button, Input } from '../components';
 
 const linkGroup1 = ['Brand', 'Campaign', 'Clothing Care'];
 const linkGroup2 = ['Guarantee', 'Store', 'Delivery & Returns'];
@@ -30,10 +30,10 @@ const Footer = () => {
           <p className="text-xs font-medium mb-4">
             We give you a 10% discount for subscription
           </p>
-          <input
+          <Input
             type="text"
             placeholder="Enter your email"
-            className="form__input border-white mb-4 md:mb-0 md:mr-4 w-full md:w-auto text-white"
+            className="border-white mb-4 md:mb-0 md:mr-4 w-full md:w-auto text-white"
           />
           <Button variant="light" className="w-full md:w-auto">
             Subscribe
