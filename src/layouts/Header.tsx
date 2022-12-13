@@ -6,7 +6,7 @@ import { Container } from '../components';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { selectItems } from '../store/slices/cart';
 import { showSideCart } from '../store/slices/ui';
-import logo from '../assets/icons/logo.svg';
+import { logo } from '../assets';
 
 const mainNavLinks = [
   {

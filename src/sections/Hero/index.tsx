@@ -1,4 +1,4 @@
-import logo from '../../assets/icons/logo.svg';
+import { logo } from '../../assets';
 import './style.css';
 import HeroSlider from './HeroSlider';
 import { Container } from '../../components';
