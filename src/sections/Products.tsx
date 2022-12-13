@@ -28,9 +28,9 @@ const Products = () => {
       <Container>
         <h1
           className="uppercase text-center text-2xl md:text-4xl text-dark mb-3 md:mb-8"
-          id="fable-of-colors-section"
+          id="fable-of-klassik-section"
         >
-          Fable of Colors
+          Fable of Klassik
         </h1>
 
         {categories.map((c, idx) => (

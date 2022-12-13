@@ -12,7 +12,7 @@ const Checkout = () => {
       <Container>
         <BreadCrumb
           links={[
-            { title: 'Collections', url: '/#fable-of-colors-section' },
+            { title: 'Collections', url: '/#fable-of-klassik-section' },
             { title: 'Order', url: '#' },
           ]}
         />

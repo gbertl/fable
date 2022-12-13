@@ -10,7 +10,7 @@ import { logo } from '../assets';
 
 const mainNavLinks = [
   {
-    url: '/#fable-of-colors-section',
+    url: '/#fable-of-klassik-section',
     text: 'Collections',
   },
   {

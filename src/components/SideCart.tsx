@@ -72,7 +72,7 @@ const SideCart = () => {
             </p>
             <Button
               as={HashLink}
-              to="/#fable-of-colors-section"
+              to="/#fable-of-klassik-section"
               onClick={() => dispatch(hideSideCart())}
             >
               Shop Now
