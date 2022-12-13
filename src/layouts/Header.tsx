@@ -33,7 +33,7 @@ const Header = () => {
 
   return (
     <header className="text-sm">
-      <Container className="flex justify-between py-5 md:py-7">
+      <Container className="flex justify-between items-center h-[74px]">
         <Link to="/" className="hidden md:block">
           <img src={logo} alt="" />
         </Link>
@@ -55,7 +55,7 @@ const Header = () => {
             </button>
           </li>
           <li>
-            <HashLink to="#">Profile</HashLink>
+            <Link to="/signin">Profile</Link>
           </li>
         </HeaderNav>
       </Container>

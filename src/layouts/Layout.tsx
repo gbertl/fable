@@ -6,7 +6,11 @@ import { selectIsSideCartOpen } from '../store/slices/ui';
 import Footer from './Footer';
 import Header from './Header';
 
-const Layout = () => {
+interface Props {
+  withoutFooter?: boolean;
+}
+
+const Layout = ({ withoutFooter }: Props) => {
   const isSideCartOpen = useAppSelector(selectIsSideCartOpen);
 
   useEffect(() => {
@@ -25,7 +29,7 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
-      <Footer />
+      {!withoutFooter && <Footer />}
 
       {isSideCartOpen && <SideCart />}
     </>

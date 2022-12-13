@@ -21,3 +21,5 @@ export { default as productHeroB } from './images/product-hero-b.png';
 export { default as productHeroC } from './images/product-hero-c.png';
 export { default as productHeroD } from './images/product-hero-d.png';
 export { default as productHeroE } from './images/product-hero-e.png';
+
+export { default as foto } from './images/Foto.jpg';

@@ -18,7 +18,6 @@ const Product = () => {
     <section>
       <Container>
         <BreadCrumb
-          className="mt-3 mb-5 md:mb-3 capitalize"
           links={[
             {
               title: product.collection,

@@ -14,7 +14,9 @@ interface Props {
 
 const BreadCrumb = ({ className = '', links }: Props) => {
   return (
-    <ul className={`flex gap-4 text-xs font-medium ${className}`}>
+    <ul
+      className={`flex gap-4 text-xs font-medium mt-3 mb-5 md:mb-3 capitalize ${className}`}
+    >
       {links.map((link, idx) => (
         <React.Fragment key={idx}>
           <li>

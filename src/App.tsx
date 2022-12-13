@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './layouts/Layout';
-import { Checkout, Home, Product } from './pages';
+import { Checkout, Home, Product, SignIn } from './pages';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +18,16 @@ const router = createBrowserRouter([
       {
         path: '/checkout',
         element: <Checkout />,
+      },
+    ],
+  },
+  {
+    path: '/',
+    element: <Layout withoutFooter />,
+    children: [
+      {
+        path: '/signin',
+        element: <SignIn />,
       },
     ],
   },
