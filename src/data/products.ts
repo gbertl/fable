@@ -1,34 +1,24 @@
-import product1 from './assets/images/product1.png';
-import product2 from './assets/images/product2.png';
-import productHero2 from './assets/images/product-hero2.png';
-import product3 from './assets/images/product3.png';
-import product4 from './assets/images/product4.png';
-import productHero4 from './assets/images/product-hero4.png';
-import product5 from './assets/images/product5.png';
-import product6 from './assets/images/product6.png';
-import productHero6 from './assets/images/product-hero6.png';
-import product7 from './assets/images/product7.png';
-import product8 from './assets/images/product8.png';
-import productHero8 from './assets/images/product-hero8.png';
-import product9 from './assets/images/product9.png';
-import product10 from './assets/images/product10.png';
-import product11 from './assets/images/product11.png';
-import { Sizes } from './typings.d';
-import productHeroA from './assets/images/product-hero-a.png';
-import productHeroB from './assets/images/product-hero-b.png';
-import productHeroC from './assets/images/product-hero-c.png';
-import productHeroD from './assets/images/product-hero-d.png';
-import productHeroE from './assets/images/product-hero-e.png';
+import { Sizes } from '../typings.d';
 
-export const categories = [
-  {
-    id: 1,
-    name: 'jacket',
-  },
-  { id: 2, name: 'shorts' },
-];
+import {
+  product1,
+  product2,
+  product3,
+  product4,
+  product5,
+  product6,
+  product7,
+  product8,
+  product9,
+  product10,
+  product11,
+  productHero2,
+  productHero4,
+  productHero6,
+  productHero8,
+} from '../assets';
 
-export const products = [
+const products = [
   {
     id: 1,
     image: product1,
@@ -145,27 +135,4 @@ export const products = [
   },
 ];
 
-export const colors = [
-  { id: 1, hex: '#F4E1CC' },
-  { id: 2, hex: '#262626' },
-  { id: 3, hex: '#9FAED9' },
-  { id: 4, hex: '#56AA91' },
-  { id: 5, hex: '#707070' },
-  { id: 6, hex: '#743821' },
-  { id: 7, hex: '#C89607' },
-  { id: 8, hex: '#214133' },
-];
-
-export const sizes = [Sizes.XS, Sizes.S, Sizes.M, Sizes.L, Sizes.XL];
-
-export const heroProducts = [
-  products.find((p) => p.id == 2),
-  { id: null, heroImage: productHeroA },
-  products.find((p) => p.id == 6),
-  { id: null, heroImage: productHeroB },
-  products.find((p) => p.id == 8),
-  products.find((p) => p.id == 4),
-  { id: null, heroImage: productHeroC },
-  { id: null, heroImage: productHeroD },
-  { id: null, heroImage: productHeroE },
-];
+export default products;
