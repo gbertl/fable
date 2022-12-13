@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { findCartItem } from '../../utils';
 import { showSideCart } from '../../store/slices/ui';
 import { Button } from '../../components';
+import ProductSlider from './ProductSlider';
 
 interface Props {
   product: Product;
@@ -105,18 +106,21 @@ const ProductCard = ({ product }: Props) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row">
-      <img
-        src={product?.image}
-        alt=""
-        className="bg-gray2 w-[650px] mb-3 md:mb-0 self-start"
-      />
+    <div className="grid md:grid-cols-[40%_60%]">
+      {product.heroImage ? (
+        <ProductSlider image={product.image} heroImage={product.heroImage} />
+      ) : (
+        <div className="w-full h-[674px] bg-gray2 mb-3 md:mb-0 flex justify-center items-end">
+          <img src={product.image} alt="" className="object-cover h-[644px]" />
+        </div>
+      )}
+
       <div className="md:px-8">
         <h1 className="text-sm md:text-3xl mb-1 md:mb-2 text-gray md:text-dark text-center md:text-left md:uppercase">
-          {product?.name}
+          {product.name}
         </h1>
         <h2 className="mb-3 md:mb-8 text-base md:text-3xl text-center md:text-left">
-          ₱{product?.price}
+          ₱{product.price}
         </h2>
 
         <h3 className="md:hidden text-base md:text-xl font-normal mb-5 md:mb-0 text-center">
