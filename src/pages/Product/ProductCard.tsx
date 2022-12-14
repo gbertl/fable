@@ -139,8 +139,10 @@ const ProductCard = ({ product }: Props) => {
               />
               <label
                 htmlFor={`item-color-${color.id}`}
-                className={`block w-5 h-5 md:w-10 md:h-10 border border-black hover:border-gray border-opacity-10 cursor-pointer ${
-                  data.colorId === color.id ? 'border-gray cursor-auto' : ''
+                className={`block w-5 h-5 md:w-10 md:h-10 border border-black hover:border-gray border-opacity-10 ${
+                  data.colorId === color.id
+                    ? 'border-gray cursor-auto'
+                    : 'cursor-pointer'
                 }`}
                 style={{ background: color.hex }}
               ></label>
@@ -162,8 +164,10 @@ const ProductCard = ({ product }: Props) => {
               />
               <label
                 htmlFor={`item-size-${size}`}
-                className={`block p-3 border border-black hover:border-gray border-opacity-10 cursor-pointer md:text-2xl ${
-                  data.size === size ? 'border-gray cursor-auto' : ''
+                className={`block p-3 border border-black hover:border-gray border-opacity-10 md:text-2xl ${
+                  data.size === size
+                    ? 'border-gray cursor-auto'
+                    : 'cursor-pointer'
                 }`}
               >
                 {size}
