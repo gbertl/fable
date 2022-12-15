@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Item, Product, Sizes } from '../../typings';
 import { sizes, colors } from '../../data';
@@ -107,6 +107,21 @@ const ProductCard = ({ product }: Props) => {
     dispatch(replaceItems(updatedCartItems));
     setData(item);
   };
+
+  useEffect(() => {
+    setData((prevData) => {
+      const cartItem = findCartItem(cartItems, prevData);
+
+      if (!cartItem) {
+        return {
+          ...prevData,
+          quantity: 0,
+        };
+      } else {
+        return { ...prevData, quantity: cartItem.quantity };
+      }
+    });
+  }, [cartItems]);
 
   return (
     <div className="grid md:grid-cols-[40%_60%]">
