@@ -46,8 +46,8 @@ app.post('/checkout', async (req, res) => {
       payment_method_types: ['card'],
       mode: 'payment',
       line_items,
-      success_url: 'http://localhost:5173/',
-      cancel_url: 'http://localhost:5173/checkout',
+      success_url: `${process.env.CLIENT_URL}/#fable-of-klassik-section`,
+      cancel_url: `${process.env.CLIENT_URL}/checkout`,
     });
 
     res.json({ url: session.url });
