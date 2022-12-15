@@ -6,6 +6,7 @@ import { categories } from '../data';
 import { Container } from '../components';
 import { Product } from '../typings';
 import axios from '../axios';
+import { Skeleton } from '@mui/material';
 
 enum SortBy {
   Price = 'price',
@@ -20,8 +21,19 @@ const Products = () => {
 
   const [products, setProducts] = useState<Product[]>();
 
+  const [imgsLoaded, setImgsLoaded] = useState<
+    { productId: number; loaded: boolean }[]
+  >([]);
+
   useEffect(() => {
     setProducts(productsData);
+
+    productsData?.forEach((p) => {
+      setImgsLoaded((prevImgLoaded) => [
+        ...prevImgLoaded,
+        { productId: p.id, loaded: false },
+      ]);
+    });
   }, [productsData]);
 
   const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -80,7 +92,33 @@ const Products = () => {
                 .map((p) => (
                   <div key={p.id}>
                     <Link to={`/products/${p.id}`}>
-                      <img src={p.image} alt="" className="bg-gray2 mb-3" />
+                      {!imgsLoaded.find((il) => il.productId === p.id)
+                        ?.loaded && (
+                        <Skeleton
+                          variant="rectangular"
+                          height={427}
+                          sx={{ marginBottom: '0.75rem' }}
+                        />
+                      )}
+                      <img
+                        src={p.image}
+                        alt=""
+                        className={`bg-gray2 mb-3 ${
+                          !imgsLoaded.find((il) => il.productId === p.id)
+                            ?.loaded
+                            ? 'h-0'
+                            : 'h-auto'
+                        }`}
+                        onLoad={() =>
+                          setImgsLoaded((prevImgsLoaded) =>
+                            prevImgsLoaded.map((pil) =>
+                              pil.productId === p.id
+                                ? { ...pil, loaded: true }
+                                : pil
+                            )
+                          )
+                        }
+                      />
                     </Link>
                     <div className="text-center">
                       <h5 className="text-xs md:text-lg mb-1 text-gray">

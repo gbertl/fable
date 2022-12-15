@@ -8,6 +8,7 @@ import { findCartItem } from '../../utils';
 import { showSideCart } from '../../store/slices/ui';
 import { Button } from '../../components';
 import ProductSlider from './ProductSlider';
+import { Skeleton } from '@mui/material';
 
 interface Props {
   product: Product;
@@ -17,6 +18,8 @@ const ProductCard = ({ product }: Props) => {
   const [data, setData] = useState<Item>({ productId: product.id });
 
   const cartItems = useAppSelector(selectItems);
+
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -107,12 +110,33 @@ const ProductCard = ({ product }: Props) => {
 
   return (
     <div className="grid md:grid-cols-[40%_60%]">
-      {product.heroImage ? (
-        <ProductSlider image={product.image} heroImage={product.heroImage} />
+      {!imgLoaded ? (
+        <>
+          <img
+            src={product.image || product.heroImage}
+            alt=""
+            className="hidden"
+            onLoad={() => setImgLoaded(true)}
+          />
+          <Skeleton variant="rectangular" sx={{ height: '644px' }} />
+        </>
       ) : (
-        <div className="w-full h-[674px] bg-gray2 mb-3 md:mb-0 flex justify-center items-end">
-          <img src={product.image} alt="" className="object-cover h-[644px]" />
-        </div>
+        <>
+          {product.heroImage ? (
+            <ProductSlider
+              image={product.image}
+              heroImage={product.heroImage}
+            />
+          ) : (
+            <div className="w-full h-[674px] bg-gray2 mb-3 md:mb-0 flex justify-center items-end">
+              <img
+                src={product.image}
+                alt=""
+                className="object-cover h-[644px]"
+              />
+            </div>
+          )}
+        </>
       )}
 
       <div className="md:px-8">

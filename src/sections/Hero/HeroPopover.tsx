@@ -1,3 +1,5 @@
+import { Skeleton } from '@mui/material';
+import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
@@ -17,10 +19,27 @@ const HeroPopover = ({ productId }: Props) => {
     }
   );
 
+  const [imgLoaded, setImgLoaded] = useState(false);
+
   return (
     <div className="hero__popover flex items-center absolute top-[25%] left-full w-max z-[9999] bg-white before:absolute before:left-0 before:top-1/2 before:-translate-x-full before:-translate-y-1/2 before:w-0 before:h-0 before:border-t-[12px] before:border-t-transparent before:border-b-[12px] before:border-b-transparent before:border-r-[12px] before:border-r-gray2">
       <div className="bg-gray2 p-5">
-        <img src={product?.image} alt="" className="w-40" />
+        {!imgLoaded && (
+          <Skeleton
+            variant="rectangular"
+            sx={{
+              width: 160,
+              height: 160,
+            }}
+          />
+        )}
+
+        <img
+          src={product?.image}
+          alt=""
+          className={`w-40 ${!imgLoaded ? 'h-0' : 'h-auto'}`}
+          onLoad={() => setImgLoaded(true)}
+        />
       </div>
 
       <div className="px-6">
