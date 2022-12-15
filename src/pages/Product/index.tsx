@@ -1,13 +1,24 @@
 import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 import { BreadCrumb, Container } from '../../components';
-import { categories, products } from '../../data';
+import { categories } from '../../data';
 import ProductCard from './ProductCard';
 import { stringToHash } from '../../utils';
+import { Product as IProduct } from '../../typings';
+import axios from '../../axios';
 
 const Product = () => {
   const { id } = useParams();
-  const product = products.find((p) => p.id === parseInt(id || ''));
+
+  const [product, setProduct] = useState<IProduct>();
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get(`/products/${id}`);
+      setProduct(data);
+    })();
+  }, []);
 
   if (!product) return null;
 

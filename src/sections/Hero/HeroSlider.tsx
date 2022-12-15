@@ -1,10 +1,11 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useMediaQuery } from 'react-responsive';
+import { useEffect, useState } from 'react';
 
 import HeroPopover from './HeroPopover';
-import { useState } from 'react';
-import { heroProducts } from '../../data';
+import { HeroProduct } from '../../typings';
+import axios from '../../axios';
 
 const HeroSlider = () => {
   const isDesktop = useMediaQuery({ query: '(min-width: 992px)' });
@@ -14,6 +15,15 @@ const HeroSlider = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredId, setHoveredId] = useState(0);
 
+  const [heroProducts, setHeroProducts] = useState<HeroProduct[]>();
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get('/heroProducts');
+      setHeroProducts(data);
+    })();
+  }, []);
+
   return (
     <>
       <Swiper
@@ -22,24 +32,24 @@ const HeroSlider = () => {
         spaceBetween={3}
         maxBackfaceHiddenSlides={0}
       >
-        {heroProducts.map((p, idx) => (
+        {heroProducts?.map((p, idx) => (
           <SwiperSlide
             key={idx}
             onMouseEnter={() => {
-              if (p?.id) {
+              if (p.id) {
                 setIsHovered(true);
                 setHoveredId(p.id);
               }
             }}
             onMouseLeave={() => {
-              if (p?.id) {
+              if (p.id) {
                 setIsHovered(false);
                 setHoveredId(0);
               }
             }}
           >
-            <img src={p?.heroImage} alt="" />
-            {p?.id && isHovered && hoveredId === p.id && (
+            <img src={p.heroImage} alt="" />
+            {p.id && isHovered && hoveredId === p.id && (
               <HeroPopover productId={p.id} />
             )}
           </SwiperSlide>

@@ -1,15 +1,5 @@
 import { Sizes } from '../typings.d';
 
-import {
-  productHeroA,
-  productHeroB,
-  productHeroC,
-  productHeroD,
-  productHeroE,
-} from '../assets';
-
-import products from './products';
-
 const categories = [
   {
     id: 1,
@@ -31,16 +21,4 @@ const colors = [
 
 const sizes = [Sizes.XS, Sizes.S, Sizes.M, Sizes.L, Sizes.XL];
 
-const heroProducts = [
-  products.find((p) => p.id == 2),
-  { id: null, heroImage: productHeroA },
-  products.find((p) => p.id == 6),
-  { id: null, heroImage: productHeroB },
-  products.find((p) => p.id == 8),
-  products.find((p) => p.id == 4),
-  { id: null, heroImage: productHeroC },
-  { id: null, heroImage: productHeroD },
-  { id: null, heroImage: productHeroE },
-];
-
-export { products, categories, colors, sizes, heroProducts };
+export { categories, colors, sizes };

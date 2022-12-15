@@ -4,16 +4,15 @@ import { Link } from 'react-router-dom';
 import { BsCartX } from 'react-icons/bs';
 import { HashLink } from 'react-router-hash-link';
 
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { useAppDispatch, useAppSelector, useGetCartTotal } from '../hooks';
 import { selectItems } from '../store/slices/cart';
 import { hideSideCart } from '../store/slices/ui';
-import { getCartTotal } from '../utils';
 import { Cart } from '.';
 import Button from './Button';
 
 const SideCart = () => {
   const cartItems = useAppSelector(selectItems);
-  const total = getCartTotal(cartItems);
+  const total = useGetCartTotal();
   const dispatch = useAppDispatch();
 
   const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {

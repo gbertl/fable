@@ -29,3 +29,8 @@ export interface Item {
   size?: Sizes;
   quantity?: number;
 }
+
+export interface HeroProduct {
+  id: number;
+  heroImage: string;
+}

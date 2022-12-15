@@ -1,7 +1,10 @@
-import { categories, products } from '../data';
 import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { categories } from '../data';
 import { Container } from '../components';
+import { Product } from '../typings';
+import axios from '../axios';
 
 enum SortBy {
   Price = 'price',
@@ -9,17 +12,24 @@ enum SortBy {
 }
 
 const Products = () => {
-  const [productsData, setProductsData] = useState(products);
+  const [products, setProducts] = useState<Product[]>();
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get('/products');
+      setProducts(data);
+    })();
+  }, []);
 
   const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === SortBy.Price) {
       const filteredProducts = products
-        .slice()
+        ?.slice()
         .sort((a, b) => a.price - b.price);
-      setProductsData(filteredProducts);
+      setProducts(filteredProducts);
     } else if (e.target.value === SortBy.New) {
-      const filteredProducts = products.slice().sort((a, b) => b.id - a.id);
-      setProductsData(filteredProducts);
+      const filteredProducts = products?.slice().sort((a, b) => b.id - a.id);
+      setProducts(filteredProducts);
     }
   };
 
@@ -60,8 +70,8 @@ const Products = () => {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-8 mb-5 md:mb-8">
-              {productsData
-                .filter((p) => p.categoryId === c.id)
+              {products
+                ?.filter((p) => p.categoryId === c.id)
                 .map((p) => (
                   <div key={p.id}>
                     <Link to={`/products/${p.id}`}>

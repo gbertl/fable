@@ -1,5 +1,10 @@
+import { AxiosError } from 'axios';
 import React, { useState } from 'react';
+
 import { Button, Checkbox, Input, Label } from '../../components';
+import { useAppSelector } from '../../hooks';
+import { selectItems } from '../../store/slices/cart';
+import axios from '../../axios';
 
 enum DeliveryMethods {
   PickUp = 'pick-up',
@@ -47,6 +52,7 @@ const initialData = {
 
 const CheckoutForm = () => {
   const [data, setData] = useState<Data>(initialData);
+  const cartItems = useAppSelector(selectItems);
 
   const handleDeliveryMethod = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value as DeliveryMethods;
@@ -61,8 +67,20 @@ const CheckoutForm = () => {
     }));
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const { data } = await axios.post('/checkout', cartItems);
+      window.location = data.url;
+    } catch (err: unknown) {
+      const e = err as AxiosError;
+      console.log(e.message);
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="mb-14">
         {/* City */}
         <div className="mb-9">

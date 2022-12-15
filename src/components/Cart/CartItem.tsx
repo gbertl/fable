@@ -1,19 +1,28 @@
-import { colors, products } from '../../data';
+import { useEffect, useState } from 'react';
+
+import { colors } from '../../data';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { replaceItems, selectItems } from '../../store/slices/cart';
-import { Item } from '../../typings';
+import { Item, Product } from '../../typings';
+import axios from '../../axios';
 
 interface Props {
   item: Item;
 }
 
 const CartItem = ({ item }: Props) => {
-  const product = products.find((p) => p.id === item.productId);
+  const [product, setProduct] = useState<Product>();
+
   const color = colors.find((c) => c.id === item.colorId);
   const cartItems = useAppSelector(selectItems);
   const dispatch = useAppDispatch();
 
-  if (!product) return null;
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get(`/products/${item.productId}`);
+      setProduct(data);
+    })();
+  }, []);
 
   const handleChangeQuantity = ({ isIncrease }: { isIncrease: boolean }) => {
     const updatedCartItems = cartItems.map((ci) => {
@@ -43,14 +52,14 @@ const CartItem = ({ item }: Props) => {
 
   return (
     <div className="grid gap-5 grid-cols-[1fr_65%]">
-      <img src={product.image} className="h-[203px] object-cover bg-gray2" />
+      <img src={product?.image} className="h-[203px] object-cover bg-gray2" />
 
       <div className="flex flex-col justify-between">
         <div>
-          <h1 className="text-base font-normal mb-2">{product.name}</h1>
+          <h1 className="text-base font-normal mb-2">{product?.name}</h1>
 
           <ul className="text-xs text-gray">
-            <li className="mb-2">Collection: {product.collection}</li>
+            <li className="mb-2">Collection: {product?.collection}</li>
             <li>Article: H0146027</li>
           </ul>
         </div>
@@ -94,7 +103,7 @@ const CartItem = ({ item }: Props) => {
           <div>
             Price:{' '}
             <span className="font-medium">
-              ₱{product.price * (item?.quantity || 0)}
+              ₱{(product?.price || 0) * (item?.quantity || 0)}
             </span>
           </div>
 

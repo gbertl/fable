@@ -1,12 +1,8 @@
 import { Button, Input } from '../../components';
-import { useAppSelector } from '../../hooks';
-import { selectItems } from '../../store/slices/cart';
-import { getCartTotal } from '../../utils';
+import { useGetCartTotal } from '../../hooks';
 
 const CheckoutSummary = () => {
-  const cartItems = useAppSelector(selectItems);
-
-  const total = getCartTotal(cartItems);
+  const total = useGetCartTotal();
 
   return (
     <div className="w-[65%] mt-16 ml-auto">
