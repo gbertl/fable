@@ -1,11 +1,12 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useMediaQuery } from 'react-responsive';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import HeroPopover from './HeroPopover';
 import { HeroProduct } from '../../typings';
 import axios from '../../axios';
+import { useQuery } from 'react-query';
 
 const HeroSlider = () => {
   const isDesktop = useMediaQuery({ query: '(min-width: 992px)' });
@@ -15,14 +16,13 @@ const HeroSlider = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredId, setHoveredId] = useState(0);
 
-  const [heroProducts, setHeroProducts] = useState<HeroProduct[]>();
-
-  useEffect(() => {
-    (async () => {
+  const { data: heroProducts } = useQuery<HeroProduct[]>(
+    'heroProducts',
+    async () => {
       const { data } = await axios.get('/heroProducts');
-      setHeroProducts(data);
-    })();
-  }, []);
+      return data;
+    }
+  );
 
   return (
     <>

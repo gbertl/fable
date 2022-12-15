@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 
 import { categories } from '../data';
 import { Container } from '../components';
@@ -12,23 +13,27 @@ enum SortBy {
 }
 
 const Products = () => {
+  const { data: productsData } = useQuery<Product[]>('products', async () => {
+    const { data } = await axios.get('/products');
+    return data;
+  });
+
   const [products, setProducts] = useState<Product[]>();
 
   useEffect(() => {
-    (async () => {
-      const { data } = await axios.get('/products');
-      setProducts(data);
-    })();
-  }, []);
+    setProducts(productsData);
+  }, [productsData]);
 
   const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === SortBy.Price) {
-      const filteredProducts = products
+      const filteredProducts = productsData
         ?.slice()
         .sort((a, b) => a.price - b.price);
       setProducts(filteredProducts);
     } else if (e.target.value === SortBy.New) {
-      const filteredProducts = products?.slice().sort((a, b) => b.id - a.id);
+      const filteredProducts = productsData
+        ?.slice()
+        .sort((a, b) => b.id - a.id);
       setProducts(filteredProducts);
     }
   };

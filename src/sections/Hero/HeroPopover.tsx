@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
 import axios from '../../axios';
@@ -9,14 +9,13 @@ interface Props {
 }
 
 const HeroPopover = ({ productId }: Props) => {
-  const [product, setProduct] = useState<Product>();
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await axios.get(`/products/${productId}`);
-      setProduct(data);
-    })();
-  }, []);
+  const { data: product } = useQuery<Product>(
+    ['product', productId],
+    async ({ queryKey }) => {
+      const { data } = await axios.get(`/products/${queryKey[1]}`);
+      return data;
+    }
+  );
 
   return (
     <div className="hero__popover flex items-center absolute top-[25%] left-full w-max z-[9999] bg-white before:absolute before:left-0 before:top-1/2 before:-translate-x-full before:-translate-y-1/2 before:w-0 before:h-0 before:border-t-[12px] before:border-t-transparent before:border-b-[12px] before:border-b-transparent before:border-r-[12px] before:border-r-gray2">

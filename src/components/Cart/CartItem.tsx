@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 
 import { colors } from '../../data';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -11,18 +11,17 @@ interface Props {
 }
 
 const CartItem = ({ item }: Props) => {
-  const [product, setProduct] = useState<Product>();
+  const { data: product } = useQuery<Product>(
+    ['product', item.productId],
+    async ({ queryKey }) => {
+      const { data } = await axios.get(`/products/${queryKey[1]}`);
+      return data;
+    }
+  );
 
   const color = colors.find((c) => c.id === item.colorId);
   const cartItems = useAppSelector(selectItems);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await axios.get(`/products/${item.productId}`);
-      setProduct(data);
-    })();
-  }, []);
 
   const handleChangeQuantity = ({ isIncrease }: { isIncrease: boolean }) => {
     const updatedCartItems = cartItems.map((ci) => {
