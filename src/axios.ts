@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:3000';
+const baseURL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://scarlet-codfish-robe.cyclic.app'
+    : 'http://localhost:3000';
 
 const instance = axios.create({
   baseURL,
