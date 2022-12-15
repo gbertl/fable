@@ -9,7 +9,7 @@ const sizes = {
 const products = [
   {
     id: 1,
-    image: `${process.env.SERVER_URL}/product1.png`,
+    image: `${process.env.CYCLIC_URL}/product1.png`,
     name: 'Jacket CLR Black',
     collection: 'Fable of Klassik',
     categoryId: 1,
@@ -19,8 +19,8 @@ const products = [
   },
   {
     id: 2,
-    heroImage: `${process.env.SERVER_URL}/product-hero2.png`,
-    image: `${process.env.SERVER_URL}/product2.png`,
+    heroImage: `${process.env.CYCLIC_URL}/product-hero2.png`,
+    image: `${process.env.CYCLIC_URL}/product2.png`,
     name: 'Jacket CLR Blue',
     collection: 'Fable of Klassik',
     categoryId: 1,
@@ -30,7 +30,7 @@ const products = [
   },
   {
     id: 3,
-    image: `${process.env.SERVER_URL}/product3.png`,
+    image: `${process.env.CYCLIC_URL}/product3.png`,
     name: 'Jacket CLR Ruby',
     collection: 'Fable of Klassik',
     categoryId: 1,
@@ -40,8 +40,8 @@ const products = [
   },
   {
     id: 4,
-    heroImage: `${process.env.SERVER_URL}/product-hero4.png`,
-    image: `${process.env.SERVER_URL}/product4.png`,
+    heroImage: `${process.env.CYCLIC_URL}/product-hero4.png`,
+    image: `${process.env.CYCLIC_URL}/product4.png`,
     name: 'Jacket CLR White',
     collection: 'Fable of Klassik',
     categoryId: 1,
@@ -51,7 +51,7 @@ const products = [
   },
   {
     id: 5,
-    image: `${process.env.SERVER_URL}/product5.png`,
+    image: `${process.env.CYCLIC_URL}/product5.png`,
     name: 'Jacket CLR Green',
     collection: 'Fable of Klassik',
     categoryId: 1,
@@ -61,8 +61,8 @@ const products = [
   },
   {
     id: 6,
-    heroImage: `${process.env.SERVER_URL}/product-hero6.png`,
-    image: `${process.env.SERVER_URL}/product6.png`,
+    heroImage: `${process.env.CYCLIC_URL}/product-hero6.png`,
+    image: `${process.env.CYCLIC_URL}/product6.png`,
     name: 'Jacket CLR Orange',
     collection: 'Fable of Klassik',
     categoryId: 1,
@@ -72,7 +72,7 @@ const products = [
   },
   {
     id: 7,
-    image: `${process.env.SERVER_URL}/product7.png`,
+    image: `${process.env.CYCLIC_URL}/product7.png`,
     name: 'Shorts CLR Blue',
     collection: 'Fable of Klassik',
     categoryId: 2,
@@ -82,8 +82,8 @@ const products = [
   },
   {
     id: 8,
-    heroImage: `${process.env.SERVER_URL}/product-hero8.png`,
-    image: `${process.env.SERVER_URL}/product8.png`,
+    heroImage: `${process.env.CYCLIC_URL}/product-hero8.png`,
+    image: `${process.env.CYCLIC_URL}/product8.png`,
     name: 'Shorts CLR Black',
     collection: 'Fable of Klassik',
     categoryId: 2,
@@ -93,7 +93,7 @@ const products = [
   },
   {
     id: 9,
-    image: `${process.env.SERVER_URL}/product9.png`,
+    image: `${process.env.CYCLIC_URL}/product9.png`,
     name: 'Shorts CLR White',
     collection: 'Fable of Klassik',
     categoryId: 2,
@@ -103,7 +103,7 @@ const products = [
   },
   {
     id: 10,
-    image: `${process.env.SERVER_URL}/product10.png`,
+    image: `${process.env.CYCLIC_URL}/product10.png`,
     name: 'Shorts CLR Orange',
     collection: 'Fable of Klassik',
     categoryId: 2,
@@ -113,7 +113,7 @@ const products = [
   },
   {
     id: 11,
-    image: `${process.env.SERVER_URL}/product11.png`,
+    image: `${process.env.CYCLIC_URL}/product11.png`,
     name: 'Shorts CLR Ruby',
     collection: 'Fable of Klassik',
     categoryId: 2,
@@ -125,14 +125,14 @@ const products = [
 
 const heroProducts = [
   products.find((p) => p.id == 2),
-  { id: null, heroImage: `${process.env.SERVER_URL}/product-hero-a.png` },
+  { id: null, heroImage: `${process.env.CYCLIC_URL}/product-hero-a.png` },
   products.find((p) => p.id == 6),
-  { id: null, heroImage: `${process.env.SERVER_URL}/product-hero-b.png` },
+  { id: null, heroImage: `${process.env.CYCLIC_URL}/product-hero-b.png` },
   products.find((p) => p.id == 8),
   products.find((p) => p.id == 4),
-  { id: null, heroImage: `${process.env.SERVER_URL}/product-hero-c.png` },
-  { id: null, heroImage: `${process.env.SERVER_URL}/product-hero-d.png` },
-  { id: null, heroImage: `${process.env.SERVER_URL}/product-hero-e.png` },
+  { id: null, heroImage: `${process.env.CYCLIC_URL}/product-hero-c.png` },
+  { id: null, heroImage: `${process.env.CYCLIC_URL}/product-hero-d.png` },
+  { id: null, heroImage: `${process.env.CYCLIC_URL}/product-hero-e.png` },
 ];
 
 module.exports = { products, heroProducts };
