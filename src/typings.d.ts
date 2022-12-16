@@ -34,3 +34,26 @@ export interface HeroProduct {
   id: number;
   heroImage: string;
 }
+
+export enum DeliveryMethods {
+  PickUp = 'pick-up',
+  ToDoor = 'to-door',
+}
+
+export enum PaymentMethods {
+  Card = 'card',
+  Cod = 'cod',
+}
+
+export interface Order {
+  city: string;
+  deliveryMethod: DeliveryMethods;
+  address: string;
+  loyaltyCard: number;
+  name: string;
+  phone: number;
+  email: string;
+  paymentMethod: PaymentMethods;
+  orderComment: string;
+  agree: boolean;
+}

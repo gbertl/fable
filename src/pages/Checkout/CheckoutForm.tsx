@@ -1,42 +1,18 @@
 import { AxiosError } from 'axios';
 import React, { useState } from 'react';
+import { useForm, useController } from 'react-hook-form';
 
 import { Button, Checkbox, Input, Label } from '../../components';
 import { useAppSelector } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import axios from '../../axios';
-
-enum DeliveryMethods {
-  PickUp = 'pick-up',
-  ToDoor = 'to-door',
-}
-
-enum PaymentMethods {
-  Card = 'card',
-  Cod = 'cod',
-}
-
-const paymentMethods = [
-  {
-    method: PaymentMethods.Card,
-    title: 'Payment Card',
-  },
-  {
-    method: PaymentMethods.Cod,
-    title: 'Cash on delivery',
-  },
-];
-
-const deliveryMethods = [
-  {
-    method: DeliveryMethods.PickUp,
-    title: 'In-store pick up',
-  },
-  {
-    method: DeliveryMethods.ToDoor,
-    title: 'To the door',
-  },
-];
+import { DeliveryMethods, PaymentMethods, Order } from '../../typings';
+import {
+  deliveryMethods,
+  initialData,
+  initialOrderData,
+  paymentMethods,
+} from './data';
 
 interface Data {
   deliveryMethod: DeliveryMethods;
@@ -44,19 +20,33 @@ interface Data {
   agree: boolean;
 }
 
-const initialData = {
-  deliveryMethod: DeliveryMethods.PickUp,
-  paymentMethod: PaymentMethods.Card,
-  agree: false,
-};
-
 const CheckoutForm = ({ className }: { className: string }) => {
   const [data, setData] = useState<Data>(initialData);
   const cartItems = useAppSelector(selectItems);
 
+  const { register, handleSubmit, control } = useForm({
+    defaultValues: initialOrderData,
+  });
+
+  const { field: deliveryMethodField } = useController({
+    name: 'deliveryMethod',
+    control,
+  });
+
+  const { field: paymentMethodField } = useController({
+    name: 'paymentMethod',
+    control,
+  });
+
+  const { field: agreeField } = useController({
+    name: 'agree',
+    control,
+  });
+
   const handleDeliveryMethod = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value as DeliveryMethods;
     setData((prevData) => ({ ...prevData, deliveryMethod: value }));
+    deliveryMethodField.onChange(value);
   };
 
   const handlePaymentMethod = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,10 +55,16 @@ const CheckoutForm = ({ className }: { className: string }) => {
       ...prevData,
       paymentMethod: value,
     }));
+    paymentMethodField.onChange(value);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleAgree = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setData((prevData) => ({ ...prevData, agree: e.target.checked }));
+    agreeField.onChange(e.target.checked);
+  };
+
+  const onSubmit = async (formValues: Order) => {
+    if (!cartItems.length) return;
 
     try {
       const { data } = await axios.post('/checkout', cartItems);
@@ -77,15 +73,22 @@ const CheckoutForm = ({ className }: { className: string }) => {
       const e = err as AxiosError;
       console.log(e.message);
     }
+
+    console.log(formValues);
   };
 
   return (
-    <form onSubmit={handleSubmit} className={`${className}`}>
+    <form onSubmit={handleSubmit(onSubmit)} className={`${className}`}>
       <div className="mb-14">
         {/* City */}
         <div className="mb-9">
           <Label>City</Label>
-          <Input type="text" placeholder="Enter city" className="md:w-1/2" />
+          <Input
+            type="text"
+            placeholder="Enter city"
+            className="md:w-1/2"
+            {...register('city')}
+          />
         </div>
 
         {/* Delivery method */}
@@ -93,15 +96,15 @@ const CheckoutForm = ({ className }: { className: string }) => {
           <Label>Delivery method</Label>
 
           <div className="grid md:grid-cols-2 gap-5">
-            {deliveryMethods.map((deliveryMethod) => {
+            {deliveryMethods.map((deliveryMethod, idx) => {
               return (
-                <div>
+                <div key={idx}>
                   <input
                     type="radio"
-                    name="delivery-method"
+                    name={deliveryMethodField.name}
                     className="hidden"
-                    id={deliveryMethod.method}
                     value={deliveryMethod.method}
+                    id={deliveryMethod.method}
                     onChange={handleDeliveryMethod}
                   />
                   <Button
@@ -125,7 +128,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
         {/* Address */}
         <div>
           <Label>Address</Label>
-          <Input type="text" placeholder="Address" />
+          <Input type="text" placeholder="Address" {...register('address')} />
         </div>
       </div>
 
@@ -135,9 +138,10 @@ const CheckoutForm = ({ className }: { className: string }) => {
 
         <Label className="text-base font-normal">Enter your loyalty card</Label>
         <Input
-          type="text"
+          type="number"
           placeholder="Enter loyalty card"
           className="md:w-1/2"
+          {...register('loyaltyCard')}
         />
       </div>
 
@@ -147,17 +151,29 @@ const CheckoutForm = ({ className }: { className: string }) => {
 
         <div className="mb-5">
           <Label className="text-base font-normal mb-2">Name and surname</Label>
-          <Input type="text" placeholder="Enter name and surname" />
+          <Input
+            type="text"
+            placeholder="Enter name and surname"
+            {...register('name')}
+          />
         </div>
 
         <div className="mb-5">
           <Label className="text-base font-normal mb-2">Phone</Label>
-          <Input type="phone" placeholder="Enter phone number" />
+          <Input
+            type="number"
+            placeholder="Enter phone number"
+            {...register('phone')}
+          />
         </div>
 
         <div>
           <Label className="text-base font-normal mb-2">Email</Label>
-          <Input type="email" placeholder="Enter emails" />
+          <Input
+            type="email"
+            placeholder="Enter emails"
+            {...register('email')}
+          />
         </div>
       </div>
 
@@ -167,10 +183,10 @@ const CheckoutForm = ({ className }: { className: string }) => {
 
         {paymentMethods.map((paymentMethod, idx) => {
           return (
-            <>
+            <React.Fragment key={idx}>
               <input
                 type="radio"
-                name="payment-method"
+                name={paymentMethodField.name}
                 className="hidden"
                 id={paymentMethod.method}
                 value={paymentMethod.method}
@@ -188,7 +204,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
               >
                 {paymentMethod.title}
               </Button>
-            </>
+            </React.Fragment>
           );
         })}
       </div>
@@ -196,7 +212,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
       {/* Order comment */}
       <div className="mb-14">
         <Label>Order Comment</Label>
-        <Input as="textarea" />
+        <Input as="textarea" {...register('orderComment')} />
       </div>
 
       {/* Terms */}
@@ -204,17 +220,22 @@ const CheckoutForm = ({ className }: { className: string }) => {
         <Checkbox
           label="I agree to the terms of the offer and the loyalty policy"
           className="mb-0 text-base font-normal select-none"
-          name="terms"
+          name={agreeField.name}
           controlId="terms"
-          onChange={(e) => {
-            setData((prevData) => ({ ...prevData, agree: e.target.checked }));
-          }}
+          defaultChecked={agreeField.value}
+          onChange={handleAgree}
         />
       </div>
 
-      <Button className="w-full" disabled={!data.agree}>
+      <Button className="w-full" disabled={!data.agree || !cartItems.length}>
         Place an order
       </Button>
+
+      {!cartItems.length && (
+        <span className="text-xs text-red-500 text-center w-full block mt-2">
+          Please add items to your cart first.
+        </span>
+      )}
     </form>
   );
 };
