@@ -30,7 +30,6 @@ const HeroSlider = () => {
         className="hero__slider"
         slidesPerView={isDesktop ? 9 : isTablet ? 6 : isMobile ? 3 : 2}
         spaceBetween={3}
-        maxBackfaceHiddenSlides={0}
       >
         {heroProducts?.map((p, idx) => (
           <SwiperSlide

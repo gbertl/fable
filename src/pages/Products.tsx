@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import { Skeleton } from '@mui/material';
+import { useMediaQuery } from 'react-responsive';
 
 import { categories } from '../data';
 import { Container } from '../components';
 import { Product } from '../typings';
 import axios from '../axios';
-import { Skeleton } from '@mui/material';
 
 enum SortBy {
   Price = 'price',
@@ -24,6 +25,8 @@ const Products = () => {
   const [imgsLoaded, setImgsLoaded] = useState<
     { productId: number; loaded: boolean }[]
   >([]);
+
+  const isMobile = useMediaQuery({ query: '(max-width: 576px)' });
 
   useEffect(() => {
     setProducts(productsData);
@@ -51,7 +54,7 @@ const Products = () => {
   };
 
   return (
-    <section className="mt-28 md:mt-11">
+    <section className="mt-8 md:mt-11">
       <Container>
         <h1
           className="uppercase text-center text-2xl md:text-4xl text-dark mb-3 md:mb-8"
@@ -96,7 +99,7 @@ const Products = () => {
                         ?.loaded && (
                         <Skeleton
                           variant="rectangular"
-                          height={427}
+                          height={isMobile ? 149 : 427}
                           sx={{ marginBottom: '0.75rem' }}
                         />
                       )}

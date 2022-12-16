@@ -20,7 +20,7 @@ const SignIn = () => {
           ]}
         />
 
-        <div className="w-[30%] mt-[8%]">
+        <div className="md:w-[30%] mt-10 md:mt-[8%]">
           <h2 className="text-xl mb-8">Sign in account</h2>
 
           <div className="flex gap-4">
@@ -65,7 +65,7 @@ const SignIn = () => {
       <img
         src={foto}
         alt=""
-        className="absolute top-0 right-0 w-[55%] h-[calc(100vh-75px-12px)] object-cover"
+        className="absolute top-0 right-0 w-[55%] h-[calc(100vh-75px-12px)] object-cover hidden md:block"
       />
     </section>
   );

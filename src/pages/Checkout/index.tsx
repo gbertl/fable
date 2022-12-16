@@ -17,11 +17,11 @@ const Checkout = () => {
           ]}
         />
 
-        <div className="grid grid-cols-2 mt-11 gap-16">
-          <CheckoutForm />
+        <div className="grid lg:grid-cols-2 mt-11 gap-16">
+          <CheckoutForm className="order-2 lg:order-1" />
 
           {cartItems.length ? (
-            <div>
+            <div className="order-1 lg:order-2">
               <Cart />
               <CheckoutSummary />
             </div>

@@ -50,7 +50,7 @@ const CartItem = ({ item }: Props) => {
   };
 
   return (
-    <div className="grid gap-5 grid-cols-[1fr_65%]">
+    <div className="grid gap-5 grid-cols-[1fr_55%] md:grid-cols-[1fr_65%]">
       <img src={product?.image} className="h-[203px] object-cover bg-gray2" />
 
       <div className="flex flex-col justify-between">
@@ -63,7 +63,7 @@ const CartItem = ({ item }: Props) => {
           </ul>
         </div>
 
-        <ul className="flex justify-between text-sm w-full">
+        <ul className="flex justify-between flex-wrap gap-4 text-sm w-full">
           <li>
             Size: <span className="uppercase font-medium">{item.size}</span>
           </li>

@@ -5,7 +5,7 @@ const CheckoutSummary = () => {
   const total = useGetCartTotal();
 
   return (
-    <div className="w-[65%] mt-16 ml-auto">
+    <div className="md:w-[65%] mt-16 md:ml-auto">
       <ul className="mb-6">
         <li className="flex justify-between text-xs mb-2">
           Summary: <span>₱{total}</span>
@@ -22,7 +22,7 @@ const CheckoutSummary = () => {
         Total: <span>₱{total}</span>
       </p>
 
-      <div className="form-group">
+      <div className="form-group flex flex-col md:flex-row">
         <Input type="text" placeholder="Enter promocode" />
         <Button>Apply</Button>
       </div>

@@ -50,7 +50,7 @@ const initialData = {
   agree: false,
 };
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ className }: { className: string }) => {
   const [data, setData] = useState<Data>(initialData);
   const cartItems = useAppSelector(selectItems);
 
@@ -80,19 +80,19 @@ const CheckoutForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={`${className}`}>
       <div className="mb-14">
         {/* City */}
         <div className="mb-9">
           <Label>City</Label>
-          <Input type="text" placeholder="Enter city" className="w-1/2" />
+          <Input type="text" placeholder="Enter city" className="md:w-1/2" />
         </div>
 
         {/* Delivery method */}
         <div className="mb-9">
           <Label>Delivery method</Label>
 
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid md:grid-cols-2 gap-5">
             {deliveryMethods.map((deliveryMethod) => {
               return (
                 <div>
@@ -134,7 +134,11 @@ const CheckoutForm = () => {
         <h5 className="text-xl mb-5">Point</h5>
 
         <Label className="text-base font-normal">Enter your loyalty card</Label>
-        <Input type="text" placeholder="Enter loyalty card" className="w-1/2" />
+        <Input
+          type="text"
+          placeholder="Enter loyalty card"
+          className="md:w-1/2"
+        />
       </div>
 
       {/* Recipient's details */}

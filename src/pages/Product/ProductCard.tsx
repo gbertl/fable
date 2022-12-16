@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
+import { Skeleton } from '@mui/material';
 
 import { Item, Product, Sizes } from '../../typings';
 import { sizes, colors } from '../../data';
@@ -8,7 +10,6 @@ import { findCartItem } from '../../utils';
 import { showSideCart } from '../../store/slices/ui';
 import { Button } from '../../components';
 import ProductSlider from './ProductSlider';
-import { Skeleton } from '@mui/material';
 
 interface Props {
   product: Product;
@@ -22,6 +23,8 @@ const ProductCard = ({ product }: Props) => {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   const dispatch = useAppDispatch();
+
+  const isMobile = useMediaQuery({ query: '(max-width: 576px)' });
 
   const handleAddToCart = () => {
     const item = {
@@ -124,7 +127,7 @@ const ProductCard = ({ product }: Props) => {
   }, [cartItems]);
 
   return (
-    <div className="grid md:grid-cols-[40%_60%]">
+    <div className="grid lg:grid-cols-[40%_60%]">
       {!imgLoaded ? (
         <>
           <img
@@ -133,7 +136,11 @@ const ProductCard = ({ product }: Props) => {
             className="hidden"
             onLoad={() => setImgLoaded(true)}
           />
-          <Skeleton variant="rectangular" sx={{ height: '644px' }} />
+          <Skeleton
+            variant="rectangular"
+            height={isMobile ? 333 : 644}
+            sx={{ marginBottom: isMobile ? '0.75rem' : '0' }}
+          />
         </>
       ) : (
         <>
@@ -143,29 +150,29 @@ const ProductCard = ({ product }: Props) => {
               heroImage={product.heroImage}
             />
           ) : (
-            <div className="w-full h-[674px] bg-gray2 mb-3 md:mb-0 flex justify-center items-end">
+            <div className="w-full h-[333px] lg:h-[674px] bg-gray2 mb-3 lg:mb-0 flex justify-center items-end">
               <img
                 src={product.image}
                 alt=""
-                className="object-cover h-[644px]"
+                className="object-cover h-[313px] lg:h-[644px]"
               />
             </div>
           )}
         </>
       )}
 
-      <div className="md:px-8">
-        <h1 className="text-sm md:text-3xl mb-1 md:mb-2 text-gray md:text-dark text-center md:text-left md:uppercase">
+      <div className="lg:px-8">
+        <h1 className="text-sm lg:text-3xl mb-1 lg:mb-2 text-gray lg:text-dark text-center lg:text-left lg:uppercase">
           {product.name}
         </h1>
-        <h2 className="mb-3 md:mb-8 text-base md:text-3xl text-center md:text-left">
+        <h2 className="mb-3 lg:mb-8 text-base lg:text-3xl text-center lg:text-left">
           ₱{product.price}
         </h2>
 
-        <h3 className="md:hidden text-base md:text-xl font-normal mb-5 md:mb-0 text-center">
+        <h3 className="lg:hidden text-base lg:text-xl font-normal mb-5 lg:mb-0 text-center">
           Color
         </h3>
-        <ul className="flex justify-center md:justify-start gap-5 md:gap-8 flex-wrap mb-5 md:mb-8">
+        <ul className="flex justify-center lg:justify-start gap-5 lg:gap-8 flex-wrap mb-5 lg:mb-8">
           {colors.map((color) => (
             <li key={color.id}>
               <input
@@ -178,7 +185,7 @@ const ProductCard = ({ product }: Props) => {
               />
               <label
                 htmlFor={`item-color-${color.id}`}
-                className={`block w-5 h-5 md:w-10 md:h-10 border border-black hover:border-gray border-opacity-10 ${
+                className={`block w-5 h-5 lg:w-10 lg:h-10 border border-black hover:border-gray border-opacity-10 ${
                   data.colorId === color.id
                     ? 'border-gray cursor-auto'
                     : 'cursor-pointer'
@@ -188,10 +195,10 @@ const ProductCard = ({ product }: Props) => {
             </li>
           ))}
         </ul>
-        <h3 className="md:hidden text-base md:text-xl font-normal mb-5 md:mb-0 text-center">
+        <h3 className="lg:hidden text-base lg:text-xl font-normal mb-5 lg:mb-0 text-center">
           Size
         </h3>
-        <ul className="flex justify-center md:justify-start flex-wrap gap-5 md:gap-8 uppercase leading-none mb-5 md:mb-8">
+        <ul className="flex justify-center lg:justify-start flex-wrap gap-5 lg:gap-8 uppercase leading-none mb-5 lg:mb-8">
           {sizes.map((size) => (
             <li key={size}>
               <input
@@ -203,7 +210,7 @@ const ProductCard = ({ product }: Props) => {
               />
               <label
                 htmlFor={`item-size-${size}`}
-                className={`block p-3 border border-black hover:border-gray border-opacity-10 md:text-2xl ${
+                className={`block p-3 border border-black hover:border-gray border-opacity-10 lg:text-2xl ${
                   data.size === size
                     ? 'border-gray cursor-auto'
                     : 'cursor-pointer'
@@ -218,11 +225,11 @@ const ProductCard = ({ product }: Props) => {
         {data.quantity ? (
           <>
             {/* Quantity */}
-            <div className="flex items-center flex-col md:flex-row mb-5">
-              <h3 className="text-base md:text-xl font-normal mb-5 md:mb-0 text-center">
-                Quantity <span className="hidden md:inline">:</span>
+            <div className="flex items-center flex-col lg:flex-row mb-5">
+              <h3 className="text-base lg:text-xl font-normal mb-5 lg:mb-0 text-center">
+                Quantity <span className="hidden lg:inline">:</span>
               </h3>
-              <div className="flex gap-3 ml-5 md:text-xl">
+              <div className="flex gap-3 ml-5 lg:text-xl">
                 <button
                   className="p-3"
                   onClick={() => handleUpdateQuantity({ isIncrease: false })}
@@ -248,7 +255,7 @@ const ProductCard = ({ product }: Props) => {
 
             <Button
               variant="success"
-              className="w-full md:w-auto"
+              className="w-full lg:w-auto"
               onClick={() => dispatch(showSideCart())}
             >
               Go to cart
@@ -256,7 +263,7 @@ const ProductCard = ({ product }: Props) => {
           </>
         ) : (
           <Button
-            className="w-full md:w-auto"
+            className="w-full lg:w-auto"
             onClick={handleAddToCart}
             disabled={data.colorId && data.size ? false : true}
           >

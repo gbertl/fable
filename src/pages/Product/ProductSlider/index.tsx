@@ -39,11 +39,15 @@ const ProductSlider = ({ image, heroImage }: Props) => {
       onSwiper={(swiper) => setSlidesLength(swiper.slides.length)}
       onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
     >
-      <SwiperSlide className="w-4/5 h-[674px] bg-gray2 mb-3 md:mb-0 flex justify-center items-end">
-        <img src={image} alt="" className="object-cover h-[644px]" />
+      <SwiperSlide className="w-4/5 h-[333px] lg:h-[674px] bg-gray2 mb-3 lg:mb-0 flex justify-center items-end">
+        <img src={image} alt="" className="object-cover h-[90%] lg:h-[644px]" />
       </SwiperSlide>
-      <SwiperSlide className="w-4/5 h-[674px] bg-gray2 mb-3 md:mb-0 flex justify-center items-end">
-        <img src={heroImage} alt="" className="object-contain h-[644px]" />
+      <SwiperSlide className="w-4/5 h-[333px] lg:h-[674px] bg-gray2 mb-3 lg:mb-0 flex justify-center items-end">
+        <img
+          src={heroImage}
+          alt=""
+          className="object-contain h-[90%] lg:h-[644px]"
+        />
       </SwiperSlide>
 
       <SwiperPrevButton

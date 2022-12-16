@@ -23,7 +23,7 @@ const Product = () => {
     categories.find((c) => c.id === product?.categoryId)?.name || '';
 
   return (
-    <section>
+    <section className="mb-11">
       <Container>
         <BreadCrumb
           links={[

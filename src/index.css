@@ -37,6 +37,10 @@
 }
 
 @layer components {
+  .hero__slider .swiper-slide {
+    transform: none;
+  }
+
   .btn {
     @apply inline-block py-3 px-16 text-xl text-center cursor-pointer;
   }
@@ -78,7 +82,7 @@
   }
 
   .form-checkbox-icon {
-    @apply block w-6 h-6 border border-dark relative cursor-pointer before:hidden before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-5 before:h-5 before:bg-dark;
+    @apply block w-6 h-6 border border-dark relative cursor-pointer flex-shrink-0 before:hidden before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-5 before:h-5 before:bg-dark;
   }
 }
 

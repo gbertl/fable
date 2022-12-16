@@ -29,7 +29,7 @@ const SideCart = () => {
       className="fixed top-0 left-0 w-full h-screen z-[9999] bg-black bg-opacity-50"
       onClick={handleClickOutside}
     >
-      <div className="w-max h-full bg-white p-5 flex flex-col ml-auto sidecart__body">
+      <div className="sm:w-max h-full bg-white p-5 flex flex-col ml-auto sidecart__body">
         <div className="flex gap-4 items-center mb-8">
           <button
             className="flex items-center text-2xl"
@@ -62,19 +62,22 @@ const SideCart = () => {
             </div>
           </>
         ) : (
-          <div className="w-[280px] text-center">
-            <BsCartX className="text-8xl mb-5 relative left-1/2 -translate-x-1/2" />
-            <h5 className="text-2xl mb-2">Your cart is empty</h5>
-            <p className="text-sm mb-8">
-              You have no items in your shopping cart. Let's go buy something!
-            </p>
-            <Button
-              as={Link}
-              to="/collections"
-              onClick={() => dispatch(hideSideCart())}
-            >
-              Shop Now
-            </Button>
+          <div className="grid place-items-center h-3/4">
+            <div className="lg:w-[333px] text-center">
+              <BsCartX className="text-8xl mb-5 relative left-1/2 -translate-x-1/2" />
+              <h5 className="text-2xl mb-2">Your cart is empty</h5>
+              <p className="text-sm mb-8">
+                You have no items in your shopping cart.
+                <br /> Let's go buy something!
+              </p>
+              <Button
+                as={Link}
+                to="/collections"
+                onClick={() => dispatch(hideSideCart())}
+              >
+                Shop Now
+              </Button>
+            </div>
           </div>
         )}
       </div>

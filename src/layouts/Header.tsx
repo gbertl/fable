@@ -41,9 +41,27 @@ const Header = () => {
           {mainNavLinks.map((link, idx) => (
             <li key={idx}>
               {link.url.includes('#') ? (
-                <HashLink to={link.url}>{link.text}</HashLink>
+                <HashLink
+                  to={link.url}
+                  className={`${
+                    link.text === 'Customizer' || link.text === 'Sale'
+                      ? 'hidden md:inline'
+                      : ''
+                  }`}
+                >
+                  {link.text}
+                </HashLink>
               ) : (
-                <Link to={link.url}>{link.text}</Link>
+                <Link
+                  to={link.url}
+                  className={`${
+                    link.text === 'Customizer' || link.text === 'Sale'
+                      ? 'hidden md:inline'
+                      : ''
+                  }`}
+                >
+                  {link.text}
+                </Link>
               )}
             </li>
           ))}
