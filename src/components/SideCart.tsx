@@ -2,7 +2,6 @@ import React from 'react';
 import { MdChevronLeft } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { BsCartX } from 'react-icons/bs';
-import { HashLink } from 'react-router-hash-link';
 
 import { useAppDispatch, useAppSelector, useGetCartTotal } from '../hooks';
 import { selectItems } from '../store/slices/cart';
@@ -70,8 +69,8 @@ const SideCart = () => {
               You have no items in your shopping cart. Let's go buy something!
             </p>
             <Button
-              as={HashLink}
-              to="/#fable-of-klassik-section"
+              as={Link}
+              to="/collections"
               onClick={() => dispatch(hideSideCart())}
             >
               Shop Now

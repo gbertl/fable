@@ -8,11 +8,11 @@ const Checkout = () => {
   const cartItems = useAppSelector(selectItems);
 
   return (
-    <section>
+    <section className="mb-11">
       <Container>
         <BreadCrumb
           links={[
-            { title: 'Collections', url: '/#fable-of-klassik-section' },
+            { title: 'Collections', url: '/collections' },
             { title: 'Order', url: '#' },
           ]}
         />

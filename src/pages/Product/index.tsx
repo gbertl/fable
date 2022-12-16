@@ -29,11 +29,11 @@ const Product = () => {
           links={[
             {
               title: product?.collection || '',
-              url: stringToHash(product?.collection || ''),
+              url: '#',
             },
             {
               title: categoryTitle,
-              url: stringToHash(categoryTitle),
+              url: '#',
             },
           ]}
         />

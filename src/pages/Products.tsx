@@ -51,12 +51,9 @@ const Products = () => {
   };
 
   return (
-    <section className="mt-28 md:mt-32">
+    <section className="mt-28 md:mt-11">
       <Container>
-        <h1
-          className="uppercase text-center text-2xl md:text-4xl text-dark mb-3 md:mb-8"
-          id="fable-of-klassik-section"
-        >
+        <h1 className="uppercase text-center text-2xl md:text-4xl text-dark mb-3 md:mb-8">
           Fable of Klassik
         </h1>
 
