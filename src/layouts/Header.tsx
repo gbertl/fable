@@ -40,7 +40,11 @@ const Header = () => {
         <HeaderNav>
           {mainNavLinks.map((link, idx) => (
             <li key={idx}>
-              <HashLink to={link.url}>{link.text}</HashLink>
+              {link.url.includes('#') ? (
+                <HashLink to={link.url}>{link.text}</HashLink>
+              ) : (
+                <Link to={link.url}>{link.text}</Link>
+              )}
             </li>
           ))}
         </HeaderNav>
