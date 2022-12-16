@@ -11,9 +11,10 @@ const Checkbox = <C extends React.ElementType = 'input'>({
   controlId,
   onChange,
   className,
+  defaultChecked,
   ...props
 }: Props<C>) => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(defaultChecked);
 
   return (
     <>
@@ -25,6 +26,7 @@ const Checkbox = <C extends React.ElementType = 'input'>({
           onChange(e);
         }}
         className="hidden"
+        defaultChecked={isChecked}
         {...props}
       />
       <Label htmlFor={controlId} className={`form-checkbox-label ${className}`}>
