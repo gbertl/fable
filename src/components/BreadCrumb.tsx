@@ -21,7 +21,17 @@ const BreadCrumb = ({ className = '', links }: Props) => {
         <React.Fragment key={idx}>
           <li>
             {link.url.includes('#') ? (
-              <HashLink to={link.url}>{link.title}</HashLink>
+              <HashLink
+                to={link.url}
+                scroll={(el) =>
+                  setTimeout(
+                    () => el.scrollIntoView({ behavior: 'smooth' }),
+                    100
+                  )
+                }
+              >
+                {link.title}
+              </HashLink>
             ) : (
               <Link to={link.url}>{link.title}</Link>
             )}
