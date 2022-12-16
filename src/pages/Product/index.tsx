@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { BreadCrumb, Container } from '../../components';
 import { categories } from '../../data';
 import ProductCard from './ProductCard';
-import { stringToHash } from '../../utils';
+import { stringToHypen } from '../../utils';
 import { Product as IProduct } from '../../typings';
 import axios from '../../axios';
 import { useQuery } from 'react-query';
@@ -29,11 +29,13 @@ const Product = () => {
           links={[
             {
               title: product?.collection || '',
-              url: '#',
+              url: `/collections#${stringToHypen(
+                product?.collection || ''
+              )}-section`,
             },
             {
               title: categoryTitle,
-              url: '#',
+              url: `/collections#${stringToHypen(categoryTitle)}-section`,
             },
           ]}
         />

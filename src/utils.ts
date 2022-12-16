@@ -8,5 +8,5 @@ export const findCartItem = (cartItems: Item[], itemData: Item) =>
       ci.size === itemData.size
   );
 
-export const stringToHash = (str: string) =>
-  `/#${str.toLowerCase().split(' ').join('-')}-section`;
+export const stringToHypen = (str: string) =>
+  str.toLowerCase().split(' ').join('-');
