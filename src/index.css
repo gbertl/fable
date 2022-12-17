@@ -84,6 +84,10 @@
   .form-checkbox-icon {
     @apply block w-6 h-6 border border-dark relative cursor-pointer flex-shrink-0 before:hidden before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-5 before:h-5 before:bg-dark;
   }
+
+  .form-error {
+    @apply block text-xs text-red-500 mt-2;
+  }
 }
 
 @layer utilities {
