@@ -2,6 +2,7 @@ import React from 'react';
 import { MdChevronLeft } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { BsCartX } from 'react-icons/bs';
+import { motion } from 'framer-motion';
 
 import { useAppDispatch, useAppSelector, useGetCartTotal } from '../hooks';
 import { selectItems } from '../store/slices/cart';
@@ -25,11 +26,21 @@ const SideCart = () => {
   const length = cartItems.length;
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      exit={{ opacity: 0 }}
       className="fixed top-0 left-0 w-full h-screen z-[9999] bg-black bg-opacity-50"
       onClick={handleClickOutside}
     >
-      <div className="sm:w-max h-full bg-white p-5 flex flex-col ml-auto sidecart__body">
+      <motion.div
+        initial={{ opacity: 0, x: '75%' }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.2 }}
+        exit={{ opacity: 0, x: '80%' }}
+        className="sm:w-max h-full bg-white p-5 flex flex-col ml-auto sidecart__body"
+      >
         <div className="flex gap-4 items-center mb-8">
           <button
             className="flex items-center text-2xl"
@@ -80,8 +91,8 @@ const SideCart = () => {
             </div>
           </div>
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

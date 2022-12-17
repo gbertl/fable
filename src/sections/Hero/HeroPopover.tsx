@@ -2,6 +2,7 @@ import { Skeleton } from '@mui/material';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import axios from '../../axios';
 import { Product } from '../../typings';
@@ -22,7 +23,13 @@ const HeroPopover = ({ productId }: Props) => {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
-    <div className="hero__popover flex items-center absolute top-[25%] left-full w-max z-[9999] bg-white before:absolute before:left-0 before:top-1/2 before:-translate-x-full before:-translate-y-1/2 before:w-0 before:h-0 before:border-t-[12px] before:border-t-transparent before:border-b-[12px] before:border-b-transparent before:border-r-[12px] before:border-r-gray2">
+    <motion.div
+      initial={{ opacity: 0.75, x: -10 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.2 }}
+      exit={{ opacity: 0, x: -10 }}
+      className="hero__popover flex items-center absolute top-[25%] left-full w-max z-[9999] bg-white before:absolute before:left-0 before:top-1/2 before:-translate-x-full before:-translate-y-1/2 before:w-0 before:h-0 before:border-t-[12px] before:border-t-transparent before:border-b-[12px] before:border-b-transparent before:border-r-[12px] before:border-r-gray2"
+    >
       <div className="bg-gray2 p-5">
         {!imgLoaded && (
           <Skeleton
@@ -79,7 +86,7 @@ const HeroPopover = ({ productId }: Props) => {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

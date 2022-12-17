@@ -1,20 +1,25 @@
-import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { Skeleton } from '@mui/material';
-import { useMediaQuery } from 'react-responsive';
 
-import { categories } from '../data';
-import { Container } from '../components';
-import { Product } from '../typings';
-import axios from '../axios';
+import { categories } from '../../data';
+import { Container } from '../../components';
+import { Product } from '../../typings';
+import axios from '../../axios';
+import ProductCard from './ProductCard';
 
 enum SortBy {
   Price = 'price',
   New = 'newest',
 }
 
+export interface ImgLoaded {
+  productId: number;
+  loaded: boolean;
+}
+
 const Products = () => {
+  const [imgsLoaded, setImgsLoaded] = useState<ImgLoaded[]>([]);
+
   const { data: productsData } = useQuery<Product[]>('products', async () => {
     const { data } = await axios.get('/products');
     return data;
@@ -22,15 +27,8 @@ const Products = () => {
 
   const [products, setProducts] = useState<Product[]>();
 
-  const [imgsLoaded, setImgsLoaded] = useState<
-    { productId: number; loaded: boolean }[]
-  >([]);
-
-  const isMobile = useMediaQuery({ query: '(max-width: 576px)' });
-
   useEffect(() => {
-    setProducts(productsData);
-
+    setProducts(productsData?.slice().sort((a, b) => b.id - a.id));
     productsData?.forEach((p) => {
       setImgsLoaded((prevImgLoaded) => [
         ...prevImgLoaded,
@@ -93,45 +91,12 @@ const Products = () => {
               {products
                 ?.filter((p) => p.categoryId === c.id)
                 .map((p) => (
-                  <div key={p.id}>
-                    <Link to={`/products/${p.id}`}>
-                      {!imgsLoaded.find((il) => il.productId === p.id)
-                        ?.loaded && (
-                        <Skeleton
-                          variant="rectangular"
-                          height={isMobile ? 149 : 427}
-                          sx={{ marginBottom: '0.75rem' }}
-                        />
-                      )}
-                      <img
-                        src={p.image}
-                        alt=""
-                        className={`bg-gray2 mb-3 ${
-                          !imgsLoaded.find((il) => il.productId === p.id)
-                            ?.loaded
-                            ? 'h-0'
-                            : 'h-auto'
-                        }`}
-                        onLoad={() =>
-                          setImgsLoaded((prevImgsLoaded) =>
-                            prevImgsLoaded.map((pil) =>
-                              pil.productId === p.id
-                                ? { ...pil, loaded: true }
-                                : pil
-                            )
-                          )
-                        }
-                      />
-                    </Link>
-                    <div className="text-center">
-                      <h5 className="text-xs md:text-lg mb-1 text-gray">
-                        {p.name}
-                      </h5>
-                      <span className="text-sm md:text-xl font-medium">
-                        ₱{p.price}
-                      </span>
-                    </div>
-                  </div>
+                  <ProductCard
+                    product={p}
+                    imgsLoaded={imgsLoaded}
+                    setImgsLoaded={setImgsLoaded}
+                    key={p.id}
+                  />
                 ))}
             </div>
           </React.Fragment>

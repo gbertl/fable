@@ -7,6 +7,7 @@ import HeroPopover from './HeroPopover';
 import { HeroProduct } from '../../typings';
 import axios from '../../axios';
 import { useQuery } from 'react-query';
+import { AnimatePresence } from 'framer-motion';
 
 const HeroSlider = () => {
   const isDesktop = useMediaQuery({ query: '(min-width: 992px)' });
@@ -48,9 +49,11 @@ const HeroSlider = () => {
             }}
           >
             <img src={p.heroImage} alt="" />
-            {p.id && isHovered && hoveredId === p.id && (
-              <HeroPopover productId={p.id} />
-            )}
+            <AnimatePresence>
+              {p.id && isHovered && hoveredId === p.id && (
+                <HeroPopover productId={p.id} />
+              )}
+            </AnimatePresence>
           </SwiperSlide>
         ))}
       </Swiper>

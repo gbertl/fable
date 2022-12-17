@@ -43,7 +43,7 @@ const Header = () => {
               {link.url.includes('#') ? (
                 <HashLink
                   to={link.url}
-                  className={`${
+                  className={`hover:opacity-70 ${
                     link.text === 'Customizer' || link.text === 'Sale'
                       ? 'hidden md:inline'
                       : ''
@@ -54,7 +54,7 @@ const Header = () => {
               ) : (
                 <Link
                   to={link.url}
-                  className={`${
+                  className={`hover:opacity-70 ${
                     link.text === 'Customizer' || link.text === 'Sale'
                       ? 'hidden md:inline'
                       : ''
@@ -72,12 +72,15 @@ const Header = () => {
             <button
               onClick={() => dispatch(showSideCart())}
               style={{ textTransform: 'inherit' }}
+              className="hover:opacity-70"
             >
               Items ({cartItems.length})
             </button>
           </li>
           <li>
-            <Link to="/signin">Profile</Link>
+            <Link to="/signin" className="hover:opacity-70">
+              Profile
+            </Link>
           </li>
         </HeaderNav>
       </Container>

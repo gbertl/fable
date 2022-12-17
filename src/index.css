@@ -42,7 +42,7 @@
   }
 
   .btn {
-    @apply inline-block py-3 px-16 text-xl text-center cursor-pointer;
+    @apply inline-block py-3 px-16 text-xl text-center cursor-pointer duration-200;
   }
 
   .btn-primary {

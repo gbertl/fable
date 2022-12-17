@@ -29,11 +29,14 @@ const BreadCrumb = ({ className = '', links }: Props) => {
                     100
                   )
                 }
+                className="hover:opacity-70"
               >
                 {link.title}
               </HashLink>
             ) : (
-              <Link to={link.url}>{link.title}</Link>
+              <Link to={link.url} className="hover:opacity-70">
+                {link.title}
+              </Link>
             )}
           </li>
           {idx < links.length - 1 && <li>&#8212;</li>}

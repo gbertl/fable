@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion';
 import { Outlet, ScrollRestoration } from 'react-router-dom';
 import { SideCart } from '../components';
 import { useAppSelector } from '../hooks';
@@ -22,7 +23,7 @@ const Layout = ({ withoutFooter }: Props) => {
       </main>
       {!withoutFooter && <Footer />}
 
-      {isSideCartOpen && <SideCart />}
+      <AnimatePresence>{isSideCartOpen && <SideCart />}</AnimatePresence>
     </>
   );
 };
