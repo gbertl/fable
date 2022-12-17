@@ -28,9 +28,9 @@ export const initialOrderData = {
   paymentMethod: PaymentMethods.Card,
   address: 'Batasan Road',
   loyaltyCard: 9204,
-  name: 'Gilbert L',
+  name: 'Gilbert',
   phone: 9989934111,
-  email: 'gbertl@gmail.com',
+  email: '',
   orderComment: 'Pack all the items separately, please',
   agree: true,
 };

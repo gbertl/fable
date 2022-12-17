@@ -1,12 +1,14 @@
 import { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { useForm, useController } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Button, Checkbox, Input, Label } from '../../components';
-import { useAppSelector } from '../../hooks';
+import { Button, Checkbox, FormError, Input, Label } from '../../components';
+import { useAppSelector, useGetCartTotal } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import axios from '../../axios';
-import { DeliveryMethods, PaymentMethods, Order } from '../../typings';
+import { DeliveryMethods, PaymentMethods, Order } from '../../typings.d';
 import {
   deliveryMethods,
   initialData,
@@ -20,12 +22,44 @@ interface Data {
   agree: boolean;
 }
 
+const schema = yup.object({
+  city: yup.string().required('Your city is required'),
+  deliveryMethod: yup.string().oneOf(Object.values(DeliveryMethods)),
+  address: yup.string().required('Your address is required'),
+  loyaltyCard: yup
+    .number()
+    .typeError('You must type a valid loyalty card')
+    .positive()
+    .integer()
+    .required(),
+  name: yup.string().required('Your full name is required'),
+  phone: yup
+    .number()
+    .typeError('You must type a valid phone number')
+    .required(),
+  email: yup
+    .string()
+    .email('You must type a valid email address')
+    .required('Your email address is required'),
+  paymentMethod: yup.string().oneOf(Object.values(PaymentMethods)),
+  orderComment: yup.string(),
+  agree: yup.bool(),
+});
+
 const CheckoutForm = ({ className }: { className: string }) => {
   const [data, setData] = useState<Data>(initialData);
   const cartItems = useAppSelector(selectItems);
 
-  const { register, handleSubmit, control } = useForm({
+  const total = useGetCartTotal();
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
     defaultValues: initialOrderData,
+    resolver: yupResolver(schema),
   });
 
   const { field: deliveryMethodField } = useController({
@@ -66,12 +100,18 @@ const CheckoutForm = ({ className }: { className: string }) => {
   const onSubmit = async (formValues: Order) => {
     if (!cartItems.length) return;
 
-    try {
-      const { data } = await axios.post('/checkout', cartItems);
-      window.location = data.url;
-    } catch (err: unknown) {
-      const e = err as AxiosError;
-      console.log(e.message);
+    if (formValues.paymentMethod === PaymentMethods.Card) {
+      try {
+        const { data } = await axios.post('/checkout', cartItems);
+        window.location = data.url;
+      } catch (err: unknown) {
+        const e = err as AxiosError;
+        console.log(e.message);
+      }
+    } else {
+      alert(
+        `Hi ${formValues.name}! You order has been placed. Please pay ₱${total} upon delivery.`
+      );
     }
 
     console.log(formValues);
@@ -89,6 +129,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
             className="md:w-1/2"
             {...register('city')}
           />
+          {errors.city?.message && <FormError message={errors.city?.message} />}
         </div>
 
         {/* Delivery method */}
@@ -129,6 +170,9 @@ const CheckoutForm = ({ className }: { className: string }) => {
         <div>
           <Label>Address</Label>
           <Input type="text" placeholder="Address" {...register('address')} />
+          {errors.address?.message && (
+            <FormError message={errors.address?.message} />
+          )}
         </div>
       </div>
 
@@ -143,6 +187,9 @@ const CheckoutForm = ({ className }: { className: string }) => {
           className="md:w-1/2"
           {...register('loyaltyCard')}
         />
+        {errors.loyaltyCard?.message && (
+          <FormError message={errors.loyaltyCard?.message} />
+        )}
       </div>
 
       {/* Recipient's details */}
@@ -156,6 +203,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
             placeholder="Enter name and surname"
             {...register('name')}
           />
+          {errors.name?.message && <FormError message={errors.name?.message} />}
         </div>
 
         <div className="mb-5">
@@ -165,15 +213,21 @@ const CheckoutForm = ({ className }: { className: string }) => {
             placeholder="Enter phone number"
             {...register('phone')}
           />
+          {errors.phone?.message && (
+            <FormError message={errors.phone?.message} />
+          )}
         </div>
 
         <div>
           <Label className="text-base font-normal mb-2">Email</Label>
           <Input
             type="email"
-            placeholder="Enter emails"
+            placeholder="Enter email"
             {...register('email')}
           />
+          {errors.email?.message && (
+            <FormError message={errors.email?.message} />
+          )}
         </div>
       </div>
 
@@ -213,6 +267,9 @@ const CheckoutForm = ({ className }: { className: string }) => {
       <div className="mb-14">
         <Label>Order Comment</Label>
         <Input as="textarea" {...register('orderComment')} />
+        {errors.orderComment?.message && (
+          <FormError message={errors.orderComment?.message} />
+        )}
       </div>
 
       {/* Terms */}
@@ -227,14 +284,20 @@ const CheckoutForm = ({ className }: { className: string }) => {
         />
       </div>
 
-      <Button className="w-full" disabled={!data.agree || !cartItems.length}>
+      <Button
+        className="w-full"
+        disabled={
+          !data.agree || !cartItems.length || !!Object.keys(errors).length
+        }
+      >
         Place an order
       </Button>
 
       {!cartItems.length && (
-        <span className="text-xs text-red-500 text-center w-full block mt-2">
-          Please add items to your cart first.
-        </span>
+        <FormError
+          message="Please add items to your cart first."
+          className="text-center w-full"
+        />
       )}
     </form>
   );
