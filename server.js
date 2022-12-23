@@ -8,6 +8,7 @@ const { products, heroProducts } = require('./data');
 
 const productsRouter = require('./routes/products');
 const categoriesRouter = require('./routes/categories');
+const heroProductsRouter = require('./routes/heroProducts');
 
 connectDB();
 
@@ -19,10 +20,11 @@ app.use(express.static('public'));
 
 app.use('/products', productsRouter);
 app.use('/categories', categoriesRouter);
+app.use('/hero-products', heroProductsRouter);
 
-app.get('/heroProducts', (req, res) => {
-  res.json(heroProducts);
-});
+// app.get('/heroProducts', (req, res) => {
+//   res.json(heroProducts);
+// });
 
 // app.get('/products', (req, res) => {
 //   res.json(products);
