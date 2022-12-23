@@ -22,19 +22,6 @@ app.use('/products', productsRouter);
 app.use('/categories', categoriesRouter);
 app.use('/hero-products', heroProductsRouter);
 
-// app.get('/heroProducts', (req, res) => {
-//   res.json(heroProducts);
-// });
-
-// app.get('/products', (req, res) => {
-//   res.json(products);
-// });
-
-app.get('/products/:id', (req, res) => {
-  const product = products.find((p) => p.id === parseInt(req.params.id));
-  res.json(product);
-});
-
 app.post('/checkout', async (req, res) => {
   try {
     const line_items = req.body.map((item) => {
