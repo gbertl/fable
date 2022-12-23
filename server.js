@@ -1,7 +1,13 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
+
 const connectDB = require('./config/db');
+const { products, heroProducts } = require('./data');
+
+const productsRouter = require('./routes/products');
+const categoriesRouter = require('./routes/categories');
 
 connectDB();
 
@@ -11,17 +17,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
-
-const { products, heroProducts } = require('./data');
+app.use('/products', productsRouter);
+app.use('/categories', categoriesRouter);
 
 app.get('/heroProducts', (req, res) => {
   res.json(heroProducts);
 });
 
-app.get('/products', (req, res) => {
-  res.json(products);
-});
+// app.get('/products', (req, res) => {
+//   res.json(products);
+// });
 
 app.get('/products/:id', (req, res) => {
   const product = products.find((p) => p.id === parseInt(req.params.id));
