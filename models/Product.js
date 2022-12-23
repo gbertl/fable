@@ -2,18 +2,20 @@ const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
   heroImage: String,
-  image: String,
-  collection: String,
+  image: { type: String, required: true },
+  collection: { type: String, required: true },
   category: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'Category',
+    required: true,
   },
   size: {
     type: String,
     enum: ['xs', 's', 'm', 'l', 'xl'],
+    required: true,
   },
-  color: String,
-  price: Number,
+  color: { type: String, required: true },
+  price: { type: Number, required: true },
 });
 
 module.exports = mongoose.model('Project', schema);
