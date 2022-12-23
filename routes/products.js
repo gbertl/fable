@@ -10,11 +10,7 @@ const upload = require('../middleware/upload');
 
 const router = express.Router();
 
-router.post(
-  '/',
-  upload.fields([{ name: 'imageFile' }, { name: 'heroImageFile' }]),
-  createProduct
-);
+router.post('/', upload.single('imageFile'), createProduct);
 router.get('/', getProducts);
 router.route('/:id').get(getProduct).delete(deleteProduct);
 

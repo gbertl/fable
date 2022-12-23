@@ -7,11 +7,7 @@ const createProduct = async (req, res) => {
   try {
     const body = req.body;
 
-    body.image = await uploadToS3(req.files['imageFile'][0]);
-
-    if (req.files['heroImageFile']) {
-      body.heroImage = await uploadToS3(req.files['heroImageFile'][0]);
-    }
+    body.image = await uploadToS3(req.file);
 
     const product = await Product.create(body);
 
@@ -27,10 +23,6 @@ const getProducts = async (req, res) => {
 
     for (const product of products) {
       product.imageUrl = await getImageUrl(product.image);
-
-      if (product.heroImage) {
-        product.heroImageUrl = await getImageUrl(product.heroImage);
-      }
     }
 
     res.json(products);
@@ -47,10 +39,6 @@ const getProduct = async (req, res) => {
 
     product.imageUrl = await getImageUrl(product.image);
 
-    if (product.heroImage) {
-      product.heroImageUrl = await getImageUrl(product.heroImage);
-    }
-
     res.json(product);
   } catch (e) {
     res.status(400).json({ message: e.message });
@@ -64,10 +52,6 @@ const deleteProduct = async (req, res) => {
     if (!product) res.sendStatus(404);
 
     await deleteToS3(product.image);
-
-    if (product.heroImage) {
-      await deleteToS3(product.heroImage);
-    }
 
     await product.remove();
     res.sendStatus(204);
