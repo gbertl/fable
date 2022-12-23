@@ -1,29 +1,18 @@
-const { PutObjectCommand, GetObjectCommand } = require('@aws-sdk/client-s3');
-const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
-
-const s3 = require('../config/s3');
 const Product = require('../models/Product');
-const randomImageName = require('../utils/randomImageName');
-
-const bucketName = process.env.AWS_BUCKET_NAME;
+const deleteToS3 = require('../utils/deleteToS3');
+const getImageUrl = require('../utils/getImageUrl');
+const uploadToS3 = require('../utils/uploadToS3');
 
 const createProduct = async (req, res) => {
   try {
     const body = req.body;
 
-    if (req.file) {
-      const imageName = randomImageName();
+    if (req.files['imageFile']) {
+      body.image = await uploadToS3(req.files['imageFile'][0]);
+    }
 
-      const params = {
-        Bucket: bucketName,
-        Key: imageName,
-        Body: req.file.buffer,
-        ContentType: req.file.mimetype,
-      };
-
-      const command = new PutObjectCommand(params);
-      await s3.send(command);
-      body.image = imageName;
+    if (req.files['heroImageFile']) {
+      body.heroImage = await uploadToS3(req.files['heroImageFile'][0]);
     }
 
     const product = await Product.create(body);
@@ -39,14 +28,13 @@ const getProducts = async (req, res) => {
     const products = await Product.find().lean();
 
     for (const product of products) {
-      const params = {
-        Bucket: bucketName,
-        Key: product.image,
-      };
+      if (product.image) {
+        product.imageUrl = await getImageUrl(product.image);
+      }
 
-      const command = new GetObjectCommand(params);
-      const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
-      product.imageUrl = url;
+      if (product.heroImage) {
+        product.heroImageUrl = await getImageUrl(product.heroImage);
+      }
     }
 
     res.json(products);
@@ -55,7 +43,50 @@ const getProducts = async (req, res) => {
   }
 };
 
+const getProduct = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id).lean();
+
+    if (!product) res.sendStatus(404);
+
+    if (product.image) {
+      product.imageUrl = await getImageUrl(product.image);
+    }
+
+    if (product.heroImage) {
+      product.heroImageUrl = await getImageUrl(product.heroImage);
+    }
+
+    res.json(product);
+  } catch (e) {
+    res.status(400).json({ message: e.message });
+  }
+};
+
+const deleteProduct = async (req, res) => {
+  try {
+    const product = await Product.findByIdAndDelete(req.params.id);
+
+    if (!product) res.sendStatus(404);
+
+    if (product.image) {
+      await deleteToS3(product.image);
+    }
+
+    if (product.heroImage) {
+      await deleteToS3(product.heroImage);
+    }
+
+    await product.remove();
+    res.sendStatus(204);
+  } catch (e) {
+    res.status(400).json({ message: e.message });
+  }
+};
+
 module.exports = {
   createProduct,
   getProducts,
+  getProduct,
+  deleteProduct,
 };
