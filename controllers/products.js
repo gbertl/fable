@@ -7,9 +7,7 @@ const createProduct = async (req, res) => {
   try {
     const body = req.body;
 
-    if (req.files['imageFile']) {
-      body.image = await uploadToS3(req.files['imageFile'][0]);
-    }
+    body.image = await uploadToS3(req.files['imageFile'][0]);
 
     if (req.files['heroImageFile']) {
       body.heroImage = await uploadToS3(req.files['heroImageFile'][0]);
@@ -28,9 +26,7 @@ const getProducts = async (req, res) => {
     const products = await Product.find().lean();
 
     for (const product of products) {
-      if (product.image) {
-        product.imageUrl = await getImageUrl(product.image);
-      }
+      product.imageUrl = await getImageUrl(product.image);
 
       if (product.heroImage) {
         product.heroImageUrl = await getImageUrl(product.heroImage);
@@ -49,9 +45,7 @@ const getProduct = async (req, res) => {
 
     if (!product) res.sendStatus(404);
 
-    if (product.image) {
-      product.imageUrl = await getImageUrl(product.image);
-    }
+    product.imageUrl = await getImageUrl(product.image);
 
     if (product.heroImage) {
       product.heroImageUrl = await getImageUrl(product.heroImage);
@@ -69,9 +63,7 @@ const deleteProduct = async (req, res) => {
 
     if (!product) res.sendStatus(404);
 
-    if (product.image) {
-      await deleteToS3(product.image);
-    }
+    await deleteToS3(product.image);
 
     if (product.heroImage) {
       await deleteToS3(product.heroImage);
