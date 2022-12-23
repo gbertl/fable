@@ -4,11 +4,12 @@ const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 const connectDB = require('./config/db');
-const { products, heroProducts } = require('./data');
 
 const productsRouter = require('./routes/products');
 const categoriesRouter = require('./routes/categories');
 const heroProductsRouter = require('./routes/heroProducts');
+
+const Product = require('./models/Product');
 
 connectDB();
 
@@ -24,10 +25,14 @@ app.use('/hero-products', heroProductsRouter);
 
 app.post('/checkout', async (req, res) => {
   try {
-    const line_items = req.body.map((item) => {
-      const product = products.find((p) => p.id === item.productId);
+    const cartItems = req.body;
 
-      return {
+    let line_items = [];
+
+    for (const item of cartItems) {
+      const product = await Product.findById(item.productId);
+
+      const line_item = {
         price_data: {
           currency: 'php',
           product_data: {
@@ -37,7 +42,9 @@ app.post('/checkout', async (req, res) => {
         },
         quantity: item.quantity,
       };
-    });
+
+      line_items.push(line_item);
+    }
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
