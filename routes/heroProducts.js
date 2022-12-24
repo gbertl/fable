@@ -8,12 +8,14 @@ const {
   deleteHeroProduct,
   updateHeroProduct,
 } = require('../controllers/heroProducts');
+const checkJwt = require('../middleware/checkJwt');
 
 const router = express.Router();
 
-router.post('/', upload.single('imageFile'), createHeroProduct);
+router.post('/', checkJwt, upload.single('imageFile'), createHeroProduct);
 router.get('/', getHeroProducts);
-router.put('/:id', upload.single('imageFile'), updateHeroProduct);
-router.route('/:id').get(getHeroProduct).delete(deleteHeroProduct);
+router.put('/:id', checkJwt, upload.single('imageFile'), updateHeroProduct);
+router.get('/:id', getHeroProduct);
+router.delete('/:id', checkJwt, deleteHeroProduct);
 
 module.exports = router;
