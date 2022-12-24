@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
+  heroProduct: { type: mongoose.SchemaTypes.ObjectId, ref: 'HeroProduct' },
   image: { type: String, required: true },
   name: { type: String, required: true },
   collectionName: { type: String, required: true },
@@ -18,4 +19,4 @@ const schema = mongoose.Schema({
   price: { type: Number, required: true },
 });
 
-module.exports = mongoose.model('Project', schema);
+module.exports = mongoose.model('Product', schema);
