@@ -16,7 +16,7 @@ interface Props {
 }
 
 const ProductCard = ({ product }: Props) => {
-  const [data, setData] = useState<Item>({ productId: product.id });
+  const [data, setData] = useState<Item>({ productId: product._id });
 
   const cartItems = useAppSelector(selectItems);
 
@@ -131,7 +131,7 @@ const ProductCard = ({ product }: Props) => {
       {!imgLoaded ? (
         <>
           <img
-            src={product.image || product.heroImage}
+            src={product.imageUrl || product.heroImageUrl}
             alt=""
             className="hidden"
             onLoad={() => setImgLoaded(true)}
@@ -144,15 +144,15 @@ const ProductCard = ({ product }: Props) => {
         </>
       ) : (
         <>
-          {product.heroImage ? (
+          {product.heroImageUrl ? (
             <ProductSlider
-              image={product.image}
-              heroImage={product.heroImage}
+              image={product.imageUrl}
+              heroImage={product.heroImageUrl}
             />
           ) : (
             <div className="w-full h-[333px] lg:h-[674px] bg-gray2 mb-3 lg:mb-0 flex justify-center items-end">
               <img
-                src={product.image}
+                src={product.imageUrl}
                 alt=""
                 className="object-cover h-[313px] lg:h-[644px]"
               />

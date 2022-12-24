@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 
-import { categories } from '../../data';
 import { Container } from '../../components';
-import { Product } from '../../typings';
+import { Category, Product } from '../../typings';
 import axios from '../../axios';
 import ProductCard from './ProductCard';
 
@@ -25,14 +24,19 @@ const Products = () => {
     return data;
   });
 
+  const { data: categories } = useQuery<Category[]>('categories', async () => {
+    const { data } = await axios.get('/categories');
+    return data;
+  });
+
   const [products, setProducts] = useState<Product[]>();
 
   useEffect(() => {
-    setProducts(productsData?.slice().sort((a, b) => b.id - a.id));
+    setProducts(productsData?.slice().sort((a, b) => b._id - a._id));
     productsData?.forEach((p) => {
       setImgsLoaded((prevImgLoaded) => [
         ...prevImgLoaded,
-        { productId: p.id, loaded: false },
+        { productId: p._id, loaded: false },
       ]);
     });
   }, [productsData]);
@@ -46,7 +50,7 @@ const Products = () => {
     } else if (e.target.value === SortBy.New) {
       const filteredProducts = productsData
         ?.slice()
-        .sort((a, b) => b.id - a.id);
+        .sort((a, b) => b._id - a._id);
       setProducts(filteredProducts);
     }
   };
@@ -61,8 +65,8 @@ const Products = () => {
           Fable of Klassik
         </h1>
 
-        {categories.map((c, idx) => (
-          <React.Fragment key={c.id}>
+        {categories?.map((c, idx) => (
+          <React.Fragment key={c._id}>
             <div className="flex justify-between">
               <h3
                 className="text-base md:text-xl text-dark my-5 capitalize"
@@ -89,13 +93,13 @@ const Products = () => {
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-8 mb-5 md:mb-8">
               {products
-                ?.filter((p) => p.categoryId === c.id)
+                ?.filter((p) => p.category === c._id)
                 .map((p) => (
                   <ProductCard
                     product={p}
                     imgsLoaded={imgsLoaded}
                     setImgsLoaded={setImgsLoaded}
-                    key={p.id}
+                    key={p._id}
                   />
                 ))}
             </div>

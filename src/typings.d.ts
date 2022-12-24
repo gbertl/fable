@@ -7,17 +7,17 @@ export enum Sizes {
 }
 
 export interface Category {
-  id: number;
+  _id: number;
   name: string;
 }
 
 export interface Product {
-  id: number;
-  heroImage?: string;
-  image: string;
+  _id: number;
+  heroImageUrl?: string;
+  imageUrl: string;
   name: string;
-  collection: string;
-  categoryId: number;
+  collectionName: string;
+  category: Category | number;
   size: Sizes;
   color: string;
   price: number;
@@ -31,8 +31,9 @@ export interface Item {
 }
 
 export interface HeroProduct {
-  id: number;
-  heroImage: string;
+  _id: number;
+  imageUrl: string;
+  product?: Product | number;
 }
 
 export enum DeliveryMethods {

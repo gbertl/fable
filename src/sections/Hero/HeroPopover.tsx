@@ -42,7 +42,7 @@ const HeroPopover = ({ productId }: Props) => {
         )}
 
         <img
-          src={product?.image}
+          src={product?.imageUrl}
           alt=""
           className={`w-40 ${!imgLoaded ? 'h-0' : 'h-auto'}`}
           onLoad={() => setImgLoaded(true)}
@@ -54,7 +54,9 @@ const HeroPopover = ({ productId }: Props) => {
         <ul className="text-xs text-gray mb-6">
           <li>
             Collection:{' '}
-            <span className="font-medium uppercase">{product?.collection}</span>
+            <span className="font-medium uppercase">
+              {product?.collectionName}
+            </span>
           </li>
           <li>
             Article: <span className="font-medium">H0146027</span>
@@ -79,7 +81,7 @@ const HeroPopover = ({ productId }: Props) => {
             Price: <span className="font-medium">₱{product?.price}</span>
           </span>
           <Link
-            to={`/products/${product?.id}`}
+            to={`/products/${product?._id}`}
             className="font-medium text-gray hover:text-dark"
           >
             Show more

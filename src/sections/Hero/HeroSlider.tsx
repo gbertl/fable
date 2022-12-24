@@ -20,7 +20,7 @@ const HeroSlider = () => {
   const { data: heroProducts } = useQuery<HeroProduct[]>(
     'heroProducts',
     async () => {
-      const { data } = await axios.get('/heroProducts');
+      const { data } = await axios.get('/hero-products');
       return data;
     }
   );
@@ -36,22 +36,22 @@ const HeroSlider = () => {
           <SwiperSlide
             key={idx}
             onMouseEnter={() => {
-              if (p.id) {
+              if (p._id) {
                 setIsHovered(true);
-                setHoveredId(p.id);
+                setHoveredId(p._id);
               }
             }}
             onMouseLeave={() => {
-              if (p.id) {
+              if (p._id) {
                 setIsHovered(false);
                 setHoveredId(0);
               }
             }}
           >
-            <img src={p.heroImage} alt="" />
+            <img src={p.imageUrl} alt="" />
             <AnimatePresence>
-              {p.id && isHovered && hoveredId === p.id && (
-                <HeroPopover productId={p.id} />
+              {p.product && isHovered && hoveredId === p._id && (
+                <HeroPopover productId={p.product as number} />
               )}
             </AnimatePresence>
           </SwiperSlide>

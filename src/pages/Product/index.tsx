@@ -14,13 +14,15 @@ const Product = () => {
   const { data: product } = useQuery<IProduct>(
     ['product', id],
     async ({ queryKey }) => {
-      const { data } = await axios.get(`/products/${queryKey[1]}`);
+      const { data } = await axios.get(
+        `/products/${queryKey[1]}?fields[0]=heroImageUrl`
+      );
       return data;
     }
   );
 
   const categoryTitle =
-    categories.find((c) => c.id === product?.categoryId)?.name || '';
+    categories.find((c) => c.id === product?.category)?.name || '';
 
   return (
     <section className="mb-11">
@@ -28,9 +30,9 @@ const Product = () => {
         <BreadCrumb
           links={[
             {
-              title: product?.collection || '',
+              title: product?.collectionName || '',
               url: `/collections#${stringToHypen(
-                product?.collection || ''
+                product?.collectionName || ''
               )}-section`,
             },
             {

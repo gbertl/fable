@@ -1,14 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { foto } from '../assets';
 import { BreadCrumb, Button, Container, Input, Label } from '../components';
 
-enum FormTabs {
-  Email,
-  Phone,
-}
-
 const SignIn = () => {
-  const [formTab, setFormTab] = useState(FormTabs.Email);
+  const { loginWithPopup } = useAuth0();
+  const [email, setEmail] = useState('');
 
   return (
     <section className="relative">
@@ -20,46 +17,34 @@ const SignIn = () => {
           ]}
         />
 
-        <div className="md:w-[30%] mt-10 md:mt-[8%]">
-          <h2 className="text-xl mb-8">Sign in account</h2>
+        <form
+          className="md:w-[30%] mt-10 md:mt-[8%]"
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            loginWithPopup({
+              login_hint: email,
+            });
+          }}
+        >
+          <h2 className="text-xl mb-8">Sign in or create an account</h2>
 
           <div className="flex gap-4">
-            <Label
-              className={`text-base font-normal ${
-                formTab === FormTabs.Email
-                  ? 'text-dark cursor-auto'
-                  : 'text-gray cursor-pointer'
-              }`}
-              onClick={() => setFormTab(FormTabs.Email)}
-            >
-              Email
-            </Label>
-            <Label
-              className={`text-base font-normal ${
-                formTab === FormTabs.Phone
-                  ? 'text-dark cursor-auto'
-                  : 'text-gray cursor-pointer'
-              }`}
-              onClick={() => setFormTab(FormTabs.Phone)}
-            >
-              Phone
-            </Label>
+            <Label className="text-base font-normal">Email</Label>
           </div>
 
-          {formTab === FormTabs.Email && (
-            <Input type="email" placeholder="Enter email" className="mb-4" />
-          )}
+          <Input
+            type="email"
+            placeholder="Enter email"
+            className="mb-4"
+            value={email}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setEmail(e.target.value)
+            }
+          />
 
-          {formTab === FormTabs.Phone && (
-            <Input
-              type="number"
-              placeholder="Enter phone number"
-              className="mb-4"
-            />
-          )}
-
-          <Button className="mb-5">Get code</Button>
-        </div>
+          <Button className="mb-5 cursor-pointer">Submit</Button>
+        </form>
       </Container>
 
       <img
