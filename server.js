@@ -10,8 +10,6 @@ const heroProductsRouter = require('./routes/heroProducts');
 
 const Product = require('./models/Product');
 
-connectDB();
-
 const app = express();
 
 app.use(cors());
@@ -59,5 +57,8 @@ app.post('/checkout', async (req, res) => {
   }
 });
 
-const port = process.env.PORT;
-app.listen(port, () => console.log(`Server running at ${port}`));
+connectDB().then(() => {
+  const port = process.env.PORT;
+
+  app.listen(port, () => console.log(`Server running at ${port}`));
+});
