@@ -35,6 +35,7 @@ export interface HeroProduct {
   _id: string;
   imageUrl: string;
   product?: Product | string;
+  priorityOrder: number;
 }
 
 export enum DeliveryMethods {
@@ -67,8 +68,10 @@ export interface NewProduct
 
 export interface NewHeroProduct extends Omit<HeroProduct, '_id' | 'imageUrl'> {
   imageFile: File;
+  priorityOrder?: number;
 }
 
 export interface UpdateHeroProduct extends Omit<HeroProduct, 'imageUrl'> {
-  imageFile: File;
+  imageFile?: File;
+  priorityOrder?: number;
 }

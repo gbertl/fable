@@ -39,7 +39,13 @@ const HeroSlider = () => {
   return (
     <>
       {isAuthenticated && isAdmin && (
-        <button className="text-xl" onClick={() => setIsFormOpen(true)}>
+        <button
+          className="text-xl"
+          onClick={() => {
+            setCurrentHeroProduct(undefined);
+            setIsFormOpen(true);
+          }}
+        >
           <HiPlusCircle />
         </button>
       )}
@@ -49,41 +55,43 @@ const HeroSlider = () => {
         slidesPerView={isDesktop ? 9 : isTablet ? 6 : isMobile ? 3 : 2}
         spaceBetween={3}
       >
-        {heroProducts?.map((p, idx) => (
-          <SwiperSlide
-            key={idx}
-            onMouseEnter={() => {
-              if (p.product) {
-                setIsHovered(true);
-                setHoveredId(p._id);
-              }
-            }}
-            onMouseLeave={() => {
-              if (p.product) {
-                setIsHovered(false);
-                setHoveredId('');
-              }
-            }}
-          >
-            <button
-              className="text-xs text-white p-1 bg-black rounded-full absolute top-0 right-3"
-              onClick={() => {
-                setCurrentHeroProduct(p);
-                setIsFormOpen(true);
+        {heroProducts
+          ?.sort((a, b) => a.priorityOrder - b.priorityOrder)
+          .map((p, idx) => (
+            <SwiperSlide
+              key={idx}
+              onMouseEnter={() => {
+                if (p.product) {
+                  setIsHovered(true);
+                  setHoveredId(p._id);
+                }
+              }}
+              onMouseLeave={() => {
+                if (p.product) {
+                  setIsHovered(false);
+                  setHoveredId('');
+                }
               }}
             >
-              <HiPencil />
-            </button>
+              <button
+                className="text-xs text-white p-1 bg-black rounded-full absolute top-0 right-3"
+                onClick={() => {
+                  setCurrentHeroProduct(p);
+                  setIsFormOpen(true);
+                }}
+              >
+                <HiPencil />
+              </button>
 
-            <img src={p.imageUrl} alt="" />
+              <img src={p.imageUrl} alt="" />
 
-            <AnimatePresence>
-              {p.product && isHovered && hoveredId === p._id && (
-                <HeroPopover productId={p.product as string} />
-              )}
-            </AnimatePresence>
-          </SwiperSlide>
-        ))}
+              <AnimatePresence>
+                {p.product && isHovered && hoveredId === p._id && (
+                  <HeroPopover productId={p.product as string} />
+                )}
+              </AnimatePresence>
+            </SwiperSlide>
+          ))}
       </Swiper>
 
       <AnimatePresence>
