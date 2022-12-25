@@ -42,6 +42,7 @@ const HeroSlider = () => {
         <button
           className="text-xl"
           onClick={() => {
+            document.body.classList.add('hide-scrollbar');
             setCurrentHeroProduct(undefined);
             setIsFormOpen(true);
           }}
@@ -76,6 +77,7 @@ const HeroSlider = () => {
               <button
                 className="text-xs text-white p-1 bg-black rounded-full absolute top-0 right-3"
                 onClick={() => {
+                  document.body.classList.add('hide-scrollbar');
                   setCurrentHeroProduct(p);
                   setIsFormOpen(true);
                 }}
