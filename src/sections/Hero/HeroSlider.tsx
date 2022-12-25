@@ -74,16 +74,18 @@ const HeroSlider = () => {
                 }
               }}
             >
-              <button
-                className="text-xs text-white p-1 bg-black rounded-full absolute top-0 right-3"
-                onClick={() => {
-                  document.body.classList.add('hide-scrollbar');
-                  setCurrentHeroProduct(p);
-                  setIsFormOpen(true);
-                }}
-              >
-                <HiPencil />
-              </button>
+              {isAuthenticated && isAdmin && (
+                <button
+                  className="text-xs text-white p-1 bg-black rounded-full absolute top-0 right-3"
+                  onClick={() => {
+                    document.body.classList.add('hide-scrollbar');
+                    setCurrentHeroProduct(p);
+                    setIsFormOpen(true);
+                  }}
+                >
+                  <HiPencil />
+                </button>
+              )}
 
               <img src={p.imageUrl} alt="" />
 
