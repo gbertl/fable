@@ -6,7 +6,7 @@ const s3 = require('../config/s3');
 const getImageUrl = async (objectKey) => {
   try {
     const params = {
-      Bucket: process.env.AWS_BUCKET_NAME,
+      Bucket: process.env.APP_AWS_BUCKET_NAME,
       Key: objectKey,
     };
 

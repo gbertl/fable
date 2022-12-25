@@ -10,7 +10,7 @@ const uploadToS3 = async (file, objectKey = '') => {
     }
 
     const params = {
-      Bucket: process.env.AWS_BUCKET_NAME,
+      Bucket: process.env.APP_AWS_BUCKET_NAME,
       Key: objectKey,
       Body: file.buffer,
       ContentType: file.mimetype,

@@ -5,7 +5,7 @@ const s3 = require('../config/s3');
 const deleteToS3 = async (objectKey) => {
   try {
     const params = {
-      Bucket: process.env.AWS_BUCKET_NAME,
+      Bucket: process.env.APP_AWS_BUCKET_NAME,
       Key: objectKey,
     };
 
