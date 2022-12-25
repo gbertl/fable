@@ -81,7 +81,7 @@ const HeroPopover = ({ productId }: Props) => {
             Price: <span className="font-medium">₱{product?.price}</span>
           </span>
           <Link
-            to={`/products/${product?._id}`}
+            to={`/products/${productId}`}
             className="font-medium text-gray hover:text-dark"
           >
             Show more
