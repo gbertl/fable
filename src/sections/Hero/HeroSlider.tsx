@@ -66,7 +66,7 @@ const HeroSlider = () => {
             <img src={p.imageUrl} alt="" />
             <AnimatePresence>
               {p.product && isHovered && hoveredId === p._id && (
-                <HeroPopover productId={p.product as number} />
+                <HeroPopover productId={p.product as string} />
               )}
             </AnimatePresence>
           </SwiperSlide>

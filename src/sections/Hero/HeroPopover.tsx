@@ -8,7 +8,7 @@ import axios from '../../axios';
 import { Product } from '../../typings';
 
 interface Props {
-  productId: number;
+  productId: string;
 }
 
 const HeroPopover = ({ productId }: Props) => {

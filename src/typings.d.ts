@@ -34,7 +34,7 @@ export interface Item {
 export interface HeroProduct {
   _id: string;
   imageUrl: string;
-  product?: Product | number;
+  product?: Product | string;
 }
 
 export enum DeliveryMethods {
