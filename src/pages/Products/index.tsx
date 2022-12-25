@@ -8,8 +8,8 @@ import { Container } from '../../components';
 import { Category, Product } from '../../typings.d';
 import axios from '../../axios';
 import ProductCard from './ProductCard';
-import { checkAdminRole } from '../../utils';
 import ProductFormModal from './ProductFormModal';
+import { useCheckAdminRole } from '../../hooks';
 
 enum SortBy {
   Price = 'price',
@@ -22,8 +22,7 @@ export interface ImgLoaded {
 }
 
 const Products = () => {
-  const { isAuthenticated, user } = useAuth0();
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { isAuthenticated } = useAuth0();
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [currentCategoryId, setCurrentCategoryId] = useState<string>();
 
@@ -41,6 +40,8 @@ const Products = () => {
 
   const [products, setProducts] = useState<Product[]>();
 
+  const isAdmin = useCheckAdminRole();
+
   useEffect(() => {
     setProducts(
       productsData
@@ -55,10 +56,6 @@ const Products = () => {
       ]);
     });
   }, [productsData]);
-
-  useEffect(() => {
-    if (user) setIsAdmin(checkAdminRole(user));
-  }, [user]);
 
   const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === SortBy.Price) {

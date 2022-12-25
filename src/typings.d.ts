@@ -67,6 +67,6 @@ export interface NewProduct
 }
 
 export interface NewHeroProduct {
-  product: number;
+  product?: number;
   imageFile: File;
 }

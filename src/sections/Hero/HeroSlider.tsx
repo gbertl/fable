@@ -8,6 +8,10 @@ import { HeroProduct } from '../../typings';
 import axios from '../../axios';
 import { useQuery } from 'react-query';
 import { AnimatePresence } from 'framer-motion';
+import { HiPlusCircle } from 'react-icons/hi2';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useCheckAdminRole } from '../../hooks';
+import HeroProductModalForm from './HeroProductModalForm';
 
 const HeroSlider = () => {
   const isDesktop = useMediaQuery({ query: '(min-width: 992px)' });
@@ -25,8 +29,19 @@ const HeroSlider = () => {
     }
   );
 
+  const { isAuthenticated } = useAuth0();
+  const isAdmin = useCheckAdminRole();
+
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   return (
     <>
+      {isAuthenticated && isAdmin && (
+        <button className="text-xl" onClick={() => setIsFormOpen(true)}>
+          <HiPlusCircle />
+        </button>
+      )}
+
       <Swiper
         className="hero__slider"
         slidesPerView={isDesktop ? 9 : isTablet ? 6 : isMobile ? 3 : 2}
@@ -57,6 +72,10 @@ const HeroSlider = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      <AnimatePresence>
+        {isFormOpen && <HeroProductModalForm setIsFormOpen={setIsFormOpen} />}
+      </AnimatePresence>
     </>
   );
 };
