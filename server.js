@@ -6,7 +6,6 @@ const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 const connectDB = require('./config/db');
 
 const productsRouter = require('./routes/products');
-const categoriesRouter = require('./routes/categories');
 const heroProductsRouter = require('./routes/heroProducts');
 
 const Product = require('./models/Product');
@@ -20,7 +19,6 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.use('/products', productsRouter);
-app.use('/categories', categoriesRouter);
 app.use('/hero-products', heroProductsRouter);
 
 app.post('/checkout', async (req, res) => {

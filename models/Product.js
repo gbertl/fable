@@ -7,8 +7,8 @@ const schema = mongoose.Schema(
     name: { type: String, required: true },
     collectionName: { type: String, required: true },
     category: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Category',
+      type: String,
+      enum: ['jacket', 'shorts'],
       required: true,
     },
     size: {
