@@ -1,5 +1,5 @@
 import { useController, useForm } from 'react-hook-form';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import placeholderImg from '../../assets/images/placeholder.png';
 import { Button, Input, Label, Modal } from '../../components';
@@ -26,27 +26,7 @@ const ProductFormModal = ({ setIsFormOpen, currentCategory }: Props) => {
     price: 0,
   };
 
-  const closeForm = () => {
-    setIsFormOpen(false);
-    setTimeout(() => document.body.classList.remove('hide-scrollbar'), 200);
-  };
-
-  const { mutateAsync: createProduct } = useCreateProduct();
-  const { mutateAsync: createHeroProduct } = useCreateHeroProduct();
-
-  const [imageFilePreview, setImageFilePreview] = useState(placeholderImg);
-  const [heroImageFilePreview, setHeroImageFilePreview] =
-    useState(placeholderImg);
-
-  const handleCloseForm = (e: React.MouseEvent<HTMLDivElement>) => {
-    const target = e.target as Element;
-
-    if (!target.closest('.products__form')) {
-      closeForm();
-    }
-  };
-
-  const { register, handleSubmit, control } = useForm<NewProductForm>({
+  const { register, handleSubmit, control, reset } = useForm<NewProductForm>({
     defaultValues: initialData,
   });
 
@@ -59,6 +39,22 @@ const ProductFormModal = ({ setIsFormOpen, currentCategory }: Props) => {
     name: 'heroImageFile',
     control,
   });
+
+  const { mutateAsync: createProduct } = useCreateProduct(() => {
+    reset();
+    setImageFilePreview(placeholderImg);
+    setHeroImageFilePreview(placeholderImg);
+  });
+
+  const { mutateAsync: createHeroProduct } = useCreateHeroProduct(() => {
+    reset();
+    setImageFilePreview(placeholderImg);
+    setHeroImageFilePreview(placeholderImg);
+  });
+
+  const [imageFilePreview, setImageFilePreview] = useState(placeholderImg);
+  const [heroImageFilePreview, setHeroImageFilePreview] =
+    useState(placeholderImg);
 
   const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.files?.[0];
@@ -95,14 +91,11 @@ const ProductFormModal = ({ setIsFormOpen, currentCategory }: Props) => {
   };
 
   return (
-    <Modal onClose={handleCloseForm}>
+    <Modal setIsOpen={setIsFormOpen}>
       <h2 className="text-2xl mb-10 text-center uppercase text-gray">
         Add new product
       </h2>
-      <form
-        className="flex flex-col gap-7 products__form"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="flex flex-col gap-7" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex gap-2">
           <input
             type="file"

@@ -12,16 +12,9 @@ const HeroProductModalForm = ({ setIsFormOpen }: Props) => {
   const [imageFile, setImageFile] = useState<File>();
   const [imageFilePreview, setImageFilePreview] = useState(placeholderImg);
 
-  const closeForm = () => {
-    setIsFormOpen(false);
-
-    setTimeout(() => {
-      document.body.classList.remove('hide-scrollbar');
-    }, 200);
-  };
-
   const { mutate: createHeroProduct } = useCreateHeroProduct(() => {
-    closeForm();
+    setImageFile(undefined);
+    setImageFilePreview(placeholderImg);
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,17 +33,9 @@ const HeroProductModalForm = ({ setIsFormOpen }: Props) => {
     createHeroProduct({ imageFile });
   };
 
-  const handleCloseForm = (e: React.MouseEvent<Element>) => {
-    const target = e.target as Element;
-
-    if (!target.closest('.hero-slider__form')) {
-      closeForm();
-    }
-  };
-
   return (
-    <Modal onClose={handleCloseForm}>
-      <form className="hero-slider__form" onSubmit={handleSubmit}>
+    <Modal setIsOpen={setIsFormOpen}>
+      <form onSubmit={handleSubmit}>
         <input
           type="file"
           id="imageFile"
