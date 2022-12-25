@@ -1,17 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
-import type { TypedUseSelectorHook } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 
-import type { RootState, AppDispatch } from './store';
-import { selectItems } from './store/slices/cart';
-import axios from './axios';
-import { Product } from './typings';
+import { selectItems } from '../store/slices/cart';
+import axios from '../axios';
+import { Product } from '../typings';
+import { useAppSelector } from '.';
 
-export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
-export const useGetCartTotal = () => {
+const useGetCartTotal = () => {
   const [cartTotal, setCartTotal] = useState(0);
   const cartItems = useAppSelector(selectItems);
 
@@ -22,7 +17,7 @@ export const useGetCartTotal = () => {
 
   useEffect(() => {
     const total = cartItems.reduce((sum, cartItem) => {
-      const product = products?.find((p) => p.id === cartItem.productId);
+      const product = products?.find((p) => p._id === cartItem.productId);
 
       return sum + (product?.price || 0) * (cartItem.quantity || 0);
     }, 0);
@@ -32,3 +27,5 @@ export const useGetCartTotal = () => {
 
   return cartTotal;
 };
+
+export default useGetCartTotal;

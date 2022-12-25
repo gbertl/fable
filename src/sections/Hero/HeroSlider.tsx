@@ -15,7 +15,7 @@ const HeroSlider = () => {
   const isMobile = useMediaQuery({ query: '(min-width: 576px)' });
 
   const [isHovered, setIsHovered] = useState(false);
-  const [hoveredId, setHoveredId] = useState(0);
+  const [hoveredId, setHoveredId] = useState('');
 
   const { data: heroProducts } = useQuery<HeroProduct[]>(
     'heroProducts',
@@ -44,7 +44,7 @@ const HeroSlider = () => {
             onMouseLeave={() => {
               if (p._id) {
                 setIsHovered(false);
-                setHoveredId(0);
+                setHoveredId('');
               }
             }}
           >

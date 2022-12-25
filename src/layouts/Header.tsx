@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import { selectItems } from '../store/slices/cart';
 import { showSideCart } from '../store/slices/ui';
 import { logo } from '../assets';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const mainNavLinks = [
   {
@@ -30,6 +31,8 @@ const HeaderNav = ({ children }: { children: React.ReactNode }) => (
 const Header = () => {
   const cartItems = useAppSelector(selectItems);
   const dispatch = useAppDispatch();
+
+  const { isAuthenticated, logout } = useAuth0();
 
   return (
     <header className="text-sm">
@@ -78,9 +81,18 @@ const Header = () => {
             </button>
           </li>
           <li>
-            <Link to="/signin" className="hover:opacity-70">
-              Profile
-            </Link>
+            {isAuthenticated ? (
+              <button
+                className="uppercase hover:opacity-70"
+                onClick={() => logout()}
+              >
+                Logout
+              </button>
+            ) : (
+              <Link to="/signin" className="hover:opacity-70">
+                Profile
+              </Link>
+            )}
           </li>
         </HeaderNav>
       </Container>

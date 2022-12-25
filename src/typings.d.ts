@@ -7,31 +7,32 @@ export enum Sizes {
 }
 
 export interface Category {
-  _id: number;
+  _id: string;
   name: string;
 }
 
 export interface Product {
-  _id: number;
+  _id: string;
   heroImageUrl?: string;
   imageUrl: string;
   name: string;
   collectionName: string;
-  category: Category | number;
+  category: Category | string;
   size: Sizes;
   color: string;
   price: number;
+  createdAt: string;
 }
 
 export interface Item {
-  productId?: number;
+  productId?: string;
   colorId?: number;
   size?: Sizes;
   quantity?: number;
 }
 
 export interface HeroProduct {
-  _id: number;
+  _id: string;
   imageUrl: string;
   product?: Product | number;
 }
@@ -57,4 +58,15 @@ export interface Order {
   paymentMethod: PaymentMethods;
   orderComment: string;
   agree: boolean;
+}
+
+export interface NewProduct
+  extends Omit<Product, '_id' | 'heroImageUrl' | 'imageUrl' | 'createdAt'> {
+  imageFile: File | undefined;
+  category: string;
+}
+
+export interface NewHeroProduct {
+  product: number;
+  imageFile: File;
 }
