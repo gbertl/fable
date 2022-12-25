@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 
 import { BreadCrumb, Container } from '../../components';
-import { categories } from '../../data';
 import ProductCard from './ProductCard';
 import { stringToHypen } from '../../utils';
 import { Product as IProduct } from '../../typings';
@@ -15,14 +14,11 @@ const Product = () => {
     ['product', id],
     async ({ queryKey }) => {
       const { data } = await axios.get(
-        `/products/${queryKey[1]}?fields[0]=heroImageUrl`
+        `/products/${queryKey[1]}?fields[0]=heroImageUrl&populate[0]=category`
       );
       return data;
     }
   );
-
-  const categoryTitle =
-    categories.find((c) => c.id === product?.category)?.name || '';
 
   return (
     <section className="mb-11">
@@ -36,8 +32,10 @@ const Product = () => {
               )}-section`,
             },
             {
-              title: categoryTitle,
-              url: `/collections#${stringToHypen(categoryTitle)}-section`,
+              title: product?.category || '',
+              url: `/collections#${stringToHypen(
+                product?.category || ''
+              )}-section`,
             },
           ]}
         />

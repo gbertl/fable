@@ -6,9 +6,9 @@ export enum Sizes {
   XL = 'xl',
 }
 
-export interface Category {
-  _id: string;
-  name: string;
+export enum Categories {
+  Jacket = 'jacket',
+  Shorts = 'shorts',
 }
 
 export interface Product {
@@ -17,7 +17,7 @@ export interface Product {
   imageUrl: string;
   name: string;
   collectionName: string;
-  category: Category | string;
+  category: Categories;
   size: Sizes;
   color: string;
   price: number;
@@ -63,7 +63,6 @@ export interface Order {
 export interface NewProduct
   extends Omit<Product, '_id' | 'heroImageUrl' | 'imageUrl' | 'createdAt'> {
   imageFile: File | undefined;
-  category: string;
 }
 
 export interface NewHeroProduct {

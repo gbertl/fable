@@ -5,7 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { AnimatePresence } from 'framer-motion';
 
 import { Container } from '../../components';
-import { Category, Product } from '../../typings.d';
+import { Categories, Product } from '../../typings.d';
 import axios from '../../axios';
 import ProductCard from './ProductCard';
 import ProductFormModal from './ProductFormModal';
@@ -24,17 +24,12 @@ export interface ImgLoaded {
 const Products = () => {
   const { isAuthenticated } = useAuth0();
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [currentCategoryId, setCurrentCategoryId] = useState<string>();
+  const [currentCategory, setCurrentCategory] = useState(Categories.Jacket);
 
   const [imgsLoaded, setImgsLoaded] = useState<ImgLoaded[]>([]);
 
   const { data: productsData } = useQuery<Product[]>('products', async () => {
     const { data } = await axios.get('/products');
-    return data;
-  });
-
-  const { data: categories } = useQuery<Category[]>('categories', async () => {
-    const { data } = await axios.get('/categories');
     return data;
   });
 
@@ -71,8 +66,8 @@ const Products = () => {
     }
   };
 
-  const handleOpenForm = (categoryId: string) => {
-    setCurrentCategoryId(categoryId);
+  const handleOpenForm = (category: Categories) => {
+    setCurrentCategory(category);
     document.body.classList.add('hide-scrollbar');
     setIsFormOpen(true);
   };
@@ -88,21 +83,21 @@ const Products = () => {
             Fable of Klassik
           </h1>
 
-          {categories?.map((c, idx) => (
-            <React.Fragment key={c._id}>
+          {Object.values(Categories)?.map((c, idx) => (
+            <React.Fragment key={idx}>
               <div className="flex justify-between">
                 <div className="my-5 flex items-center gap-3">
                   <h3
                     className="text-base md:text-xl text-dark capitalize"
-                    id={`${c.name}-section`}
+                    id={`${c}-section`}
                   >
-                    {c.name}
+                    {c}
                   </h3>
 
                   {isAuthenticated && isAdmin && (
                     <button
                       className="text-3xl"
-                      onClick={() => handleOpenForm(c._id)}
+                      onClick={() => handleOpenForm(c)}
                     >
                       <HiPlusCircle />
                     </button>
@@ -127,7 +122,7 @@ const Products = () => {
 
               <div className="grid grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-8 mb-5 md:mb-8">
                 {products
-                  ?.filter((p) => p.category === c._id)
+                  ?.filter((p) => p.category === c)
                   .map((p) => (
                     <ProductCard
                       product={p}
@@ -143,11 +138,10 @@ const Products = () => {
       </section>
 
       <AnimatePresence>
-        {currentCategoryId && isFormOpen && (
+        {currentCategory && isFormOpen && (
           <ProductFormModal
             setIsFormOpen={setIsFormOpen}
-            categories={categories}
-            currentCategoryId={currentCategoryId}
+            currentCategory={currentCategory}
           />
         )}
       </AnimatePresence>

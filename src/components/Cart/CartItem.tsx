@@ -51,14 +51,17 @@ const CartItem = ({ item }: Props) => {
 
   return (
     <div className="grid gap-5 grid-cols-[1fr_55%] md:grid-cols-[1fr_65%]">
-      <img src={product?.image} className="h-[203px] object-cover bg-gray2" />
+      <img
+        src={product?.imageUrl}
+        className="h-[203px] object-cover bg-gray2"
+      />
 
       <div className="flex flex-col justify-between">
         <div>
           <h1 className="text-base font-normal mb-2">{product?.name}</h1>
 
           <ul className="text-xs text-gray">
-            <li className="mb-2">Collection: {product?.collection}</li>
+            <li className="mb-2">Collection: {product?.collectionName}</li>
             <li>Article: H0146027</li>
           </ul>
         </div>

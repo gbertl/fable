@@ -3,29 +3,24 @@ import React, { useState } from 'react';
 
 import placeholderImg from '../../assets/images/placeholder.png';
 import { Button, Input, Label, Modal } from '../../components';
-import { Category, NewProduct, Sizes } from '../../typings.d';
+import { Categories, NewProduct, Sizes } from '../../typings.d';
 import { useCreateProduct, useCreateHeroProduct } from '../../hooks';
 
 interface Props {
   setIsFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  categories?: Category[];
-  currentCategoryId: string;
+  currentCategory: Categories;
 }
 
 interface NewProductForm extends NewProduct {
   heroImageFile?: File | undefined;
 }
 
-const ProductFormModal = ({
-  setIsFormOpen,
-  categories,
-  currentCategoryId,
-}: Props) => {
+const ProductFormModal = ({ setIsFormOpen, currentCategory }: Props) => {
   const initialData: NewProductForm = {
     imageFile: undefined,
     name: '',
     collectionName: 'Fable of Klassik',
-    category: currentCategoryId,
+    category: currentCategory,
     size: Sizes.XS,
     color: '',
     price: 0,
@@ -37,9 +32,7 @@ const ProductFormModal = ({
   };
 
   const { mutateAsync: createProduct } = useCreateProduct();
-  const { mutateAsync: createHeroProduct } = useCreateHeroProduct(() => {
-    closeForm();
-  });
+  const { mutateAsync: createHeroProduct } = useCreateHeroProduct();
 
   const [imageFilePreview, setImageFilePreview] = useState(placeholderImg);
   const [heroImageFilePreview, setHeroImageFilePreview] =
@@ -93,10 +86,12 @@ const ProductFormModal = ({
       category,
     });
 
-    await createHeroProduct({
-      product: product._id,
-      imageFile: heroImageFile as File,
-    });
+    if (heroImageFile) {
+      await createHeroProduct({
+        product: product._id,
+        imageFile: heroImageFile,
+      });
+    }
   };
 
   return (
@@ -164,9 +159,9 @@ const ProductFormModal = ({
           <div>
             <Label>Category</Label>
             <select className="w-full p-4" {...register('category')}>
-              {categories?.map((category) => (
-                <option value={category._id} key={category._id}>
-                  {category.name.toUpperCase()}
+              {Object.values(Categories)?.map((c, idx) => (
+                <option value={c} key={idx}>
+                  {c.toUpperCase()}
                 </option>
               ))}
             </select>

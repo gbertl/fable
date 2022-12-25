@@ -7,7 +7,7 @@ const useCheckAdminRole = (): boolean => {
 
   useEffect(() => {
     if (user) {
-      setIsAdmin(user['https://fable-gbertl.web.app/roles'].includes('Admin'));
+      setIsAdmin(user['https://fable-gbertl.web.app/roles']?.includes('Admin'));
     }
   }, [user]);
 
