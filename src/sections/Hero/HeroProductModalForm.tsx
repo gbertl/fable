@@ -2,17 +2,31 @@ import React, { useState } from 'react';
 
 import { Button, Modal } from '../../components';
 import placeholderImg from '../../assets/images/placeholder.png';
-import { useCreateHeroProduct } from '../../hooks';
+import { useCreateHeroProduct, useUpdateHeroProduct } from '../../hooks';
+import { HeroProduct } from '../../typings.d';
+import { useQueryClient } from 'react-query';
 
 interface Props {
   setIsFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  currentHeroProduct?: HeroProduct;
 }
 
-const HeroProductModalForm = ({ setIsFormOpen }: Props) => {
+const HeroProductModalForm = ({ setIsFormOpen, currentHeroProduct }: Props) => {
   const [imageFile, setImageFile] = useState<File>();
-  const [imageFilePreview, setImageFilePreview] = useState(placeholderImg);
+  const [imageFilePreview, setImageFilePreview] = useState(
+    currentHeroProduct?.imageUrl || placeholderImg
+  );
+
+  const queryClient = useQueryClient();
 
   const { mutate: createHeroProduct } = useCreateHeroProduct(() => {
+    queryClient.invalidateQueries('heroProducts');
+    setImageFile(undefined);
+    setImageFilePreview(placeholderImg);
+  });
+
+  const { mutate: updateHeroProduct } = useUpdateHeroProduct(() => {
+    queryClient.invalidateQueries('heroProducts');
     setImageFile(undefined);
     setImageFilePreview(placeholderImg);
   });
@@ -30,7 +44,17 @@ const HeroProductModalForm = ({ setIsFormOpen }: Props) => {
     e.preventDefault();
 
     if (!imageFile) return;
-    createHeroProduct({ imageFile });
+
+    if (currentHeroProduct) {
+      const { imageUrl, ...heroProduct } = currentHeroProduct;
+
+      updateHeroProduct({
+        id: currentHeroProduct._id,
+        heroProduct: { ...heroProduct, imageFile },
+      });
+    } else {
+      createHeroProduct({ imageFile });
+    }
   };
 
   return (

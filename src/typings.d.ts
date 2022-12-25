@@ -65,7 +65,10 @@ export interface NewProduct
   imageFile: File | undefined;
 }
 
-export interface NewHeroProduct {
-  product?: number;
+export interface NewHeroProduct extends Omit<HeroProduct, '_id' | 'imageUrl'> {
+  imageFile: File;
+}
+
+export interface UpdateHeroProduct extends Omit<HeroProduct, 'imageUrl'> {
   imageFile: File;
 }

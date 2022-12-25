@@ -4,11 +4,11 @@ import { useMediaQuery } from 'react-responsive';
 import { useState } from 'react';
 
 import HeroPopover from './HeroPopover';
-import { HeroProduct } from '../../typings';
+import { HeroProduct } from '../../typings.d';
 import axios from '../../axios';
 import { useQuery } from 'react-query';
 import { AnimatePresence } from 'framer-motion';
-import { HiPlusCircle } from 'react-icons/hi2';
+import { HiPencil, HiPlusCircle } from 'react-icons/hi2';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useCheckAdminRole } from '../../hooks';
 import HeroProductModalForm from './HeroProductModalForm';
@@ -34,6 +34,8 @@ const HeroSlider = () => {
 
   const [isFormOpen, setIsFormOpen] = useState(false);
 
+  const [currentHeroProduct, setCurrentHeroProduct] = useState<HeroProduct>();
+
   return (
     <>
       {isAuthenticated && isAdmin && (
@@ -51,19 +53,30 @@ const HeroSlider = () => {
           <SwiperSlide
             key={idx}
             onMouseEnter={() => {
-              if (p._id) {
+              if (p.product) {
                 setIsHovered(true);
                 setHoveredId(p._id);
               }
             }}
             onMouseLeave={() => {
-              if (p._id) {
+              if (p.product) {
                 setIsHovered(false);
                 setHoveredId('');
               }
             }}
           >
+            <button
+              className="text-xs text-white p-1 bg-black rounded-full absolute top-0 right-3"
+              onClick={() => {
+                setCurrentHeroProduct(p);
+                setIsFormOpen(true);
+              }}
+            >
+              <HiPencil />
+            </button>
+
             <img src={p.imageUrl} alt="" />
+
             <AnimatePresence>
               {p.product && isHovered && hoveredId === p._id && (
                 <HeroPopover productId={p.product as string} />
@@ -74,7 +87,12 @@ const HeroSlider = () => {
       </Swiper>
 
       <AnimatePresence>
-        {isFormOpen && <HeroProductModalForm setIsFormOpen={setIsFormOpen} />}
+        {isFormOpen && (
+          <HeroProductModalForm
+            setIsFormOpen={setIsFormOpen}
+            currentHeroProduct={currentHeroProduct}
+          />
+        )}
       </AnimatePresence>
     </>
   );
