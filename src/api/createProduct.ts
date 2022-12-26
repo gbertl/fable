@@ -1,6 +1,6 @@
 import { applyToken } from '../utils';
 import axios from '../axios';
-import { NewProduct } from '../typings.d';
+import { NewProduct } from '../types';
 
 const createProduct = (values: NewProduct, token: string) => {
   applyToken(token);

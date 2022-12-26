@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import axios from '../../axios';
-import { Product } from '../../typings';
+import { Product } from '../../types';
 
 interface Props {
   productId: string;

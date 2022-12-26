@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 
 import { selectItems } from '../store/slices/cart';
 import axios from '../axios';
-import { Product } from '../typings';
+import { Product } from '../types';
 import { useAppSelector } from '.';
 
 const useGetCartTotal = () => {

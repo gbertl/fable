@@ -1,4 +1,4 @@
-import { Sizes } from '../typings.d';
+import { Sizes } from '../enums';
 
 const categories = [
   {

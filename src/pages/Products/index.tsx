@@ -5,7 +5,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { AnimatePresence } from 'framer-motion';
 
 import { Container } from '../../components';
-import { Categories, Product } from '../../typings.d';
+import { Product } from '../../types';
+import { Categories } from '../../enums';
 import axios from '../../axios';
 import ProductCard from './ProductCard';
 import ProductFormModal from './ProductFormModal';

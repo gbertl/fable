@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Skeleton } from '@mui/material';
 
-import { Item, Product, Sizes } from '../../typings';
+import { Item, Product } from '../../types';
+import { Sizes } from '../../enums';
 import { sizes, colors } from '../../data';
 import { replaceItems, selectItems } from '../../store/slices/cart';
 import { useAppDispatch, useAppSelector } from '../../hooks';

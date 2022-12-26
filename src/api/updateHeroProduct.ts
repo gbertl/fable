@@ -1,4 +1,4 @@
-import { UpdateHeroProduct } from '../typings.d';
+import { UpdateHeroProduct } from '../types';
 import { applyToken } from '../utils';
 import axios from '../axios';
 

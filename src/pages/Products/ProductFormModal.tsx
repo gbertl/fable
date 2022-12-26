@@ -3,7 +3,8 @@ import React, { useRef, useState } from 'react';
 
 import placeholderImg from '../../assets/images/placeholder.png';
 import { Button, Input, Label, Modal } from '../../components';
-import { Categories, NewProduct, Sizes } from '../../typings.d';
+import { NewProduct } from '../../types';
+import { Sizes, Categories } from '../../enums';
 import { useCreateProduct, useCreateHeroProduct } from '../../hooks';
 
 interface Props {

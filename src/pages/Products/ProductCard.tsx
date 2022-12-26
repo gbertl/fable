@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Skeleton } from '@mui/material';
 import { useMediaQuery } from 'react-responsive';
 
-import { Product } from '../../typings';
+import { Product } from '../../types';
 import { ImgLoaded } from '.';
 
 interface Props {

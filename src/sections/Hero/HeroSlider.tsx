@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 import { useState } from 'react';
 
 import HeroPopover from './HeroPopover';
-import { HeroProduct } from '../../typings.d';
+import { HeroProduct } from '../../types';
 import axios from '../../axios';
 import { useQuery } from 'react-query';
 import { AnimatePresence } from 'framer-motion';

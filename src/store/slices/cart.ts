@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../index';
-import { Item } from '../../typings';
+import { Item } from '../../types';
 
 interface CartState {
   items: Item[];

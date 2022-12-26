@@ -1,4 +1,4 @@
-import { DeliveryMethods, PaymentMethods } from '../../typings.d';
+import { DeliveryMethods, PaymentMethods } from '../../enums';
 
 export const paymentMethods = [
   {

@@ -1,8 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { AxiosError, AxiosResponse } from 'axios';
-import { Query, useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 
-import { NewProduct } from '../typings';
+import { NewProduct } from '../types';
 import * as api from '../api';
 
 const useCreateProduct = (onSuccess?: () => any, onError?: () => any) => {

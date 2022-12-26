@@ -1,4 +1,4 @@
-import { Item } from './typings';
+import { Item } from './types';
 import axios from './axios';
 
 export const findCartItem = (cartItems: Item[], itemData: Item) =>

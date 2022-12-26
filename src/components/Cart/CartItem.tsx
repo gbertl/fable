@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { colors } from '../../data';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { replaceItems, selectItems } from '../../store/slices/cart';
-import { Item, Product } from '../../typings';
+import { Item, Product } from '../../types';
 import axios from '../../axios';
 
 interface Props {

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { BreadCrumb, Container } from '../../components';
 import ProductCard from './ProductCard';
 import { stringToHypen } from '../../utils';
-import { Product as IProduct } from '../../typings';
+import { Product as IProduct } from '../../types';
 import axios from '../../axios';
 import { useQuery } from 'react-query';
 

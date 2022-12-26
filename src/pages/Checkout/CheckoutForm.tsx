@@ -8,7 +8,8 @@ import { Button, Checkbox, FormError, Input, Label } from '../../components';
 import { useAppSelector, useGetCartTotal } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import axios from '../../axios';
-import { DeliveryMethods, PaymentMethods, Order } from '../../typings.d';
+import { Order } from '../../types';
+import { DeliveryMethods, PaymentMethods } from '../../enums';
 import {
   deliveryMethods,
   initialData,

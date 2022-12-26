@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
-import { UpdateHeroProduct } from '../typings';
+import { UpdateHeroProduct } from '../types';
 import * as api from '../api';
 
 const useUpdateHeroProduct = (onSuccess?: () => any, onError?: () => any) => {

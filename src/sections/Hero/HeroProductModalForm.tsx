@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button, Input, Modal } from '../../components';
 import placeholderImg from '../../assets/images/placeholder.png';
 import { useCreateHeroProduct, useUpdateHeroProduct } from '../../hooks';
-import { HeroProduct } from '../../typings.d';
+import { HeroProduct } from '../../types';
 import { useQueryClient } from 'react-query';
 
 interface Props {
