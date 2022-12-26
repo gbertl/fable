@@ -49,11 +49,14 @@ const HeroProductModalForm = ({ setIsFormOpen, currentHeroProduct }: Props) => {
     e.preventDefault();
 
     if (currentHeroProduct) {
-      const { imageUrl, ...heroProduct } = currentHeroProduct;
+      let { imageUrl, product, ...oldHeroProduct } = currentHeroProduct;
+      product = product as string;
+
+      const updatedValues = { imageFile, priorityOrder };
 
       updateHeroProduct({
         id: currentHeroProduct._id,
-        heroProduct: { ...heroProduct, imageFile, priorityOrder },
+        heroProduct: { product, ...oldHeroProduct, ...updatedValues },
       });
     } else {
       if (imageFile) {

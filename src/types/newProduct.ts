@@ -1,8 +1,13 @@
-import Product from './product';
+import { Categories, Sizes } from '../enums';
 
-interface NewProduct
-  extends Omit<Product, '_id' | 'heroImageUrl' | 'imageUrl' | 'createdAt'> {
-  imageFile: File | undefined;
+interface NewProduct {
+  imageFile?: File;
+  name?: string;
+  collectionName?: string;
+  category?: Categories;
+  size?: Sizes;
+  color?: string;
+  price?: number;
 }
 
 export default NewProduct;

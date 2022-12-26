@@ -1,7 +1,5 @@
-import HeroProduct from './heroProduct';
-
-interface UpdateHeroProduct
-  extends Omit<HeroProduct, 'imageUrl' | 'priorityOrder'> {
+interface UpdateHeroProduct {
+  product?: string;
   imageFile?: File;
   priorityOrder?: number;
 }

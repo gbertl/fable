@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { HiPlusCircle } from 'react-icons/hi2';
+import { HiPencil, HiPlusCircle } from 'react-icons/hi2';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AnimatePresence } from 'framer-motion';
 
@@ -25,18 +25,22 @@ export interface ImgLoaded {
 const Products = () => {
   const { isAuthenticated } = useAuth0();
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState(Categories.Jacket);
+  const [currentCategory, setCurrentCategory] = useState<
+    Categories | undefined
+  >(Categories.Jacket);
 
   const [imgsLoaded, setImgsLoaded] = useState<ImgLoaded[]>([]);
 
   const { data: productsData } = useQuery<Product[]>('products', async () => {
-    const { data } = await axios.get('/products');
+    const { data } = await axios.get('/products?fields[0]=heroImageUrl');
     return data;
   });
 
   const [products, setProducts] = useState<Product[]>();
 
   const isAdmin = useCheckAdminRole();
+
+  const [currentProduct, setCurrentProduct] = useState<Product>();
 
   useEffect(() => {
     setProducts(
@@ -67,8 +71,15 @@ const Products = () => {
     }
   };
 
-  const handleOpenForm = (category: Categories) => {
+  const handleOpenForm = ({
+    product,
+    category,
+  }: {
+    product?: Product;
+    category?: Categories;
+  }) => {
     setCurrentCategory(category);
+    setCurrentProduct(product);
     document.body.classList.add('hide-scrollbar');
     setIsFormOpen(true);
   };
@@ -98,7 +109,7 @@ const Products = () => {
                   {isAuthenticated && isAdmin && (
                     <button
                       className="text-3xl"
-                      onClick={() => handleOpenForm(c)}
+                      onClick={() => handleOpenForm({ category: c })}
                     >
                       <HiPlusCircle />
                     </button>
@@ -125,12 +136,22 @@ const Products = () => {
                 {products
                   ?.filter((p) => p.category === c)
                   .map((p) => (
-                    <ProductCard
-                      product={p}
-                      imgsLoaded={imgsLoaded}
-                      setImgsLoaded={setImgsLoaded}
-                      key={p._id}
-                    />
+                    <div key={p._id} className="relative">
+                      {isAuthenticated && isAdmin && (
+                        <button
+                          className="text-xs bg-dark p-2 rounded-full text-white absolute top-3 right-3"
+                          onClick={() => handleOpenForm({ product: p })}
+                        >
+                          <HiPencil />
+                        </button>
+                      )}
+                      <ProductCard
+                        product={p}
+                        imgsLoaded={imgsLoaded}
+                        setImgsLoaded={setImgsLoaded}
+                        key={p._id}
+                      />
+                    </div>
                   ))}
               </div>
             </React.Fragment>
@@ -139,10 +160,11 @@ const Products = () => {
       </section>
 
       <AnimatePresence>
-        {currentCategory && isFormOpen && (
+        {isFormOpen && (
           <ProductFormModal
             setIsFormOpen={setIsFormOpen}
             currentCategory={currentCategory}
+            currentProduct={currentProduct}
           />
         )}
       </AnimatePresence>

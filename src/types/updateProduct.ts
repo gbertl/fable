@@ -1,17 +1,13 @@
 import { Categories, Sizes } from '../enums';
 
-interface Product {
-  _id: string;
-  heroProduct: string;
-  heroImageUrl?: string;
-  imageUrl: string;
+interface UpdateProduct {
+  imageFile?: File;
   name: string;
   collectionName: string;
   category: Categories;
   size: Sizes;
   color: string;
   price: number;
-  createdAt: string;
 }
 
-export default Product;
+export default UpdateProduct;

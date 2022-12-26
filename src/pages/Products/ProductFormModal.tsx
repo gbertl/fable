@@ -3,31 +3,40 @@ import React, { useRef, useState } from 'react';
 
 import placeholderImg from '../../assets/images/placeholder.png';
 import { Button, Input, Label, Modal } from '../../components';
-import { NewProduct } from '../../types';
+import { NewProduct, Product, UpdateProduct } from '../../types';
 import { Sizes, Categories } from '../../enums';
-import { useCreateProduct, useCreateHeroProduct } from '../../hooks';
+import {
+  useCreateProduct,
+  useCreateHeroProduct,
+  useUpdateProduct,
+  useUpdateHeroProduct,
+} from '../../hooks';
 
 interface Props {
   setIsFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  currentCategory: Categories;
+  currentCategory?: Categories;
+  currentProduct?: Product;
 }
 
-interface NewProductForm extends NewProduct {
+interface ProductForm extends NewProduct {
   heroImageFile?: File | undefined;
 }
 
-const ProductFormModal = ({ setIsFormOpen, currentCategory }: Props) => {
-  const initialData: NewProductForm = {
-    imageFile: undefined,
-    name: '',
-    collectionName: 'Fable of Klassik',
-    category: currentCategory,
-    size: Sizes.XS,
-    color: '',
-    price: 0,
+const ProductFormModal = ({
+  setIsFormOpen,
+  currentCategory,
+  currentProduct,
+}: Props) => {
+  const initialData: ProductForm = {
+    name: currentProduct?.name,
+    collectionName: currentProduct?.collectionName || 'Fable of Klassik',
+    category: currentProduct?.category || currentCategory,
+    size: currentProduct?.size,
+    color: currentProduct?.color,
+    price: currentProduct?.price,
   };
 
-  const { register, handleSubmit, control, reset } = useForm<NewProductForm>({
+  const { register, handleSubmit, control, reset } = useForm<ProductForm>({
     defaultValues: initialData,
   });
 
@@ -41,21 +50,23 @@ const ProductFormModal = ({ setIsFormOpen, currentCategory }: Props) => {
     control,
   });
 
-  const { mutateAsync: createProduct } = useCreateProduct(() => {
+  const resetForm = () => {
     reset();
     setImageFilePreview(placeholderImg);
     setHeroImageFilePreview(placeholderImg);
-  });
+  };
 
-  const { mutateAsync: createHeroProduct } = useCreateHeroProduct(() => {
-    reset();
-    setImageFilePreview(placeholderImg);
-    setHeroImageFilePreview(placeholderImg);
-  });
+  const { mutateAsync: createProduct } = useCreateProduct(resetForm);
+  const { mutateAsync: updateProduct } = useUpdateProduct(resetForm);
+  const { mutateAsync: createHeroProduct } = useCreateHeroProduct(resetForm);
+  const { mutateAsync: updateHeroProduct } = useUpdateHeroProduct(resetForm);
 
-  const [imageFilePreview, setImageFilePreview] = useState(placeholderImg);
-  const [heroImageFilePreview, setHeroImageFilePreview] =
-    useState(placeholderImg);
+  const [imageFilePreview, setImageFilePreview] = useState(
+    currentProduct?.imageUrl || placeholderImg
+  );
+  const [heroImageFilePreview, setHeroImageFilePreview] = useState(
+    currentProduct?.heroImageUrl || placeholderImg
+  );
 
   const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.files?.[0];
@@ -75,26 +86,39 @@ const ProductFormModal = ({ setIsFormOpen, currentCategory }: Props) => {
     heroImageFileField.onChange(value);
   };
 
-  const onSubmit = async (values: NewProductForm) => {
-    const { heroImageFile, category, ...productValues } = values;
+  const onSubmit = async (values: ProductForm) => {
+    const { heroImageFile, ...productValues } = values;
 
-    const { data: product } = await createProduct({
-      ...productValues,
-      category,
-    });
-
-    if (heroImageFile) {
-      await createHeroProduct({
-        product: product._id,
-        imageFile: heroImageFile,
+    if (currentProduct) {
+      const { data: product } = await updateProduct({
+        id: currentProduct._id,
+        product: productValues as UpdateProduct,
       });
+
+      if (heroImageFile) {
+        await updateHeroProduct({
+          id: product.heroProduct,
+          heroProduct: {
+            imageFile: heroImageFile,
+          },
+        });
+      }
+    } else {
+      const { data: product } = await createProduct(productValues);
+
+      if (heroImageFile) {
+        await createHeroProduct({
+          product: product._id,
+          imageFile: heroImageFile,
+        });
+      }
     }
   };
 
   return (
     <Modal setIsOpen={setIsFormOpen}>
       <h2 className="text-2xl mb-10 text-center uppercase text-gray">
-        Add new product
+        {currentProduct ? 'Update' : 'Add new'} product
       </h2>
       <form className="flex flex-col gap-7" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex gap-2">
