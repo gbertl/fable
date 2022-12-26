@@ -10,8 +10,15 @@ const getImageUrl = async (objectKey) => {
       Key: objectKey,
     };
 
+    let signingDate = new Date();
+    signingDate.setUTCHours(0, 0, 0, 0);
+    signingDate.setUTCDate(signingDate.getUTCDate() - 1);
+
     const command = new GetObjectCommand(params);
-    const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
+    const url = await getSignedUrl(s3, command, {
+      expiresIn: 3 * 3600 * 24,
+      signingDate,
+    });
 
     return Promise.resolve(url);
   } catch (e) {
