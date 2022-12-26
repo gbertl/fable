@@ -1,5 +1,5 @@
-import { User } from '@auth0/auth0-react';
 import { Item } from './typings';
+import axios from './axios';
 
 export const findCartItem = (cartItems: Item[], itemData: Item) =>
   cartItems.find(
@@ -11,3 +11,6 @@ export const findCartItem = (cartItems: Item[], itemData: Item) =>
 
 export const stringToHypen = (str: string) =>
   str.toLowerCase().split(' ').join('-');
+
+export const applyToken = (token: string) =>
+  (axios.defaults.headers.common['Authorization'] = `Bearer ${token}`);
