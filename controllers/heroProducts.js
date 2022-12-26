@@ -70,20 +70,7 @@ const updateHeroProduct = async (req, res) => {
   const body = req.body;
 
   try {
-    if (req.file) {
-      await uploadToS3(req.file, body.image);
-    }
-
-    const heroProduct = await HeroProduct.findById(req.params.id);
-
-    // handles updating product
-    if (body.product !== heroProduct.product) {
-      const product = await Product.findById(body.product);
-      product.heroProduct = heroProduct._id;
-      await product.save();
-    }
-
-    const updatedHeroProduct = await HeroProduct.findByIdAndUpdate(
+    const heroProduct = await HeroProduct.findByIdAndUpdate(
       req.params.id,
       body,
       {
@@ -91,7 +78,11 @@ const updateHeroProduct = async (req, res) => {
       }
     );
 
-    res.json(updatedHeroProduct);
+    if (req.file) {
+      await uploadToS3(req.file, heroProduct.image);
+    }
+
+    res.json(heroProduct);
   } catch (e) {
     res.status(400).json({ message: e.message });
   }

@@ -78,22 +78,11 @@ const updateProduct = async (req, res) => {
       await uploadToS3(req.file, body.image);
     }
 
-    // handles updating heroProduct
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findByIdAndUpdate(req.params.id, body, {
+      new: true,
+    });
 
-    if (body.heroProduct !== product.heroProduct) {
-      const heroProduct = await HeroProduct.findById(body.heroProduct);
-
-      heroProduct.product = product._id;
-      await heroProduct.save();
-    }
-
-    const updatedProduct = await Product.findByIdAndUpdate(
-      req.params.id,
-      body,
-      { new: true }
-    );
-    res.json(updatedProduct);
+    res.json(product);
   } catch (e) {
     res.status(400).json({ message: e.message });
   }
