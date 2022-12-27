@@ -12,8 +12,8 @@ const SignIn = () => {
       <Container>
         <BreadCrumb
           links={[
-            { title: 'Profile', url: '#' },
-            { title: 'Sign in', url: '#' },
+            { title: 'Profile', url: '/profile' },
+            { title: 'Sign in', url: '/signin' },
           ]}
         />
 

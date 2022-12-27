@@ -23,3 +23,4 @@ export { default as productHeroD } from './images/product-hero-d.png';
 export { default as productHeroE } from './images/product-hero-e.png';
 
 export { default as foto } from './images/Foto.jpg';
+export { default as bonusCard } from './images/bonus-card.jpg';

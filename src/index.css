@@ -12,16 +12,19 @@
   h3,
   h4,
   h5 {
-    font-weight: 500;
-    color: #000;
+    @apply font-medium text-dark;
   }
 
   h1 {
-    font-size: var(--h1-font-size);
+    @apply text-3xl;
   }
 
-  h5 {
-    font-size: var(--font-size-md);
+  h2 {
+    @apply text-2xl;
+  }
+
+  h4 {
+    @apply text-lg;
   }
 
   /* disable buttons in input type number */
@@ -33,6 +36,10 @@
 
   input[type='number'] {
     -moz-appearance: textfield;
+  }
+
+  th {
+    @apply font-medium text-left;
   }
 }
 
@@ -87,6 +94,18 @@
 
   .form-error {
     @apply block text-xs text-red-500 mt-2;
+  }
+
+  .profile__table thead tr > * {
+    @apply border-b-[1rem] border-transparent;
+  }
+
+  .profile__table tr > * + * {
+    @apply border-l-[4rem] border-transparent;
+  }
+
+  .profile__table tbody > * + * {
+    @apply border-t-[1rem] border-transparent;
   }
 }
 
