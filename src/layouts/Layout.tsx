@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
 import { Outlet, ScrollRestoration } from 'react-router-dom';
-import Auth0ProviderWithHistory from '../auth/Auth0ProviderWithHistory';
+import { Auth0ProviderWithHistory } from '../auth';
 import { SideCart } from '../components';
 import { useAppSelector } from '../hooks';
 import { selectIsSideCartOpen } from '../store/slices/ui';

@@ -81,18 +81,9 @@ const Header = () => {
             </button>
           </li>
           <li>
-            {isAuthenticated ? (
-              <button
-                className="uppercase hover:opacity-70"
-                onClick={() => logout()}
-              >
-                Logout
-              </button>
-            ) : (
-              <Link to="/signin" className="hover:opacity-70">
-                Profile
-              </Link>
-            )}
+            <Link to="/profile" className="hover:opacity-70">
+              Profile
+            </Link>
           </li>
         </HeaderNav>
       </Container>

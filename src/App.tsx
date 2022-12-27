@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Layout from './layouts/Layout';
-import { Checkout, Home, Product, Products, SignIn } from './pages';
+import { Checkout, Home, Product, Products, Profile, SignIn } from './pages';
+import { ProtectedRoute } from './auth';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: '/checkout',
         element: <Checkout />,
+      },
+      {
+        path: '/profile',
+        element: <ProtectedRoute children={<Profile />} />,
       },
     ],
   },
