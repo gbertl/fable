@@ -19,7 +19,7 @@ const CartItem = ({ item }: Props) => {
     }
   );
 
-  const color = colors.find((c) => c.id === item.colorId);
+  const color = colors.find((c) => c === item.color);
   const cartItems = useAppSelector(selectItems);
   const dispatch = useAppDispatch();
 
@@ -27,7 +27,7 @@ const CartItem = ({ item }: Props) => {
     const updatedCartItems = cartItems.map((ci) => {
       if (
         ci.productId === item.productId &&
-        ci.colorId === item.colorId &&
+        ci.color === item.color &&
         ci.size === item.size
       ) {
         if (isIncrease) {
@@ -75,7 +75,7 @@ const CartItem = ({ item }: Props) => {
             <div
               className="inline-block w-5 h-5"
               style={{
-                background: color?.hex,
+                background: color,
               }}
             ></div>
           </li>

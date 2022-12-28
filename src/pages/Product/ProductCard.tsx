@@ -42,7 +42,7 @@ const ProductCard = ({ product }: Props) => {
     const items = cartItems.map((cartItem) => {
       if (
         cartItem.productId === data.productId &&
-        cartItem.colorId === data.colorId &&
+        cartItem.color === data.color &&
         cartItem.size === data.size
       ) {
         const quantity = isIncrease
@@ -63,16 +63,16 @@ const ProductCard = ({ product }: Props) => {
     dispatch(replaceItems(items));
   };
 
-  const handleChangeColor = (colorId: number) =>
+  const handleChangeColor = (color: string) =>
     setData((prevData) => {
-      const existingItem = findCartItem(cartItems, { ...prevData, colorId });
+      const existingItem = findCartItem(cartItems, { ...prevData, color });
 
       if (existingItem) {
         return existingItem;
       } else {
         return {
           ...prevData,
-          colorId,
+          color,
           quantity: 0,
         };
       }
@@ -99,7 +99,7 @@ const ProductCard = ({ product }: Props) => {
     const updatedCartItems = cartItems.map((ci) => {
       if (
         ci.productId === data.productId &&
-        ci.colorId === data.colorId &&
+        ci.color === data.color &&
         ci.size === data.size
       ) {
         return item;
@@ -174,24 +174,24 @@ const ProductCard = ({ product }: Props) => {
           Color
         </h3>
         <ul className="flex justify-center lg:justify-start gap-5 lg:gap-8 flex-wrap mb-5 lg:mb-8">
-          {colors.map((color) => (
-            <li key={color.id}>
+          {colors.map((color, idx) => (
+            <li key={idx}>
               <input
                 type="radio"
                 name="item-color"
-                id={`item-color-${color.id}`}
-                value={color.id}
-                onChange={() => handleChangeColor(color.id)}
+                id={`item-color-${idx}`}
+                value={color}
+                onChange={() => handleChangeColor(color)}
                 className="hidden"
               />
               <label
-                htmlFor={`item-color-${color.id}`}
+                htmlFor={`item-color-${idx}`}
                 className={`block w-5 h-5 lg:w-10 lg:h-10 border border-black hover:border-gray border-opacity-10 ${
-                  data.colorId === color.id
+                  data.color === color
                     ? 'border-gray cursor-auto'
                     : 'cursor-pointer'
                 }`}
-                style={{ background: color.hex }}
+                style={{ background: color }}
               ></label>
             </li>
           ))}
@@ -266,7 +266,7 @@ const ProductCard = ({ product }: Props) => {
           <Button
             className="w-full lg:w-auto"
             onClick={handleAddToCart}
-            disabled={data.colorId && data.size ? false : true}
+            disabled={data.color && data.size ? false : true}
           >
             Add to cart
           </Button>

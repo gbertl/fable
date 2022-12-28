@@ -5,7 +5,7 @@ export const findCartItem = (cartItems: Item[], itemData: Item) =>
   cartItems.find(
     (ci) =>
       ci.productId === itemData.productId &&
-      ci.colorId === itemData.colorId &&
+      ci.color === itemData.color &&
       ci.size === itemData.size
   );
 
