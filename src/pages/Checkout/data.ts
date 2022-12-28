@@ -35,9 +35,3 @@ export const initialOrderData: CheckoutInput = {
   orderComment: 'Pack all the items separately, please',
   agree: true,
 };
-
-export const initialData = {
-  deliveryMethod: initialOrderData.deliveryMethod,
-  paymentMethod: initialOrderData.paymentMethod,
-  agree: initialOrderData.agree,
-};

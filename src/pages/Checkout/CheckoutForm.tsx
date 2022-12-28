@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, useController } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,18 +10,7 @@ import { selectItems } from '../../store/slices/cart';
 import axios from '../../axios';
 import { CheckoutInput } from '../../types';
 import { DeliveryMethods, PaymentMethods } from '../../enums';
-import {
-  deliveryMethods,
-  initialData,
-  initialOrderData,
-  paymentMethods,
-} from './data';
-
-interface Data {
-  deliveryMethod: DeliveryMethods;
-  paymentMethod: PaymentMethods;
-  agree: boolean;
-}
+import { deliveryMethods, initialOrderData, paymentMethods } from './data';
 
 const schema = yup.object({
   city: yup.string().required('Your city is required'),
@@ -48,7 +37,6 @@ const schema = yup.object({
 });
 
 const CheckoutForm = ({ className }: { className: string }) => {
-  const [data, setData] = useState<Data>(initialData);
   const cartItems = useAppSelector(selectItems);
 
   const total = useGetCartTotal();
@@ -57,11 +45,16 @@ const CheckoutForm = ({ className }: { className: string }) => {
     register,
     handleSubmit,
     control,
+    watch,
     formState: { errors },
   } = useForm<CheckoutInput>({
     defaultValues: initialOrderData,
     resolver: yupResolver(schema),
   });
+
+  const watchDeliveryMethod = watch('deliveryMethod');
+  const watchPaymentMethod = watch('paymentMethod');
+  const watchAgree = watch('agree');
 
   const { field: deliveryMethodField } = useController({
     name: 'deliveryMethod',
@@ -80,21 +73,15 @@ const CheckoutForm = ({ className }: { className: string }) => {
 
   const handleDeliveryMethod = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value as DeliveryMethods;
-    setData((prevData) => ({ ...prevData, deliveryMethod: value }));
     deliveryMethodField.onChange(value);
   };
 
   const handlePaymentMethod = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value as PaymentMethods;
-    setData((prevData) => ({
-      ...prevData,
-      paymentMethod: value,
-    }));
     paymentMethodField.onChange(value);
   };
 
   const handleAgree = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData((prevData) => ({ ...prevData, agree: e.target.checked }));
     agreeField.onChange(e.target.checked);
   };
 
@@ -154,7 +141,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
                     variant="outline"
                     htmlFor={deliveryMethod.method}
                     className={`w-full lg:px-0 ${
-                      data.deliveryMethod === deliveryMethod.method
+                      watchDeliveryMethod === deliveryMethod.method
                         ? 'bg-dark text-white cursor-auto'
                         : ''
                     }`}
@@ -252,7 +239,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
                 variant="outline"
                 htmlFor={paymentMethod.method}
                 className={`w-full ${
-                  data.paymentMethod === paymentMethod.method
+                  watchPaymentMethod === paymentMethod.method
                     ? 'bg-dark text-white cursor-auto'
                     : ''
                 } ${idx !== 0 ? 'mt-5' : ''}`}
@@ -288,7 +275,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
       <Button
         className="w-full"
         disabled={
-          !data.agree || !cartItems.length || !!Object.keys(errors).length
+          !watchAgree || !cartItems.length || !!Object.keys(errors).length
         }
       >
         Place an order
