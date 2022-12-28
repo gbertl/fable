@@ -1,4 +1,5 @@
 import { DeliveryMethods, PaymentMethods } from '../../enums';
+import { CheckoutInput } from '../../types';
 
 export const paymentMethods = [
   {
@@ -22,7 +23,7 @@ export const deliveryMethods = [
   },
 ];
 
-export const initialOrderData = {
+export const initialOrderData: CheckoutInput = {
   city: 'Quezon City',
   deliveryMethod: DeliveryMethods.ToDoor,
   paymentMethod: PaymentMethods.Card,

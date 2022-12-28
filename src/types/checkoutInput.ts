@@ -1,16 +1,12 @@
-import { DeliveryMethods, PaymentMethods } from '../enums';
+import Buyer from './buyer';
+import Order from './order';
 
-interface CheckoutInput {
-  city: string;
-  deliveryMethod: DeliveryMethods;
-  address: string;
+interface CheckoutInput
+  extends Omit<Buyer, 'orders'>,
+    Omit<Order, 'buyer' | 'product'> {
   loyaltyCard: number;
-  name: string;
-  phone: number;
-  email: string;
-  paymentMethod: PaymentMethods;
-  orderComment: string;
   agree: boolean;
+  orderComment: string;
 }
 
 export default CheckoutInput;

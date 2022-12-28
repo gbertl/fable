@@ -58,7 +58,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
+  } = useForm<CheckoutInput>({
     defaultValues: initialOrderData,
     resolver: yupResolver(schema),
   });
