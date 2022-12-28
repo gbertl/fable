@@ -1,6 +1,6 @@
 import { DeliveryMethods, PaymentMethods } from '../enums';
 
-interface Order {
+interface CheckoutInput {
   city: string;
   deliveryMethod: DeliveryMethods;
   address: string;
@@ -13,4 +13,4 @@ interface Order {
   agree: boolean;
 }
 
-export default Order;
+export default CheckoutInput;

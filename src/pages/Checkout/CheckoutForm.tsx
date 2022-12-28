@@ -8,7 +8,7 @@ import { Button, Checkbox, FormError, Input, Label } from '../../components';
 import { useAppSelector, useGetCartTotal } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import axios from '../../axios';
-import { Order } from '../../types';
+import { CheckoutInput } from '../../types';
 import { DeliveryMethods, PaymentMethods } from '../../enums';
 import {
   deliveryMethods,
@@ -98,7 +98,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
     agreeField.onChange(e.target.checked);
   };
 
-  const onSubmit = async (formValues: Order) => {
+  const onSubmit = async (formValues: CheckoutInput) => {
     if (!cartItems.length) return;
 
     if (formValues.paymentMethod === PaymentMethods.Card) {
