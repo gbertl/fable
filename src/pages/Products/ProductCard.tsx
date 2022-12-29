@@ -17,7 +17,7 @@ const ProductCard = ({ product, imgsLoaded, setImgsLoaded }: Props) => {
   return (
     <div>
       <Link to={`/products/${product._id}`}>
-        {!imgsLoaded.find((il) => il.productId === product._id)?.loaded && (
+        {!imgsLoaded.find((il) => il.product === product._id)?.loaded && (
           <Skeleton
             variant="rectangular"
             height={isMobile ? 149 : 427}
@@ -29,7 +29,7 @@ const ProductCard = ({ product, imgsLoaded, setImgsLoaded }: Props) => {
           src={product.imageUrl}
           alt=""
           className={`bg-gray2 mb-3 w-full object-contain ${
-            !imgsLoaded.find((il) => il.productId === product._id)?.loaded
+            !imgsLoaded.find((il) => il.product === product._id)?.loaded
               ? 'h-0'
               : 'h-auto'
           }
@@ -37,7 +37,7 @@ const ProductCard = ({ product, imgsLoaded, setImgsLoaded }: Props) => {
           onLoad={() =>
             setImgsLoaded((prevImgsLoaded) =>
               prevImgsLoaded.map((pil) =>
-                pil.productId === product._id ? { ...pil, loaded: true } : pil
+                pil.product === product._id ? { ...pil, loaded: true } : pil
               )
             )
           }

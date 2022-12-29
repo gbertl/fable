@@ -12,7 +12,7 @@ interface Props {
 
 const CartItem = ({ item }: Props) => {
   const { data: product } = useQuery<Product>(
-    ['product', item.productId],
+    ['product', item.product],
     async ({ queryKey }) => {
       const { data } = await axios.get(`/products/${queryKey[1]}`);
       return data;
@@ -26,7 +26,7 @@ const CartItem = ({ item }: Props) => {
   const handleChangeQuantity = ({ isIncrease }: { isIncrease: boolean }) => {
     const updatedCartItems = cartItems.map((ci) => {
       if (
-        ci.productId === item.productId &&
+        ci.product === item.product &&
         ci.color === item.color &&
         ci.size === item.size
       ) {

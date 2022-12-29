@@ -17,7 +17,7 @@ const useGetCartTotal = () => {
 
   useEffect(() => {
     const total = cartItems.reduce((sum, cartItem) => {
-      const product = products?.find((p) => p._id === cartItem.productId);
+      const product = products?.find((p) => p._id === cartItem.product);
 
       return sum + (product?.price || 0) * (cartItem.quantity || 0);
     }, 0);

@@ -8,12 +8,12 @@ import axios from '../../axios';
 import { Product } from '../../types';
 
 interface Props {
-  productId: string;
+  product: string;
 }
 
-const HeroPopover = ({ productId }: Props) => {
+const HeroPopover = ({ product }: Props) => {
   const { data: product } = useQuery<Product>(
-    ['product', productId],
+    ['product', product],
     async ({ queryKey }) => {
       const { data } = await axios.get(`/products/${queryKey[1]}`);
       return data;
@@ -81,7 +81,7 @@ const HeroPopover = ({ productId }: Props) => {
             Price: <span className="font-medium">₱{product?.price}</span>
           </span>
           <Link
-            to={`/products/${productId}`}
+            to={`/products/${product}`}
             className="font-medium text-gray hover:text-dark"
           >
             Show more

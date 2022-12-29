@@ -18,7 +18,7 @@ enum SortBy {
 }
 
 export interface ImgLoaded {
-  productId: string;
+  product: string;
   loaded: boolean;
 }
 
@@ -52,7 +52,7 @@ const Products = () => {
     productsData?.forEach((p) => {
       setImgsLoaded((prevImgLoaded) => [
         ...prevImgLoaded,
-        { productId: p._id, loaded: false },
+        { product: p._id, loaded: false },
       ]);
     });
   }, [productsData]);

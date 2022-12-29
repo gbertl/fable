@@ -17,7 +17,7 @@ interface Props {
 }
 
 const ProductCard = ({ product }: Props) => {
-  const [data, setData] = useState<Item>({ productId: product._id });
+  const [data, setData] = useState<Item>({ product: product._id });
 
   const cartItems = useAppSelector(selectItems);
 
@@ -41,7 +41,7 @@ const ProductCard = ({ product }: Props) => {
   const handleUpdateQuantity = ({ isIncrease }: { isIncrease: boolean }) => {
     const items = cartItems.map((cartItem) => {
       if (
-        cartItem.productId === data.productId &&
+        cartItem.product === data.product &&
         cartItem.color === data.color &&
         cartItem.size === data.size
       ) {
@@ -98,7 +98,7 @@ const ProductCard = ({ product }: Props) => {
 
     const updatedCartItems = cartItems.map((ci) => {
       if (
-        ci.productId === data.productId &&
+        ci.product === data.product &&
         ci.color === data.color &&
         ci.size === data.size
       ) {

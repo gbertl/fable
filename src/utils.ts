@@ -4,7 +4,7 @@ import axios from './axios';
 export const findCartItem = (cartItems: Item[], itemData: Item) =>
   cartItems.find(
     (ci) =>
-      ci.productId === itemData.productId &&
+      ci.product === itemData.product &&
       ci.color === itemData.color &&
       ci.size === itemData.size
   );
