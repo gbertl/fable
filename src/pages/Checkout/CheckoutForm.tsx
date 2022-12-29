@@ -5,12 +5,15 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Button, Checkbox, FormError, Input, Label } from '../../components';
-import { useAppSelector, useGetCartTotal } from '../../hooks';
+import { useAppSelector, useGetCartTotal, useCreateBuyer } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import axios from '../../axios';
 import { CheckoutInput } from '../../types';
 import { DeliveryMethods, PaymentMethods } from '../../enums';
 import { deliveryMethods, initialOrderData, paymentMethods } from './data';
+import * as api from '../../api';
+import useCreateOrder from '../../hooks/useCreateOrder';
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object({
   city: yup.string().required('Your city is required'),
@@ -39,7 +42,7 @@ const schema = yup.object({
 const CheckoutForm = ({ className }: { className: string }) => {
   const cartItems = useAppSelector(selectItems);
 
-  const total = useGetCartTotal();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -71,6 +74,9 @@ const CheckoutForm = ({ className }: { className: string }) => {
     control,
   });
 
+  const { mutateAsync: createBuyer } = useCreateBuyer();
+  const { mutateAsync: createOrder } = useCreateOrder();
+
   const handleDeliveryMethod = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value as DeliveryMethods;
     deliveryMethodField.onChange(value);
@@ -97,12 +103,38 @@ const CheckoutForm = ({ className }: { className: string }) => {
         console.log(e.message);
       }
     } else {
-      alert(
-        `Hi ${formValues.name}! You order has been placed. Please pay ₱${total} upon delivery.`
-      );
-    }
+      const {
+        name,
+        phone,
+        email,
+        city,
+        address,
+        deliveryMethod,
+        paymentMethod,
+      } = formValues;
+      const { data: buyer } = await createBuyer({
+        name,
+        phone,
+        email,
+        city,
+        address,
+      });
 
-    console.log(formValues);
+      // create orders attach buyer id on each
+      for (const item of cartItems) {
+        await createOrder({
+          product: item.product,
+          color: item.color,
+          size: item.size,
+          quantity: item.quantity,
+          buyer: buyer._id as string,
+          deliveryMethod,
+          paymentMethod,
+        });
+      }
+
+      navigate('/profile', { replace: true });
+    }
   };
 
   return (
