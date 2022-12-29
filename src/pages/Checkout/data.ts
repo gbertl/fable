@@ -26,12 +26,12 @@ export const deliveryMethods = [
 export const initialOrderData: CheckoutInput = {
   city: 'Quezon City',
   deliveryMethod: DeliveryMethods.ToDoor,
-  paymentMethod: PaymentMethods.Card,
+  paymentMethod: PaymentMethods.Cod,
   address: 'Batasan Road',
   loyaltyCard: 9204,
   name: 'Gilbert',
   phone: 9989934111,
-  email: '',
+  email: 'gbertl@example.com',
   orderComment: 'Pack all the items separately, please',
   agree: true,
 };
