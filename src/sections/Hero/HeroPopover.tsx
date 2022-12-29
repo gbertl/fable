@@ -2,18 +2,18 @@ import { Skeleton } from '@mui/material';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import axios from '../../axios';
 import { Product } from '../../types';
 
 interface Props {
-  product: string;
+  productId: string;
 }
 
-const HeroPopover = ({ product }: Props) => {
+const HeroPopover = ({ productId }: Props) => {
   const { data: product } = useQuery<Product>(
-    ['product', product],
+    ['product', productId],
     async ({ queryKey }) => {
       const { data } = await axios.get(`/products/${queryKey[1]}`);
       return data;
@@ -81,7 +81,7 @@ const HeroPopover = ({ product }: Props) => {
             Price: <span className="font-medium">₱{product?.price}</span>
           </span>
           <Link
-            to={`/products/${product}`}
+            to={`/products/${productId}`}
             className="font-medium text-gray hover:text-dark"
           >
             Show more

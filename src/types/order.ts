@@ -1,10 +1,9 @@
 import { DeliveryMethods, PaymentMethods } from '../enums';
 import Buyer from './buyer';
-import Product from './product';
+import Item from './item';
 
-interface Order {
+interface Order extends Item {
   buyer: string | Buyer;
-  product: string | Product;
   deliveryMethod: DeliveryMethods;
   paymentMethod: PaymentMethods;
 }

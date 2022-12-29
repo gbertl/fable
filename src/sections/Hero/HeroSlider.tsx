@@ -91,7 +91,7 @@ const HeroSlider = () => {
 
               <AnimatePresence>
                 {p.product && isHovered && hoveredId === p._id && (
-                  <HeroPopover product={p.product as string} />
+                  <HeroPopover productId={p.product as string} />
                 )}
               </AnimatePresence>
             </SwiperSlide>
