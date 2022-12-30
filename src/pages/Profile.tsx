@@ -1,10 +1,39 @@
 import { useAuth0 } from '@auth0/auth0-react';
+import moment from 'moment';
+
 import { Container } from '../components';
 import { bonusCard } from '../assets';
 import { Link } from 'react-router-dom';
+import { useGetBuyer } from '../hooks';
+import { useEffect, useState } from 'react';
+import { Order, Product } from '../types';
+import axios from '../axios';
 
 const Profile = () => {
   const { isAuthenticated, logout, user } = useAuth0();
+  const { data: buyer } = useGetBuyer(localStorage.getItem('buyerId') || '', [
+    'orders',
+  ]);
+
+  const [orders, setOrders] = useState<Order[]>();
+
+  useEffect(() => {
+    (async () => {
+      const ordersData: Order[] = [];
+
+      if (buyer?.orders?.length) {
+        for (const buyerOrder of buyer.orders) {
+          if (typeof buyerOrder === 'object') {
+            const { data } = await axios.get(`/products/${buyerOrder.product}`);
+            buyerOrder.product = data;
+            ordersData.push(buyerOrder);
+          }
+        }
+
+        setOrders(ordersData as Order[]);
+      }
+    })();
+  }, [buyer]);
 
   return (
     <Container className="grid lg:grid-cols-[20%_1fr] gap-14 lg:gap-10 mt-20">
@@ -43,7 +72,9 @@ const Profile = () => {
       </div>
 
       <div>
-        <h2 className="capitalize mb-9">Hello, {user?.name || 'Guest'}!</h2>
+        <h2 className="capitalize mb-9">
+          Hello, {buyer?.name || user?.name || 'Guest'}!
+        </h2>
 
         <div className="w-[335px] h-[242px] bg-gray2 mb-9">
           <img src={bonusCard} alt="" className="pt-5" />
@@ -62,7 +93,7 @@ const Profile = () => {
         <div>
           <h4 className="mb-8">Recent orders</h4>
 
-          <table className="profile__table">
+          <table className="profile__table w-full">
             <thead>
               <tr>
                 <th>Number</th>
@@ -73,22 +104,31 @@ const Profile = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>849234</td>
-                <td>
-                  Jacket KLS Black M, Trousers KLS Black M, Shirt KLS White M
-                </td>
-                <td>20.09.2022</td>
-                <td>€180</td>
-                <td className="text-green">Paid</td>
-              </tr>
-              <tr>
-                <td>835012</td>
-                <td>Short KLS Graphit S, Jacket KLS Graphite M</td>
-                <td>19.09.2021</td>
-                <td>€340</td>
-                <td className="text-green">Delivered</td>
-              </tr>
+              {orders?.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>{`${
+                    (order.product as Product)?.name
+                  } ${order.size?.toUpperCase()}`}</td>
+                  <td>
+                    {moment(orders?.[0].createdAt).format('MMMM DD YYYY kk:mm')}
+                  </td>
+                  <td>
+                    ₱
+                    {Math.floor(
+                      (order.product as Product).price * (order.quantity || 0)
+                    )}
+                  </td>
+                  <td className="text-green capitalize">{order.status}</td>
+                </tr>
+              ))}
+              {!orders?.length && (
+                <tr>
+                  <td colSpan={5} className="text-center">
+                    You have no orders.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

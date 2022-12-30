@@ -3,17 +3,17 @@ import React from 'react';
 import { useForm, useController } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 
 import { Button, Checkbox, FormError, Input, Label } from '../../components';
-import { useAppSelector, useGetCartTotal, useCreateBuyer } from '../../hooks';
-import { selectItems } from '../../store/slices/cart';
-import axios from '../../axios';
-import { CheckoutInput } from '../../types';
+import { useAppDispatch, useAppSelector, useCreateBuyer } from '../../hooks';
+import { replaceItems, selectItems } from '../../store/slices/cart';
+import { Buyer, CheckoutInput } from '../../types';
 import { DeliveryMethods, PaymentMethods } from '../../enums';
 import { deliveryMethods, initialOrderData, paymentMethods } from './data';
 import * as api from '../../api';
 import useCreateOrder from '../../hooks/useCreateOrder';
-import { useNavigate } from 'react-router-dom';
+import axios from '../../axios';
 
 const schema = yup.object({
   city: yup.string().required('Your city is required'),
@@ -41,6 +41,7 @@ const schema = yup.object({
 
 const CheckoutForm = ({ className }: { className: string }) => {
   const cartItems = useAppSelector(selectItems);
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
@@ -112,17 +113,33 @@ const CheckoutForm = ({ className }: { className: string }) => {
         deliveryMethod,
         paymentMethod,
       } = formValues;
-      const { data: buyer } = await createBuyer({
-        name,
-        phone,
-        email,
-        city,
-        address,
-      });
+
+      let buyer: Buyer;
+
+      if (!localStorage.getItem('buyerId')) {
+        const { data } = await createBuyer({
+          name,
+          phone,
+          email,
+          city,
+          address,
+        });
+
+        buyer = data;
+
+        localStorage.setItem('buyerId', buyer._id || '');
+      } else {
+        const { data } = await api.getBuyer(
+          localStorage.getItem('buyerId') || ''
+        );
+        buyer = data;
+      }
 
       // create orders attach buyer id on each
+      const orderIds: string[] = [];
+
       for (const item of cartItems) {
-        await createOrder({
+        const { data } = await createOrder({
           product: item.product,
           color: item.color,
           size: item.size,
@@ -130,8 +147,19 @@ const CheckoutForm = ({ className }: { className: string }) => {
           buyer: buyer._id as string,
           deliveryMethod,
           paymentMethod,
+          status: 'pending',
         });
+
+        orderIds.push(data._id as string);
       }
+
+      // update buyer's order property with orderIds
+      await api.updateBuyer(buyer._id as string, {
+        ...buyer,
+        orders: orderIds,
+      });
+
+      dispatch(replaceItems([]));
 
       navigate('/profile', { replace: true });
     }

@@ -101,7 +101,7 @@
   }
 
   .profile__table tr > * + * {
-    @apply border-l-[4rem] border-transparent;
+    @apply border-l-[2rem] border-transparent;
   }
 
   .profile__table tbody > * + * {

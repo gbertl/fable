@@ -7,7 +7,7 @@ interface Buyer {
   email: string;
   city: string;
   address: string;
-  orders?: Order[];
+  orders?: Order[] | string[];
 }
 
 export default Buyer;

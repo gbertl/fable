@@ -13,3 +13,4 @@ export { default as useCreateHeroProduct } from './useCreateHeroProduct';
 export { default as useUpdateHeroProduct } from './useUpdateHeroProduct';
 export { default as useCheckAdminRole } from './useCheckAdminRole';
 export { default as useCreateBuyer } from './useCreateBuyer';
+export { default as useGetBuyer } from './useGetBuyer';

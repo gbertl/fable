@@ -7,3 +7,4 @@ export { type default as UpdateProduct } from './updateProduct';
 export { type default as NewHeroProduct } from './newHeroProduct';
 export { type default as UpdateHeroProduct } from './updateHeroProduct';
 export { type default as Buyer } from './buyer';
+export { type default as Order } from './order';
