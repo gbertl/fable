@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { Sizes } = require('../constants');
 
 const schema = mongoose.Schema(
   {
@@ -13,7 +14,7 @@ const schema = mongoose.Schema(
     },
     size: {
       type: String,
-      enum: ['xs', 's', 'm', 'l', 'xl'],
+      enum: Sizes,
       required: true,
     },
     color: { type: String, required: true },

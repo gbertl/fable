@@ -7,6 +7,8 @@ const connectDB = require('./config/db');
 
 const productsRouter = require('./routes/products');
 const heroProductsRouter = require('./routes/heroProducts');
+const buyersRouter = require('./routes/buyers');
+const ordersRouter = require('./routes/orders');
 
 const Product = require('./models/Product');
 
@@ -18,6 +20,8 @@ app.use(express.static('public'));
 
 app.use('/products', productsRouter);
 app.use('/hero-products', heroProductsRouter);
+app.use('/buyers', buyersRouter);
+app.use('/orders', ordersRouter);
 
 app.post('/checkout', async (req, res) => {
   try {
