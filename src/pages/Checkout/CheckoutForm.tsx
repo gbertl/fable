@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, useController } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -40,6 +40,7 @@ const schema = yup.object({
 });
 
 const CheckoutForm = ({ className }: { className: string }) => {
+  const [processing, setProcessing] = useState(false);
   const cartItems = useAppSelector(selectItems);
   const dispatch = useAppDispatch();
 
@@ -95,6 +96,8 @@ const CheckoutForm = ({ className }: { className: string }) => {
   const onSubmit = async (formValues: CheckoutInput) => {
     if (!cartItems.length) return;
 
+    setProcessing(true);
+
     if (formValues.paymentMethod === PaymentMethods.Card) {
       try {
         const { data } = await axios.post('/checkout', cartItems);
@@ -102,6 +105,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
       } catch (err: unknown) {
         const e = err as AxiosError;
         console.log(e.message);
+        setProcessing(false);
       }
     } else {
       const {
@@ -335,10 +339,13 @@ const CheckoutForm = ({ className }: { className: string }) => {
       <Button
         className="w-full"
         disabled={
-          !watchAgree || !cartItems.length || !!Object.keys(errors).length
+          !watchAgree ||
+          !cartItems.length ||
+          !!Object.keys(errors).length ||
+          processing
         }
       >
-        Place an order
+        {processing ? 'Please wait' : 'Place an order'}
       </Button>
 
       {!cartItems.length && (
