@@ -1,12 +1,17 @@
 import { AxiosError } from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, useController } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Checkbox, FormError, Input, Label } from '../../components';
-import { useAppDispatch, useAppSelector, useCreateBuyer } from '../../hooks';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCreateBuyer,
+  useGetBuyer,
+} from '../../hooks';
 import { replaceItems, selectItems } from '../../store/slices/cart';
 import { Buyer, CheckoutInput } from '../../types';
 import { DeliveryMethods, PaymentMethods } from '../../enums';
@@ -46,12 +51,17 @@ const CheckoutForm = ({ className }: { className: string }) => {
 
   const navigate = useNavigate();
 
+  const { data: currentBuyer } = useGetBuyer(
+    localStorage.getItem('buyerId') || ''
+  );
+
   const {
     register,
     handleSubmit,
     control,
     watch,
     formState: { errors },
+    reset,
   } = useForm<CheckoutInput>({
     defaultValues: initialOrderData,
     resolver: yupResolver(schema),
@@ -98,76 +108,109 @@ const CheckoutForm = ({ className }: { className: string }) => {
 
     setProcessing(true);
 
-    if (formValues.paymentMethod === PaymentMethods.Card) {
+    const { name, phone, email, city, address, deliveryMethod, paymentMethod } =
+      formValues;
+
+    let buyer: Buyer;
+
+    if (!localStorage.getItem('buyerId')) {
+      const { data } = await createBuyer({
+        name,
+        phone,
+        email,
+        city,
+        address,
+      });
+
+      buyer = data;
+
+      localStorage.setItem('buyerId', buyer._id || '');
+    } else {
+      const { data } = await api.getBuyer(
+        localStorage.getItem('buyerId') || ''
+      );
+
+      buyer = data;
+    }
+
+    if (paymentMethod === PaymentMethods.Card) {
       try {
-        const { data } = await axios.post('/checkout', cartItems);
+        const { data } = await axios.post('/checkout', {
+          buyerId: buyer._id,
+          deliveryMethod,
+          paymentMethod,
+          cartItems,
+        });
+
+        localStorage.setItem('formValues', JSON.stringify(formValues));
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
         window.location = data.url;
       } catch (err: unknown) {
         const e = err as AxiosError;
         console.log(e.message);
         setProcessing(false);
       }
-    } else {
-      const {
-        name,
-        phone,
-        email,
-        city,
-        address,
-        deliveryMethod,
-        paymentMethod,
-      } = formValues;
+    } else if (paymentMethod === PaymentMethods.Cod) {
+      try {
+        // create orders attach buyer id on each
+        const orderIds: string[] = [];
 
-      let buyer: Buyer;
+        for (const item of cartItems) {
+          const { data } = await createOrder({
+            product: item.product,
+            color: item.color,
+            size: item.size,
+            quantity: item.quantity,
+            buyer: buyer._id as string,
+            deliveryMethod,
+            paymentMethod,
+            status: 'pending',
+          });
 
-      if (!localStorage.getItem('buyerId')) {
-        const { data } = await createBuyer({
-          name,
-          phone,
-          email,
-          city,
-          address,
+          orderIds.push(data._id as string);
+        }
+
+        // update buyer's order property with orderIds
+        await api.updateBuyer(buyer._id as string, {
+          ...buyer,
+          orders: orderIds,
         });
 
-        buyer = data;
+        dispatch(replaceItems([]));
 
-        localStorage.setItem('buyerId', buyer._id || '');
-      } else {
-        const { data } = await api.getBuyer(
-          localStorage.getItem('buyerId') || ''
-        );
-        buyer = data;
+        navigate('/profile', { replace: true });
+      } catch (err: unknown) {
+        const e = err as AxiosError;
+        console.log(e.message);
+        setProcessing(false);
       }
-
-      // create orders attach buyer id on each
-      const orderIds: string[] = [];
-
-      for (const item of cartItems) {
-        const { data } = await createOrder({
-          product: item.product,
-          color: item.color,
-          size: item.size,
-          quantity: item.quantity,
-          buyer: buyer._id as string,
-          deliveryMethod,
-          paymentMethod,
-          status: 'pending',
-        });
-
-        orderIds.push(data._id as string);
-      }
-
-      // update buyer's order property with orderIds
-      await api.updateBuyer(buyer._id as string, {
-        ...buyer,
-        orders: orderIds,
-      });
-
-      dispatch(replaceItems([]));
-
-      navigate('/profile', { replace: true });
     }
   };
+
+  useEffect(() => {
+    const formValues = JSON.parse(localStorage.getItem('formValues') || '{}');
+
+    if (Object.keys(formValues).length) {
+      reset(formValues);
+      localStorage.removeItem('formValues');
+    }
+
+    const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+
+    if (Object.keys(cartItems).length) {
+      dispatch(replaceItems(cartItems));
+      localStorage.removeItem('cartItems');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (currentBuyer) {
+      const { name, phone, email, city, address } = currentBuyer;
+
+      reset({ ...initialOrderData, name, phone, email, city, address });
+    }
+  }, [currentBuyer]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={`${className}`}>
@@ -180,6 +223,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
             placeholder="Enter city"
             className="md:w-1/2"
             {...register('city')}
+            disabled={!!currentBuyer}
           />
           {errors.city?.message && <FormError message={errors.city?.message} />}
         </div>
@@ -221,7 +265,12 @@ const CheckoutForm = ({ className }: { className: string }) => {
         {/* Address */}
         <div>
           <Label>Address</Label>
-          <Input type="text" placeholder="Address" {...register('address')} />
+          <Input
+            type="text"
+            placeholder="Address"
+            {...register('address')}
+            disabled={!!currentBuyer}
+          />
           {errors.address?.message && (
             <FormError message={errors.address?.message} />
           )}
@@ -254,6 +303,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
             type="text"
             placeholder="Enter name and surname"
             {...register('name')}
+            disabled={!!currentBuyer}
           />
           {errors.name?.message && <FormError message={errors.name?.message} />}
         </div>
@@ -264,6 +314,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
             type="number"
             placeholder="Enter phone number"
             {...register('phone')}
+            disabled={!!currentBuyer}
           />
           {errors.phone?.message && (
             <FormError message={errors.phone?.message} />
@@ -276,6 +327,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
             type="email"
             placeholder="Enter email"
             {...register('email')}
+            disabled={!!currentBuyer}
           />
           {errors.email?.message && (
             <FormError message={errors.email?.message} />

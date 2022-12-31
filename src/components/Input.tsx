@@ -19,7 +19,7 @@ const Input = React.forwardRef(
       <Component
         className={`form-input ${className} ${
           as === 'textarea' ? 'form-textarea' : ''
-        }`}
+        } ${props.disabled ? 'bg-gray2' : ''}`}
         {...props}
         ref={ref}
       />

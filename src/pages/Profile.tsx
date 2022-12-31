@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import { Container } from '../components';
 import { bonusCard } from '../assets';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useGetBuyer } from '../hooks';
 import { useEffect, useState } from 'react';
 import { Order, Product } from '../types';
@@ -11,13 +11,17 @@ import axios from '../axios';
 
 const Profile = () => {
   const { isAuthenticated, logout, user } = useAuth0();
-  const { data: buyer } = useGetBuyer(localStorage.getItem('buyerId') || '', [
-    'orders',
-  ]);
+  const { data: buyer, refetch } = useGetBuyer(
+    localStorage.getItem('buyerId') || '',
+    ['orders']
+  );
 
   const [orders, setOrders] = useState<Order[]>();
 
+  const [searchParams] = useSearchParams();
+
   useEffect(() => {
+    console.log(buyer?.orders);
     (async () => {
       const ordersData: Order[] = [];
 
@@ -34,6 +38,13 @@ const Profile = () => {
       }
     })();
   }, [buyer]);
+
+  useEffect(() => {
+    if (searchParams.get('status') === 'success') {
+      localStorage.removeItem('formValues');
+      localStorage.removeItem('cartItems');
+    }
+  }, []);
 
   return (
     <Container className="grid lg:grid-cols-[20%_1fr] gap-14 lg:gap-10 mt-20">
