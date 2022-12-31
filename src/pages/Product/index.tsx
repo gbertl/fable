@@ -11,7 +11,7 @@ const Product = () => {
   const { id } = useParams();
 
   const { data: product } = useQuery<IProduct>(
-    ['product', id],
+    ['product', id, 'single-product'],
     async ({ queryKey }) => {
       const { data } = await axios.get(
         `/products/${queryKey[1]}?fields[0]=heroImageUrl&populate[0]=category`
