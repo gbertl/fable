@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MdChevronLeft } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { BsCartX } from 'react-icons/bs';
@@ -24,6 +24,11 @@ const SideCart = () => {
   };
 
   const length = cartItems.length;
+
+  useEffect(() => {
+    document.body.classList.add('hide-scrollbar');
+    return () => document.body.classList.remove('hide-scrollbar');
+  }, []);
 
   return (
     <motion.div
