@@ -1,6 +1,6 @@
-import { Sizes } from '../enums';
+import { Sizes } from './enums';
 
-const categories = [
+export const categories = [
   {
     id: 1,
     name: 'jacket',
@@ -8,7 +8,7 @@ const categories = [
   { id: 2, name: 'shorts' },
 ];
 
-const colors = [
+export const colors = [
   '#F4E1CC',
   '#262626',
   '#9FAED9',
@@ -19,6 +19,4 @@ const colors = [
   '#214133',
 ];
 
-const sizes = [Sizes.XS, Sizes.S, Sizes.M, Sizes.L, Sizes.XL];
-
-export { categories, colors, sizes };
+export const sizes = [Sizes.XS, Sizes.S, Sizes.M, Sizes.L, Sizes.XL];
