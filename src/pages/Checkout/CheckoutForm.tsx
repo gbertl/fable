@@ -17,7 +17,7 @@ import { Buyer, CheckoutInput } from '../../types';
 import { DeliveryMethods, PaymentMethods } from '../../enums';
 import { deliveryMethods, initialOrderData, paymentMethods } from './data';
 import * as api from '../../api';
-import useCreateOrder from '../../hooks/useCreateOrder';
+import { useCreateOrder } from '../../hooks';
 import axios from '../../axios';
 
 const schema = yup.object({
