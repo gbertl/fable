@@ -1,5 +1,5 @@
 import { Sizes } from '../enums';
-import Product from './product';
+import { Product } from './products';
 
 interface Item {
   product?: string | Product;
