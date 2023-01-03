@@ -2,30 +2,30 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Layout from './layouts/Layout';
 import { Checkout, Home, Product, Products, Profile, SignIn } from './pages';
-import { ProtectedRoute } from './auth';
+import { appRoutes } from './routes';
 
 const router = createBrowserRouter([
   {
     element: <Layout withoutFooter />,
     children: [
       {
-        path: '/',
+        path: appRoutes.home,
         element: <Home />,
       },
       {
-        path: '/signin',
+        path: appRoutes.login,
         element: <SignIn />,
       },
       {
-        path: '/products/:id',
+        path: appRoutes.productDetail,
         element: <Product />,
       },
       {
-        path: '/checkout',
+        path: appRoutes.checkout,
         element: <Checkout />,
       },
       {
-        path: '/profile',
+        path: appRoutes.profile,
         element: <Profile />,
       },
     ],
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: '/collections',
+        path: appRoutes.collections,
         element: <Products />,
       },
     ],

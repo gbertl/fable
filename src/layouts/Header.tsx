@@ -7,11 +7,11 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import { selectItems } from '../store/slices/cart';
 import { showSideCart } from '../store/slices/ui';
 import { logo } from '../assets';
-import { useAuth0 } from '@auth0/auth0-react';
+import { appRoutes } from '../routes';
 
 const mainNavLinks = [
   {
-    url: '/collections',
+    url: appRoutes.collections,
     text: 'Collections',
   },
   {
@@ -32,12 +32,10 @@ const Header = () => {
   const cartItems = useAppSelector(selectItems);
   const dispatch = useAppDispatch();
 
-  const { isAuthenticated, logout } = useAuth0();
-
   return (
     <header className="text-sm">
       <Container className="flex justify-between items-center h-[74px]">
-        <Link to="/" className="hidden md:block">
+        <Link to={appRoutes.home} className="hidden md:block">
           <img src={logo} alt="" />
         </Link>
         <HeaderNav>
@@ -81,7 +79,7 @@ const Header = () => {
             </button>
           </li>
           <li>
-            <Link to="/profile" className="hover:opacity-70">
+            <Link to={appRoutes.profile} className="hover:opacity-70">
               Profile
             </Link>
           </li>

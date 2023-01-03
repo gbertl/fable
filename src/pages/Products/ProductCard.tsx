@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, generatePath } from 'react-router-dom';
 import { Skeleton } from '@mui/material';
 import { useMediaQuery } from 'react-responsive';
 
 import { Product } from '../../types';
 import { ImgLoaded } from '.';
+import { appRoutes } from '../../routes';
 
 interface Props {
   product: Product;
@@ -16,7 +17,11 @@ const ProductCard = ({ product, imgsLoaded, setImgsLoaded }: Props) => {
 
   return (
     <div>
-      <Link to={`/products/${product._id}`}>
+      <Link
+        to={generatePath(appRoutes.productDetail, {
+          id: product._id,
+        })}
+      >
         {!imgsLoaded.find((il) => il.product === product._id)?.loaded && (
           <Skeleton
             variant="rectangular"

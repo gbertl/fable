@@ -1,11 +1,12 @@
 import { Skeleton } from '@mui/material';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import axios from '../../axios';
 import { Product } from '../../types';
+import { apiRoutes, appRoutes } from '../../routes';
 
 interface Props {
   productId: string;
@@ -15,7 +16,9 @@ const HeroPopover = ({ productId }: Props) => {
   const { data: product } = useQuery<Product>(
     ['product', productId],
     async ({ queryKey }) => {
-      const { data } = await axios.get(`/products/${queryKey[1]}`);
+      const { data } = await axios.get(
+        generatePath(apiRoutes.productDetail, { id: queryKey[1] })
+      );
       return data;
     }
   );
@@ -81,7 +84,9 @@ const HeroPopover = ({ productId }: Props) => {
             Price: <span className="font-medium">₱{product?.price}</span>
           </span>
           <Link
-            to={`/products/${productId}`}
+            to={generatePath(appRoutes.productDetail, {
+              id: productId,
+            })}
             className="font-medium text-gray hover:text-dark"
           >
             Show more

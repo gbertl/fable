@@ -1,6 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { Navigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import { appRoutes } from '../routes';
 
 interface Props {
   children: React.ReactNode;
@@ -30,7 +31,7 @@ const ProtectedRoute = ({ children }: Props) => {
       {!isLoading && (
         <>
           {!isAuthenticated ? (
-            <Navigate to="/signin" replace />
+            <Navigate to={appRoutes.login} replace />
           ) : (
             <>{children}</>
           )}

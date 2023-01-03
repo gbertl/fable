@@ -19,6 +19,7 @@ import { deliveryMethods, initialOrderData, paymentMethods } from './data';
 import * as api from '../../api';
 import { useCreateOrder } from '../../hooks';
 import axios from '../../axios';
+import { apiRoutes } from '../../routes';
 
 const schema = yup.object({
   city: yup.string().required('Your city is required'),
@@ -135,7 +136,7 @@ const CheckoutForm = ({ className }: { className: string }) => {
 
     if (paymentMethod === PaymentMethods.Card) {
       try {
-        const { data } = await axios.post('/checkout', {
+        const { data } = await axios.post(apiRoutes.checkout, {
           buyerId: buyer._id,
           deliveryMethod,
           paymentMethod,

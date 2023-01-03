@@ -9,6 +9,7 @@ import { selectItems } from '../store/slices/cart';
 import { hideSideCart } from '../store/slices/ui';
 import { Cart } from '.';
 import Button from './Button';
+import { appRoutes } from '../routes';
 
 const SideCart = () => {
   const cartItems = useAppSelector(selectItems);
@@ -69,7 +70,7 @@ const SideCart = () => {
 
               <Button
                 as={Link}
-                to="/checkout"
+                to={appRoutes.checkout}
                 className="w-full"
                 onClick={() => dispatch(hideSideCart())}
               >
@@ -88,7 +89,7 @@ const SideCart = () => {
               </p>
               <Button
                 as={Link}
-                to="/collections"
+                to={appRoutes.collections}
                 onClick={() => dispatch(hideSideCart())}
               >
                 Shop Now

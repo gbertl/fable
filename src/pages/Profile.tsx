@@ -3,11 +3,12 @@ import moment from 'moment';
 
 import { Container } from '../components';
 import { bonusCard } from '../assets';
-import { Link, useSearchParams } from 'react-router-dom';
+import { generatePath, Link, useSearchParams } from 'react-router-dom';
 import { useGetBuyer } from '../hooks';
 import { useEffect, useState } from 'react';
 import { Order, Product } from '../types';
 import axios from '../axios';
+import { apiRoutes, appRoutes } from '../routes';
 
 const Profile = () => {
   const { isAuthenticated, logout, user } = useAuth0();
@@ -28,7 +29,11 @@ const Profile = () => {
       if (buyer?.orders?.length) {
         for (const buyerOrder of buyer.orders) {
           if (typeof buyerOrder === 'object') {
-            const { data } = await axios.get(`/products/${buyerOrder.product}`);
+            const { data } = await axios.get(
+              generatePath(apiRoutes.productDetail, {
+                id: buyerOrder.product,
+              })
+            );
             buyerOrder.product = data;
             ordersData.push(buyerOrder);
           }
@@ -74,7 +79,7 @@ const Profile = () => {
                 Logout
               </button>
             ) : (
-              <Link to="/signin" className="text-gray hover:text-dark">
+              <Link to={appRoutes.login} className="text-gray hover:text-dark">
                 Sign In
               </Link>
             )}

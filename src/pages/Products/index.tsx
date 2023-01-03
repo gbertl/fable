@@ -11,6 +11,7 @@ import axios from '../../axios';
 import ProductCard from './ProductCard';
 import ProductFormModal from './ProductFormModal';
 import { useCheckAdminRole } from '../../hooks';
+import { apiRoutes } from '../../routes';
 
 enum SortBy {
   Price = 'price',
@@ -32,7 +33,9 @@ const Products = () => {
   const [imgsLoaded, setImgsLoaded] = useState<ImgLoaded[]>([]);
 
   const { data: productsData } = useQuery<Product[]>('products', async () => {
-    const { data } = await axios.get('/products?fields[0]=heroImageUrl');
+    const { data } = await axios.get(
+      `${apiRoutes.productList}?fields[0]=heroImageUrl`
+    );
     return data;
   });
 

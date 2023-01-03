@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { generatePath, useParams } from 'react-router-dom';
 
 import { BreadCrumb, Container } from '../../components';
 import ProductCard from './ProductCard';
@@ -6,6 +6,7 @@ import { stringToHypen } from '../../utils';
 import { Product as IProduct } from '../../types';
 import axios from '../../axios';
 import { useQuery } from 'react-query';
+import { apiRoutes, appRoutes } from '../../routes';
 
 const Product = () => {
   const { id } = useParams();
@@ -14,7 +15,9 @@ const Product = () => {
     ['product', id, 'single-product'],
     async ({ queryKey }) => {
       const { data } = await axios.get(
-        `/products/${queryKey[1]}?fields[0]=heroImageUrl&populate[0]=category`
+        `${generatePath(apiRoutes.productDetail, {
+          id: queryKey[1],
+        })}?fields[0]=heroImageUrl&populate[0]=category`
       );
       return data;
     }
@@ -27,13 +30,13 @@ const Product = () => {
           links={[
             {
               title: product?.collectionName || '',
-              url: `/collections#${stringToHypen(
+              url: `${appRoutes.collections}#${stringToHypen(
                 product?.collectionName || ''
               )}-section`,
             },
             {
               title: product?.category || '',
-              url: `/collections#${stringToHypen(
+              url: `${appRoutes.collections}#${stringToHypen(
                 product?.category || ''
               )}-section`,
             },

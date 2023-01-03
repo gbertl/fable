@@ -5,13 +5,14 @@ import { selectItems } from '../store/slices/cart';
 import axios from '../axios';
 import { Product } from '../types';
 import { useAppSelector } from '.';
+import { apiRoutes } from '../routes';
 
 const useGetCartTotal = () => {
   const [cartTotal, setCartTotal] = useState(0);
   const cartItems = useAppSelector(selectItems);
 
   const { data: products } = useQuery<Product[]>('products', async () => {
-    const { data } = await axios.get('/products');
+    const { data } = await axios.get(apiRoutes.productList);
     return data;
   });
 

@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { replaceItems, selectItems } from '../../store/slices/cart';
 import { Item, Product } from '../../types';
 import axios from '../../axios';
+import { generatePath } from 'react-router-dom';
+import { apiRoutes } from '../../routes';
 
 interface Props {
   item: Item;
@@ -14,7 +16,11 @@ const CartItem = ({ item }: Props) => {
   const { data: product } = useQuery<Product>(
     ['product', item.product],
     async ({ queryKey }) => {
-      const { data } = await axios.get(`/products/${queryKey[1]}`);
+      const { data } = await axios.get(
+        generatePath(apiRoutes.productDetail, {
+          id: queryKey[1],
+        })
+      );
       return data;
     }
   );

@@ -12,6 +12,7 @@ import { HiPencil, HiPlusCircle } from 'react-icons/hi2';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useCheckAdminRole } from '../../hooks';
 import HeroProductModalForm from './HeroProductModalForm';
+import { apiRoutes } from '../../routes';
 
 const HeroSlider = () => {
   const isDesktop = useMediaQuery({ query: '(min-width: 992px)' });
@@ -24,7 +25,7 @@ const HeroSlider = () => {
   const { data: heroProducts } = useQuery<HeroProduct[]>(
     'heroProducts',
     async () => {
-      const { data } = await axios.get('/hero-products');
+      const { data } = await axios.get(apiRoutes.heroProductList);
       return data;
     }
   );
