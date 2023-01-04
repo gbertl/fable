@@ -52,9 +52,9 @@ const Profile = () => {
   }, []);
 
   return (
-    <Container className="grid lg:grid-cols-[20%_1fr] gap-14 lg:gap-10 mt-20">
-      <div>
-        <ul className="flex lg:flex-col gap-6">
+    <Container className="flex flex-col lg:flex-row gap-14 mt-20 mb-10 w-full">
+      <div className="min-w-[200px]">
+        <ul className="flex lg:flex-col gap-6 flex-wrap">
           <li>
             <a href="#" className="text-dark">
               Main
@@ -87,12 +87,12 @@ const Profile = () => {
         </ul>
       </div>
 
-      <div>
+      <div className="w-full">
         <h2 className="capitalize mb-9">
           Hello, {buyer?.name || user?.name || 'Guest'}!
         </h2>
 
-        <div className="w-[335px] h-[242px] bg-gray2 mb-9">
+        <div className="max-w-[335px] h-[242px] bg-gray2 mb-9">
           <img src={bonusCard} alt="" className="pt-5" />
           <div className="px-5 pt-4 pb-5">
             <ul className="flex flex-col gap-3">
@@ -106,9 +106,9 @@ const Profile = () => {
           </div>
         </div>
 
-        <div>
-          <h4 className="mb-8">Recent orders</h4>
+        <h4 className="mb-8">Recent orders</h4>
 
+        <div className="overflow-auto">
           <table className="profile__table w-full">
             <thead>
               <tr>
