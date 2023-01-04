@@ -12,3 +12,4 @@ export { useCreateBuyer, useGetBuyer } from './buyers';
 export { default as useGetCartTotal } from './useGetCartTotal';
 export { default as useCheckAdminRole } from './useCheckAdminRole';
 export { default as useCreateOrder } from './useCreateOrder';
+export { default as useHideScrollbar } from './useHideScrollbar';

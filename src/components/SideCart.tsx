@@ -4,7 +4,12 @@ import { Link } from 'react-router-dom';
 import { BsCartX } from 'react-icons/bs';
 import { motion } from 'framer-motion';
 
-import { useAppDispatch, useAppSelector, useGetCartTotal } from '../hooks';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useGetCartTotal,
+  useHideScrollbar,
+} from '../hooks';
 import { selectItems } from '../store/slices/cart';
 import { hideSideCart } from '../store/slices/ui';
 import { Cart } from '.';
@@ -26,10 +31,7 @@ const SideCart = () => {
 
   const length = cartItems.length;
 
-  useEffect(() => {
-    document.body.classList.add('hide-scrollbar');
-    return () => document.body.classList.remove('hide-scrollbar');
-  }, []);
+  useHideScrollbar();
 
   return (
     <motion.div

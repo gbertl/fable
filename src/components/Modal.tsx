@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useHideScrollbar } from '../hooks';
 
 interface Props {
   children: React.ReactNode;
@@ -11,9 +12,10 @@ const Modal = ({ children, setIsOpen }: Props) => {
 
     if (!target.closest('.modal-body')) {
       setIsOpen(false);
-      setTimeout(() => document.body.classList.remove('hide-scrollbar'), 200);
     }
   };
+
+  useHideScrollbar();
 
   return (
     <motion.div

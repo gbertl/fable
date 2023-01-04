@@ -83,7 +83,6 @@ const Products = () => {
   }) => {
     setCurrentCategory(category);
     setCurrentProduct(product);
-    document.body.classList.add('hide-scrollbar');
     setIsFormOpen(true);
   };
 

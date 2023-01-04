@@ -108,10 +108,3 @@
     @apply border-t-[1rem] border-transparent;
   }
 }
-
-@layer utilities {
-  .hide-scrollbar {
-    overflow-y: hidden;
-    padding-right: 15px;
-  }
-}
