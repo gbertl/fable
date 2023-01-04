@@ -37,7 +37,7 @@ const SideCart = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.2 }}
       exit={{ opacity: 0 }}
-      className="fixed top-0 left-0 w-full h-screen z-[9999] bg-black bg-opacity-50"
+      className="fixed top-0 left-0 w-full h-full z-[9999] bg-black bg-opacity-50"
       onClick={handleClickOutside}
     >
       <motion.div
