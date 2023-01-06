@@ -4,3 +4,5 @@ export { default as Product } from './Product';
 export { default as SignIn } from './SignIn';
 export { default as Products } from './Products';
 export { default as Profile } from './Profile';
+export { default as ProfileMain } from './Profile/ProfileMain';
+export { default as ProfileInformation } from './Profile/ProfileInformation';

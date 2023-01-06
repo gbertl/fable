@@ -16,16 +16,36 @@ export const useCreateBuyer = (
 
 export const useGetBuyer = (
   id: string,
-  populate?: string[],
+  populate: string[] = [],
   onSuccess?: () => void,
   onError?: () => void
 ) => {
+  let qk = ['buyer', id];
+
+  if (populate.length) {
+    qk.push(populate.join(''));
+  }
+
   return useQuery<Buyer>(
-    ['buyer', id],
+    qk,
     async ({ queryKey }) => {
       const { data } = await api.getBuyer(queryKey[1] as string, populate);
       return data;
     },
     { onSuccess, onError, enabled: !!id }
   );
+};
+
+export const useUpdateBuyer = (
+  onSuccess?: () => void,
+  onError?: () => void
+) => {
+  return useMutation<
+    AxiosResponse<Buyer>,
+    AxiosError,
+    { id: string; newBuyer: Buyer }
+  >(api.updateBuyer, {
+    onSuccess,
+    onError,
+  });
 };

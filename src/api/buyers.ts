@@ -22,7 +22,13 @@ export const getBuyer = (id: string, populate?: string[]) => {
   );
 };
 
-export const updateBuyer = (id: string, newBuyer: Buyer) =>
+export const updateBuyer = ({
+  id,
+  newBuyer,
+}: {
+  id: string;
+  newBuyer: Buyer;
+}) =>
   axios.put(
     generatePath(apiRoutes.buyerDetail, {
       id,

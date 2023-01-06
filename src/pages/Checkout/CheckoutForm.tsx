@@ -173,9 +173,12 @@ const CheckoutForm = ({ className }: { className: string }) => {
         }
 
         // update buyer's order property with orderIds
-        await api.updateBuyer(buyer._id as string, {
-          ...buyer,
-          orders: orderIds,
+        await api.updateBuyer({
+          id: buyer._id as string,
+          newBuyer: {
+            ...buyer,
+            orders: orderIds,
+          },
         });
 
         dispatch(replaceItems([]));

@@ -1,7 +1,17 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ProtectedRoute } from './auth';
 
 import Layout from './layouts/Layout';
-import { Checkout, Home, Product, Products, Profile, SignIn } from './pages';
+import {
+  Checkout,
+  Home,
+  Product,
+  Products,
+  Profile,
+  ProfileInformation,
+  ProfileMain,
+  SignIn,
+} from './pages';
 import { appRoutes } from './routes';
 
 const router = createBrowserRouter([
@@ -27,7 +37,18 @@ const router = createBrowserRouter([
       {
         path: appRoutes.profile,
         element: <Profile />,
+        children: [
+          {
+            path: '',
+            element: <ProfileMain />,
+          },
+          {
+            path: appRoutes.profileInformation,
+            element: <ProtectedRoute children={<ProfileInformation />} />,
+          },
+        ],
       },
+      {},
     ],
   },
   {
