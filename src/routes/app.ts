@@ -5,6 +5,7 @@ const routes = {
   checkout: '/checkout',
   profile: '/profile',
   profileInformation: 'information',
+  profileOrderHistory: 'order-history',
   collections: '/collections',
 };
 

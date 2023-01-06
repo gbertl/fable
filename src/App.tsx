@@ -10,6 +10,7 @@ import {
   Profile,
   ProfileInformation,
   ProfileMain,
+  ProfileOrderHistory,
   SignIn,
 } from './pages';
 import { appRoutes } from './routes';
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
           {
             path: appRoutes.profileInformation,
             element: <ProtectedRoute children={<ProfileInformation />} />,
+          },
+          {
+            path: appRoutes.profileOrderHistory,
+            element: <ProfileOrderHistory />,
           },
         ],
       },

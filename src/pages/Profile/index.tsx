@@ -40,9 +40,14 @@ const Profile = () => {
             </li>
           )}
           <li>
-            <a href="#" className="text-gray hover:text-dark">
+            <Link
+              to={appRoutes.profileOrderHistory}
+              className={`${setActiveLink(
+                appRoutes.profileOrderHistory
+              )} hover:text-dark`}
+            >
               Order history
-            </a>
+            </Link>
           </li>
           <li>
             {isAuthenticated ? (

@@ -25,7 +25,9 @@ const schema = yup.object({
 const ProfileInformation = () => {
   const [processing, setProcessing] = useState(false);
 
-  const { data: buyer } = useGetBuyer(localStorage.getItem('buyerId') || '');
+  const { data: buyer } = useGetBuyer({
+    id: localStorage.getItem('buyerId') || '',
+  });
   const { mutateAsync: updateBuyer } = useUpdateBuyer();
 
   const {

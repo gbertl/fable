@@ -52,9 +52,9 @@ const CheckoutForm = ({ className }: { className: string }) => {
 
   const navigate = useNavigate();
 
-  const { data: currentBuyer } = useGetBuyer(
-    localStorage.getItem('buyerId') || ''
-  );
+  const { data: currentBuyer } = useGetBuyer({
+    id: localStorage.getItem('buyerId') || '',
+  });
 
   const {
     register,
@@ -127,9 +127,9 @@ const CheckoutForm = ({ className }: { className: string }) => {
 
       localStorage.setItem('buyerId', buyer._id || '');
     } else {
-      const { data } = await api.getBuyer(
-        localStorage.getItem('buyerId') || ''
-      );
+      const { data } = await api.getBuyer({
+        id: localStorage.getItem('buyerId') || '',
+      });
 
       buyer = data;
     }

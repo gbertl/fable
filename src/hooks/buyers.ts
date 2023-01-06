@@ -14,12 +14,19 @@ export const useCreateBuyer = (
   });
 };
 
-export const useGetBuyer = (
-  id: string,
-  populate: string[] = [],
-  onSuccess?: () => void,
-  onError?: () => void
-) => {
+export const useGetBuyer = ({
+  id,
+  populate = [],
+  limit = [],
+  onSuccess,
+  onError,
+}: {
+  id: string;
+  populate?: string[];
+  limit?: Object[];
+  onSuccess?: () => void;
+  onError?: () => void;
+}) => {
   let qk = ['buyer', id];
 
   if (populate.length) {
@@ -29,7 +36,11 @@ export const useGetBuyer = (
   return useQuery<Buyer>(
     qk,
     async ({ queryKey }) => {
-      const { data } = await api.getBuyer(queryKey[1] as string, populate);
+      const { data } = await api.getBuyer({
+        id: queryKey[1] as string,
+        populate,
+        limit,
+      });
       return data;
     },
     { onSuccess, onError, enabled: !!id }
