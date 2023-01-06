@@ -12,17 +12,15 @@ import { apiRoutes, appRoutes } from '../routes';
 
 const Profile = () => {
   const { isAuthenticated, logout, user } = useAuth0();
-  const { data: buyer, refetch } = useGetBuyer(
-    localStorage.getItem('buyerId') || '',
-    ['orders']
-  );
+  const { data: buyer } = useGetBuyer(localStorage.getItem('buyerId') || '', [
+    'orders',
+  ]);
 
   const [orders, setOrders] = useState<Order[]>();
 
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    console.log(buyer?.orders);
     (async () => {
       const ordersData: Order[] = [];
 
@@ -45,7 +43,7 @@ const Profile = () => {
   }, [buyer]);
 
   useEffect(() => {
-    if (searchParams.get('status') === 'success') {
+    if (searchParams.get('success') !== null) {
       localStorage.removeItem('formValues');
       localStorage.removeItem('cartItems');
     }
