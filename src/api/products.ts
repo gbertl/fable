@@ -33,3 +33,6 @@ export const updateProduct = (
     }
   );
 };
+
+export const getProduct = (id: string) =>
+  axios.get(generatePath(apiRoutes.productDetail, { id }));

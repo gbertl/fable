@@ -1,14 +1,13 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
-import { generatePath, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import { bonusCard } from '../../assets';
 import { Order } from '../../types';
-import axios from '../../axios';
 import { useGetBuyer } from '../../hooks';
-import { apiRoutes } from '../../routes';
 import { Loading } from '../../components';
 import ProfileOrdersTable from './ProfileOrdersTable';
+import * as api from '../../api';
 
 const ProfileMain = () => {
   const { isLoading } = useAuth0();
@@ -25,20 +24,17 @@ const ProfileMain = () => {
   useEffect(() => {
     (async () => {
       const ordersData: Order[] = [];
-
       if (buyer?.orders?.length) {
         for (const buyerOrder of buyer.orders) {
-          if (typeof buyerOrder === 'object') {
-            const { data } = await axios.get(
-              generatePath(apiRoutes.productDetail, {
-                id: buyerOrder.product,
-              })
-            );
+          if (
+            typeof buyerOrder === 'object' &&
+            typeof buyerOrder.product === 'string'
+          ) {
+            const { data } = await api.getProduct(buyerOrder.product);
             buyerOrder.product = data;
             ordersData.push(buyerOrder);
           }
         }
-
         setOrders(ordersData as Order[]);
       }
     })();

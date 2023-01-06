@@ -18,10 +18,12 @@ export const getBuyer = ({
   // populate[0]=orders
   let populateQuery = '';
 
-  populate?.forEach((p, idx) => {
-    populateQuery +=
-      idx === 0 ? `?populate[${idx}]=${p}` : `&populate[${idx}]=${p}`;
-  });
+  if (populate?.length) {
+    populate.forEach((p, idx) => {
+      populateQuery +=
+        idx === 0 ? `?populate[${idx}]=${p}` : `&populate[${idx}]=${p}`;
+    });
+  }
 
   // limit[0][orders]=2
   let limitQuery = '';
@@ -31,8 +33,6 @@ export const getBuyer = ({
       limitQuery += `&limit[${idx}][${key}]=${value}`;
     }
   });
-
-  console.log(limitQuery);
 
   return axios.get(
     `${generatePath(apiRoutes.buyerDetail, {

@@ -17,7 +17,7 @@ export const useCreateBuyer = (
 export const useGetBuyer = ({
   id,
   populate = [],
-  limit = [],
+  limit,
   onSuccess,
   onError,
 }: {
