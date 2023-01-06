@@ -34,7 +34,20 @@ const createProduct = async (req, res) => {
 
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find().lean();
+    // [{_id: ['randomstring']}]
+    let options = {};
+
+    if (req.query.where) {
+      req.query.where.forEach((w) => {
+        for (const [key, value] of Object.entries(w)) {
+          if (key === '_id') {
+            options[key] = { $in: value };
+          }
+        }
+      });
+    }
+
+    const products = await Product.find(options).lean();
 
     for (const product of products) {
       product.imageUrl = await getImageUrl(product.image);
