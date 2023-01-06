@@ -110,7 +110,7 @@ app.post('/checkout', async (req, res) => {
       mode: 'payment',
       customer: customer.id,
       line_items,
-      success_url: `${process.env.CLIENT_URL}/profile?status=success`,
+      success_url: `${process.env.CLIENT_URL}/profile?success`,
       cancel_url: `${process.env.CLIENT_URL}/checkout`,
     });
 
