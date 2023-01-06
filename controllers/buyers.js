@@ -14,7 +14,22 @@ const getBuyer = async (req, res) => {
     let query = Buyer.findById(req.params.id);
 
     if (req.query.populate?.includes('orders')) {
-      query = query.populate('orders');
+      let options = { sort: { createdAt: -1 } };
+
+      if (req.query.limit) {
+        // [{ orders: 5}]
+        req.query.limit.forEach((l) => {
+          for (const [key, value] of Object.entries(l)) {
+            if (key === 'orders')
+              options = { ...options, limit: parseInt(value) };
+          }
+        });
+      }
+
+      query = query.populate({
+        path: 'orders',
+        options,
+      });
     }
 
     const buyer = await query;
