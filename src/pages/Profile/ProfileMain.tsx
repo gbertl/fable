@@ -5,12 +5,10 @@ import { useSearchParams } from 'react-router-dom';
 import { bonusCard } from '../../assets';
 import { Order } from '../../types';
 import { useGetBuyer } from '../../hooks';
-import { Loading } from '../../components';
 import ProfileOrdersTable from './ProfileOrdersTable';
 import * as api from '../../api';
 
 const ProfileMain = () => {
-  const { isLoading } = useAuth0();
   const { data: buyer } = useGetBuyer({
     id: localStorage.getItem('buyerId') || '',
     populate: ['orders'],
@@ -49,8 +47,6 @@ const ProfileMain = () => {
 
   return (
     <>
-      <Loading isLoading={isLoading} />
-
       <h2 className="capitalize mb-9">Hello, {buyer?.name || 'Guest'}!</h2>
 
       <div className="max-w-[335px] h-[242px] bg-gray2 mb-9">

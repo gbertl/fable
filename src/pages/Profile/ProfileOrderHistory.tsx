@@ -34,7 +34,7 @@ const ProfileOrderHistory = () => {
 
   return (
     <>
-      <h2>Your orders {orders && <>({orders.length})</>}</h2>
+      <h2>Your orders {orders?.length ? <>({orders.length})</> : null}</h2>
       <hr className="border-gray2 my-6" />
 
       <ProfileOrdersTable orders={orders as Order[]} />
