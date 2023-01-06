@@ -14,20 +14,35 @@ const ProfileOrderHistory = () => {
   const [orders, setOrders] = useState<Order[]>();
 
   useEffect(() => {
+    if (!buyer) return;
+
     (async () => {
       const ordersData: Order[] = [];
-      if (buyer?.orders?.length) {
-        for (const buyerOrder of buyer.orders) {
-          if (
-            typeof buyerOrder === 'object' &&
-            typeof buyerOrder.product === 'string'
-          ) {
-            const { data } = await api.getProduct(buyerOrder.product);
-            buyerOrder.product = data;
-            ordersData.push(buyerOrder);
+      if (buyer.orders?.length) {
+        let productIds: string[] = [];
+
+        buyer.orders.forEach((order) => {
+          if (typeof order === 'object' && typeof order.product === 'string') {
+            productIds.push(order.product);
           }
+        });
+
+        if (productIds.length) {
+          const { data: products } = await api.getProducts(productIds);
+
+          for (const buyerOrder of buyer.orders) {
+            if (
+              typeof buyerOrder === 'object' &&
+              typeof buyerOrder.product === 'string'
+            ) {
+              buyerOrder.product = products.find(
+                (p) => p._id === buyerOrder.product
+              );
+              ordersData.push(buyerOrder);
+            }
+          }
+          setOrders(ordersData as Order[]);
         }
-        setOrders(ordersData as Order[]);
       }
     })();
   }, [buyer]);
