@@ -33,8 +33,10 @@ const updateBuyer = async (req, res) => {
       new: true,
     });
 
-    for (const order of orders) {
-      buyer.orders.push(order);
+    if (orders) {
+      for (const order of orders) {
+        buyer.orders.push(order);
+      }
     }
 
     const updatedBuyer = await buyer.save();
