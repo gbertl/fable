@@ -1,15 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { foto } from '../assets';
-import { BreadCrumb, Button, Container, Input, Label } from '../components';
+import {
+  BreadCrumb,
+  Button,
+  Container,
+  Input,
+  Label,
+  Loading,
+} from '../components';
+import { useNavigate } from 'react-router-dom';
+import { appRoutes } from '../routes';
 
 const SignIn = () => {
-  const { loginWithPopup } = useAuth0();
+  const { loginWithPopup, isLoading, isAuthenticated } = useAuth0();
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(appRoutes.profile);
+    }
+  }, [isAuthenticated]);
 
   return (
     <section className="relative">
       <Container>
+        <Loading isLoading={isLoading} />
+
         <BreadCrumb
           links={[
             { title: 'Profile', url: '/profile' },

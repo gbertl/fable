@@ -8,3 +8,4 @@ export { default as Checkbox } from './Checkbox';
 export { default as Label } from './Label';
 export { default as FormError } from './FormError';
 export { default as Modal } from './Modal';
+export { default as Loading } from './Loading';
