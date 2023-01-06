@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { ProtectedRoute } from './auth';
 
 import Layout from './layouts/Layout';
 import {
@@ -45,7 +44,7 @@ const router = createBrowserRouter([
           },
           {
             path: appRoutes.profileInformation,
-            element: <ProtectedRoute children={<ProfileInformation />} />,
+            element: <ProfileInformation />,
           },
           {
             path: appRoutes.profileOrderHistory,

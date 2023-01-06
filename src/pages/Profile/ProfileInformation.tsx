@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { Button, FormError, Input, Label } from '../../components';
-import { useGetBuyer, useUpdateBuyer } from '../../hooks';
+import { useCreateBuyer, useGetBuyer, useUpdateBuyer } from '../../hooks';
 import { Buyer } from '../../types';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -28,7 +28,10 @@ const ProfileInformation = () => {
   const { data: buyer } = useGetBuyer({
     id: localStorage.getItem('buyerId') || '',
   });
+
   const { mutateAsync: updateBuyer } = useUpdateBuyer();
+
+  const { mutateAsync: createBuyer } = useCreateBuyer();
 
   const {
     register,
@@ -42,10 +45,15 @@ const ProfileInformation = () => {
   const onSubmit = async (formValues: ProfileInput) => {
     setProcessing(true);
 
-    await updateBuyer({
-      id: localStorage.getItem('buyerId') as string,
-      newBuyer: formValues,
-    });
+    if (!localStorage.getItem('buyerId')) {
+      const { data } = await createBuyer(formValues);
+      localStorage.setItem('buyerId', data._id as string);
+    } else {
+      await updateBuyer({
+        id: localStorage.getItem('buyerId') as string,
+        newBuyer: formValues,
+      });
+    }
 
     setProcessing(false);
   };

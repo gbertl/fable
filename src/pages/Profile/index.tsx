@@ -32,18 +32,16 @@ const Profile = () => {
                 Main
               </Link>
             </li>
-            {isAuthenticated && (
-              <li>
-                <Link
-                  to={appRoutes.profileInformation}
-                  className={`${setActiveLink(
-                    appRoutes.profileInformation
-                  )} hover:text-dark`}
-                >
-                  Information
-                </Link>
-              </li>
-            )}
+            <li>
+              <Link
+                to={appRoutes.profileInformation}
+                className={`${setActiveLink(
+                  appRoutes.profileInformation
+                )} hover:text-dark`}
+              >
+                Information
+              </Link>
+            </li>
             <li>
               <Link
                 to={appRoutes.profileOrderHistory}
