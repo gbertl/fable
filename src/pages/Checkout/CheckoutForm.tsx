@@ -190,26 +190,25 @@ const CheckoutForm = ({ className }: { className: string }) => {
   };
 
   useEffect(() => {
-    const formValues = JSON.parse(localStorage.getItem('formValues') || '{}');
-
-    if (Object.keys(formValues).length) {
-      reset(formValues);
-      localStorage.removeItem('formValues');
-    }
-
-    const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-
-    if (Object.keys(cartItems).length) {
-      dispatch(replaceItems(cartItems));
-      localStorage.removeItem('cartItems');
-    }
-  }, []);
-
-  useEffect(() => {
+    // prefills data loaded from localstorage
     if (currentBuyer) {
       const { name, phone, email, city, address } = currentBuyer;
 
-      reset({ ...initialOrderData, name, phone, email, city, address });
+      const formValues = JSON.parse(localStorage.getItem('formValues') || '{}');
+
+      if (Object.keys(formValues).length) {
+        reset({ ...formValues, name, phone, email, city, address });
+        localStorage.removeItem('formValues');
+      } else {
+        reset({ ...initialOrderData, name, phone, email, city, address });
+      }
+
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+
+      if (Object.keys(cartItems).length) {
+        dispatch(replaceItems(cartItems));
+        localStorage.removeItem('cartItems');
+      }
     }
   }, [currentBuyer]);
 
