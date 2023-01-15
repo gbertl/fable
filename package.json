@@ -1,0 +1,16 @@
+{
+  "name": "fable",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:gbertl/fable.git",
+  "author": "gbertl <gilbertlcsndle@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "client": "cd client && yarn dev",
+    "server": "cd server && yarn dev",
+    "dev": "concurrently -k \"yarn client \" \"yarn server \""
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
