@@ -1,0 +1,7 @@
+.hero__slider > .swiper-wrapper {
+  align-items: flex-end;
+}
+
+.hero__popover {
+  filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.3));
+}
