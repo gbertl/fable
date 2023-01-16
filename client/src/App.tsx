@@ -1,18 +1,23 @@
+import { lazy } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Layout from './layouts/Layout';
-import {
-  Checkout,
-  Home,
-  Product,
-  Products,
-  Profile,
-  ProfileInformation,
-  ProfileMain,
-  ProfileOrderHistory,
-  SignIn,
-} from './pages';
+
 import { appRoutes } from './routes';
+
+const Checkout = lazy(() => import('./pages/Checkout'));
+const Home = lazy(() => import('./pages/Home'));
+const Product = lazy(() => import('./pages/Product'));
+const Products = lazy(() => import('./pages/Products'));
+const Profile = lazy(() => import('./pages/Profile'));
+const ProfileInformation = lazy(
+  () => import('./pages/Profile/ProfileInformation')
+);
+const ProfileMain = lazy(() => import('./pages/Profile/ProfileMain'));
+const ProfileOrderHistory = lazy(
+  () => import('./pages/Profile/ProfileOrderHistory')
+);
+const SignIn = lazy(() => import('./pages/SignIn'));
 
 const router = createBrowserRouter([
   {

@@ -1,4 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
+import { Suspense } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
 import { Container, Loading } from '../../components';
@@ -72,7 +73,9 @@ const Profile = () => {
           </ul>
         </div>
         <div className="w-full">
-          <Outlet />
+          <Suspense fallback={<Loading isLoading={true} />}>
+            <Outlet />
+          </Suspense>
         </div>
       </Container>
     </>

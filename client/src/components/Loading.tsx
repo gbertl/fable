@@ -1,9 +1,24 @@
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const Loading = ({ isLoading }: { isLoading: boolean }) => {
+  const [delayDone, setDelayDone] = useState(false);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
+    if (isLoading) {
+      timeout = setTimeout(() => {
+        setDelayDone(true);
+      }, 3000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [isLoading]);
+
   return (
     <AnimatePresence>
-      {isLoading && (
+      {isLoading && delayDone && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
