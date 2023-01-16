@@ -125,8 +125,14 @@ app.use('/hero-products', heroProductsRouter);
 app.use('/buyers', buyersRouter);
 app.use('/orders', ordersRouter);
 
-connectDB().then(() => {
-  const port = process.env.PORT;
+(async () => {
+  try {
+    await connectDB();
 
-  app.listen(port, () => console.log(`Server running at ${port}`));
-});
+    const port = process.env.PORT;
+
+    app.listen(port, () => console.log(`Server running at ${port}`));
+  } catch (e) {
+    console.log(e);
+  }
+})();
