@@ -3,7 +3,7 @@ import './style.css';
 import HeroSlider from './HeroSlider';
 import { Container } from '../../components';
 
-const Hero = () => {
+const Home = () => {
   return (
     <section className="relative mt-28 md:mt-24">
       <Container className="text-center mb-11 md:mb-16">
@@ -22,4 +22,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Home;
