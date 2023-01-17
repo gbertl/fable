@@ -30,8 +30,8 @@ const SignIn = () => {
 
         <BreadCrumb
           links={[
-            { title: 'Profile', url: '/profile' },
-            { title: 'Sign in', url: '/signin' },
+            { title: 'Profile', url: appRoutes.profile },
+            { title: 'Sign in', url: appRoutes.login },
           ]}
         />
 
