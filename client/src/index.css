@@ -107,4 +107,14 @@
   .profile__table tbody > * + * {
     @apply border-t-[1rem] border-transparent;
   }
+
+  .product-card .swiper-slide {
+    height: 333px;
+  }
+
+  @screen lg {
+    .product-card .swiper-slide {
+      height: 674px;
+    }
+  }
 }

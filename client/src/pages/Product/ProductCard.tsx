@@ -125,7 +125,7 @@ const ProductCard = ({ product }: Props) => {
   }, [cartItems]);
 
   return (
-    <div className="grid lg:grid-cols-[40%_60%]">
+    <div className="grid lg:grid-cols-[40%_60%] product-card">
       {!imgLoaded ? (
         <>
           <img
