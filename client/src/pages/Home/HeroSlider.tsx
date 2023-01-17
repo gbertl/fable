@@ -1,6 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { useMediaQuery } from 'react-responsive';
 import { useState } from 'react';
 
 import HeroPopover from './HeroPopover';
@@ -15,10 +14,6 @@ import HeroProductModalForm from './HeroProductModalForm';
 import { apiRoutes } from '../../routes';
 
 const HeroSlider = () => {
-  const isDesktop = useMediaQuery({ query: '(min-width: 992px)' });
-  const isTablet = useMediaQuery({ query: '(min-width: 768px)' });
-  const isMobile = useMediaQuery({ query: '(min-width: 576px)' });
-
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredId, setHoveredId] = useState('');
 
@@ -53,9 +48,20 @@ const HeroSlider = () => {
 
       <Swiper
         className="hero__slider"
-        slidesPerView={isDesktop ? 9 : isTablet ? 6 : isMobile ? 3 : 2}
+        slidesPerView={2}
         spaceBetween={3}
         maxBackfaceHiddenSlides={0}
+        breakpoints={{
+          640: {
+            slidesPerView: 3,
+          },
+          768: {
+            slidesPerView: 6,
+          },
+          1024: {
+            slidesPerView: 9,
+          },
+        }}
       >
         {heroProducts
           ?.sort((a, b) => a.priorityOrder - b.priorityOrder)

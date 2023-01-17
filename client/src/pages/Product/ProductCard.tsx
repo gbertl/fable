@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
 import { Skeleton } from '@mui/material';
 
 import { Item, Product } from '../../types';
@@ -24,8 +23,6 @@ const ProductCard = ({ product }: Props) => {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   const dispatch = useAppDispatch();
-
-  const isMobile = useMediaQuery({ query: '(max-width: 576px)' });
 
   const handleAddToCart = () => {
     const item = {
@@ -139,8 +136,10 @@ const ProductCard = ({ product }: Props) => {
           />
           <Skeleton
             variant="rectangular"
-            height={isMobile ? 333 : 644}
-            sx={{ marginBottom: isMobile ? '0.75rem' : '0' }}
+            sx={{
+              height: { xs: 333, lg: 644 },
+              marginBottom: { xs: '0.75rem', lg: 0 },
+            }}
           />
         </>
       ) : (

@@ -1,6 +1,5 @@
 import { Link, generatePath } from 'react-router-dom';
 import { Skeleton } from '@mui/material';
-import { useMediaQuery } from 'react-responsive';
 
 import { Product } from '../../types';
 import { ImgLoaded } from '.';
@@ -13,8 +12,6 @@ interface Props {
 }
 
 const ProductCard = ({ product, imgsLoaded, setImgsLoaded }: Props) => {
-  const isMobile = useMediaQuery({ query: '(max-width: 576px)' });
-
   return (
     <div>
       <Link
@@ -25,8 +22,7 @@ const ProductCard = ({ product, imgsLoaded, setImgsLoaded }: Props) => {
         {!imgsLoaded.find((il) => il.product === product._id)?.loaded && (
           <Skeleton
             variant="rectangular"
-            height={isMobile ? 149 : 427}
-            sx={{ marginBottom: '0.75rem' }}
+            sx={{ height: { xs: 149, lg: 427 }, marginBottom: '0.75rem' }}
           />
         )}
 
