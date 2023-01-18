@@ -1,11 +1,13 @@
 import { BreadCrumb, Cart, Container } from '../../components';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useSetTitle } from '../../hooks';
 import { selectItems } from '../../store/slices/cart';
 import CheckoutForm from './CheckoutForm';
 import CheckoutSummary from './CheckoutSummary';
 
 const Checkout = () => {
   const cartItems = useAppSelector(selectItems);
+
+  useSetTitle('Checkout');
 
   return (
     <section className="mb-11">

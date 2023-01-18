@@ -10,7 +10,7 @@ import { Categories } from '../../enums';
 import axios from '../../axios';
 import ProductCard from './ProductCard';
 import ProductFormModal from './ProductFormModal';
-import { useCheckAdminRole } from '../../hooks';
+import { useCheckAdminRole, useSetTitle } from '../../hooks';
 import { apiRoutes } from '../../routes';
 
 enum SortBy {
@@ -23,7 +23,11 @@ export interface ImgLoaded {
   loaded: boolean;
 }
 
+const collectionName = 'Fable of Klassik';
+
 const Products = () => {
+  useSetTitle(`${collectionName} Collections`);
+
   const { isAuthenticated } = useAuth0();
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [currentCategory, setCurrentCategory] = useState<
@@ -94,7 +98,7 @@ const Products = () => {
             className="uppercase text-center text-2xl md:text-4xl text-dark mb-3 md:mb-8"
             id="fable-of-klassik-section"
           >
-            Fable of Klassik
+            {collectionName}
           </h1>
 
           {Object.values(Categories)?.map((c, idx) => (

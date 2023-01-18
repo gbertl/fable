@@ -11,11 +11,14 @@ import {
 } from '../components';
 import { useNavigate } from 'react-router-dom';
 import { appRoutes } from '../routes';
+import { useSetTitle } from '../hooks';
 
 const SignIn = () => {
   const { loginWithPopup, isLoading, isAuthenticated } = useAuth0();
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
+
+  useSetTitle('Login');
 
   useEffect(() => {
     if (isAuthenticated) {

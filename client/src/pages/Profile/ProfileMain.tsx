@@ -3,11 +3,13 @@ import { useSearchParams } from 'react-router-dom';
 
 import { bonusCard } from '../../assets';
 import { Order } from '../../types';
-import { useGetBuyer } from '../../hooks';
+import { useGetBuyer, useSetTitle } from '../../hooks';
 import ProfileOrdersTable from './ProfileOrdersTable';
 import * as api from '../../api';
 
 const ProfileMain = () => {
+  useSetTitle('Profile');
+
   const { data: buyer } = useGetBuyer({
     id: localStorage.getItem('buyerId') || '',
     populate: ['orders'],

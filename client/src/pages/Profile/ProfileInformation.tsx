@@ -1,6 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { Button, FormError, Input, Label } from '../../components';
-import { useCreateBuyer, useGetBuyer, useUpdateBuyer } from '../../hooks';
+import {
+  useCreateBuyer,
+  useGetBuyer,
+  useSetTitle,
+  useUpdateBuyer,
+} from '../../hooks';
 import { Buyer } from '../../types';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -23,6 +28,8 @@ const schema = yup.object({
 });
 
 const ProfileInformation = () => {
+  useSetTitle('Account Details');
+
   const [processing, setProcessing] = useState(false);
 
   const { data: buyer } = useGetBuyer({

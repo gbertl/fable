@@ -2,8 +2,11 @@ import { logo } from '../../assets';
 import './style.css';
 import HeroSlider from './HeroSlider';
 import { Container } from '../../components';
+import { useSetTitle } from '../../hooks';
 
 const Home = () => {
+  useSetTitle();
+
   return (
     <section className="relative mt-28 md:mt-24">
       <Container className="text-center mb-11 md:mb-16">

@@ -7,6 +7,7 @@ import { Product as IProduct } from '../../types';
 import axios from '../../axios';
 import { useQuery } from 'react-query';
 import { apiRoutes, appRoutes } from '../../routes';
+import { useSetTitle } from '../../hooks';
 
 const Product = () => {
   const { id } = useParams();
@@ -22,6 +23,8 @@ const Product = () => {
       return data;
     }
   );
+
+  useSetTitle(product?.name);
 
   return (
     <section className="mb-11">

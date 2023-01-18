@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 
-import { useGetBuyer } from '../../hooks';
+import { useGetBuyer, useSetTitle } from '../../hooks';
 import { Order } from '../../types';
 import ProfileOrdersTable from './ProfileOrdersTable';
 import * as api from '../../api';
 
 const ProfileOrderHistory = () => {
+  useSetTitle('Orders');
+
   const { data: buyer } = useGetBuyer({
     id: localStorage.getItem('buyerId') || '',
     populate: ['orders'],
