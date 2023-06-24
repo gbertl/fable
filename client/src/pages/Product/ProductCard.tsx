@@ -16,7 +16,10 @@ interface Props {
 }
 
 const ProductCard = ({ product }: Props) => {
-  const [data, setData] = useState<Item>({ product: product._id });
+  const [data, setData] = useState<Item>({
+    product: product._id,
+    price: product.price,
+  });
 
   const cartItems = useAppSelector(selectItems);
 

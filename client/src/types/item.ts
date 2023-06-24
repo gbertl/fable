@@ -6,6 +6,7 @@ interface Item {
   color?: string;
   size?: Sizes;
   quantity?: number;
+  price?: number;
 }
 
 export default Item;
