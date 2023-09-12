@@ -1,12 +1,12 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectFade } from 'swiper';
-import 'swiper/css';
-import 'swiper/css/effect-fade';
-import { useState } from 'react';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectFade } from "swiper";
+import "swiper/css";
+import "swiper/css/effect-fade";
+import { useState } from "react";
 
-import SwiperPrevButton from './SwiperPrevButton';
-import SwiperNextButton from './SwiperNextButton';
-import SwiperBullet from './SwiperBullet';
+import SwiperPrevButton from "./SwiperPrevButton";
+import SwiperNextButton from "./SwiperNextButton";
+import SwiperBullet from "./SwiperBullet";
 
 interface Props {
   image: string;
@@ -39,10 +39,10 @@ const ProductSlider = ({ image, heroImage }: Props) => {
       onSwiper={(swiper) => setSlidesLength(swiper.slides.length)}
       onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
     >
-      <SwiperSlide className="w-4/5 bg-gray2 mb-3 lg:mb-0 flex justify-center items-end">
+      <SwiperSlide className="w-4/5 bg-gray2 mb-3 lg:mb-0 !flex justify-center items-end">
         <img src={image} alt="" className="object-cover h-[90%] lg:h-[644px]" />
       </SwiperSlide>
-      <SwiperSlide className="w-4/5 bg-gray2 mb-3 lg:mb-0 flex justify-center items-end">
+      <SwiperSlide className="w-4/5 bg-gray2 mb-3 lg:mb-0 !flex justify-center items-end">
         <img
           src={heroImage}
           alt=""
@@ -51,11 +51,11 @@ const ProductSlider = ({ image, heroImage }: Props) => {
       </SwiperSlide>
 
       <SwiperPrevButton
-        className={activeIndex === 0 ? 'opacity-50 cursor-auto' : ''}
+        className={activeIndex === 0 ? "opacity-50 cursor-auto" : ""}
       />
       <SwiperNextButton
         className={
-          activeIndex === slidesLength - 1 ? 'opacity-50 cursor-auto' : ''
+          activeIndex === slidesLength - 1 ? "opacity-50 cursor-auto" : ""
         }
       />
 
