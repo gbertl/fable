@@ -1,24 +1,24 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import { useState } from 'react';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { useState } from "react";
 
-import HeroPopover from './HeroPopover';
-import { HeroProduct } from '../../types';
-import axios from '../../axios';
-import { useQuery } from 'react-query';
-import { AnimatePresence } from 'framer-motion';
-import { HiPencil, HiPlusCircle } from 'react-icons/hi2';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useCheckAdminRole } from '../../hooks';
-import HeroProductModalForm from './HeroProductModalForm';
-import { apiRoutes } from '../../routes';
+import HeroPopover from "./HeroPopover";
+import { HeroProduct } from "../../types";
+import axios from "../../axios";
+import { useQuery } from "react-query";
+import { AnimatePresence } from "framer-motion";
+import { HiPencil, HiPlusCircle } from "react-icons/hi2";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useCheckAdminRole } from "../../hooks";
+import HeroProductModalForm from "./HeroProductModalForm";
+import { apiRoutes } from "../../routes";
 
 const HeroSlider = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const [hoveredId, setHoveredId] = useState('');
+  const [hoveredId, setHoveredId] = useState("");
 
   const { data: heroProducts } = useQuery<HeroProduct[]>(
-    'heroProducts',
+    "heroProducts",
     async () => {
       const { data } = await axios.get(apiRoutes.heroProductList);
       return data;
@@ -48,8 +48,6 @@ const HeroSlider = () => {
 
       <Swiper
         className="hero__slider"
-        slidesPerView={2}
-        spaceBetween={3}
         maxBackfaceHiddenSlides={0}
         breakpoints={{
           640: {
@@ -77,7 +75,7 @@ const HeroSlider = () => {
               onMouseLeave={() => {
                 if (p.product) {
                   setIsHovered(false);
-                  setHoveredId('');
+                  setHoveredId("");
                 }
               }}
             >
